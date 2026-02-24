@@ -1,0 +1,46 @@
+{
+  "version": "v1",
+  "set": "repeato-tab-icons-v1",
+  "menus": [
+    {
+      "key": "today",
+      "label": "Today",
+      "svg": "today.svg",
+      "emoji": "🏠",
+      "sf_symbol": "house",
+      "nounproject_search": "https://thenounproject.com/search/icons/?q=home"
+    },
+    {
+      "key": "decks",
+      "label": "Decks",
+      "svg": "decks.svg",
+      "emoji": "📚",
+      "sf_symbol": "books.vertical",
+      "nounproject_search": "https://thenounproject.com/search/icons/?q=book"
+    },
+    {
+      "key": "add",
+      "label": "Add",
+      "svg": "add.svg",
+      "emoji": "➕",
+      "sf_symbol": "plus.circle",
+      "nounproject_search": "https://thenounproject.com/search/icons/?q=add"
+    },
+    {
+      "key": "insights",
+      "label": "Insights",
+      "svg": "insights.svg",
+      "emoji": "📊",
+      "sf_symbol": "chart.bar",
+      "nounproject_search": "https://thenounproject.com/search/icons/?q=chart"
+    },
+    {
+      "key": "profile",
+      "label": "Profile",
+      "svg": "profile.svg",
+      "emoji": "👤",
+      "sf_symbol": "person",
+      "nounproject_search": "https://thenounproject.com/search/icons/?q=profile"
+    }
+  ]
+}
