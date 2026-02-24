@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -88,22 +89,63 @@ class AppRoot extends StatefulWidget {
 class _AppRootState extends State<AppRoot> {
   int _currentIndex = 0;
   SessionStats _stats = SessionStats.empty;
+  late final Future<List<WordCard>> _cardsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _cardsFuture = _loadCards();
+  }
 
   Future<List<WordCard>> _loadCards() async {
-    final raw = await rootBundle.loadString('assets/data/m2_beginner_words.json');
-    final List<dynamic> decoded = jsonDecode(raw) as List<dynamic>;
-    return decoded
-        .map((e) => WordCard.fromJson(e as Map<String, dynamic>))
-        .toList();
+    const assetPath = 'assets/data/m2_beginner_words.json';
+    debugPrint('[Repeato] loadCards: start ($assetPath)');
+
+    try {
+      final raw = await rootBundle
+          .loadString(assetPath)
+          .timeout(const Duration(seconds: 5), onTimeout: () {
+        throw TimeoutException('Timed out loading asset: $assetPath');
+      });
+      debugPrint('[Repeato] loadCards: loaded raw (${raw.length} chars)');
+
+      final List<dynamic> decoded = jsonDecode(raw) as List<dynamic>;
+      debugPrint('[Repeato] loadCards: decoded list (${decoded.length} items)');
+
+      final cards = decoded
+          .map((e) => WordCard.fromJson(e as Map<String, dynamic>))
+          .toList();
+      debugPrint('[Repeato] loadCards: done (${cards.length} cards)');
+      return cards;
+    } catch (e, st) {
+      debugPrint('[Repeato] loadCards: ERROR $e');
+      debugPrint('$st');
+      rethrow;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<WordCard>>(
-      future: _loadCards(),
+      future: _cardsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
-          return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(
+            body: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: CircularProgressIndicator(strokeWidth: 4),
+                  ),
+                  SizedBox(height: 12),
+                  Text('Loading…'),
+                ],
+              ),
+            ),
+          );
         }
 
         if (snapshot.hasError) {
