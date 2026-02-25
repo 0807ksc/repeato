@@ -221,6 +221,7 @@ class _TodayScreenState extends State<TodayScreen> {
   bool _showMeaning = false;
   double? _dragStartX;
   bool _swipeHandled = false;
+  double _nextCardEnterFromX = 0.18;
 
   @override
   void initState() {
@@ -246,6 +247,11 @@ class _TodayScreenState extends State<TodayScreen> {
 
   void _answer(bool isKnown) {
     setState(() {
+      // Card transition direction:
+      // - known (left swipe): next card enters from right
+      // - again (button): next card enters from left
+      _nextCardEnterFromX = isKnown ? 0.18 : -0.18;
+
       if (isKnown) {
         _known++;
       } else {
@@ -352,32 +358,51 @@ class _TodayScreenState extends State<TodayScreen> {
                             setState(() => _showMeaning = false);
                           }
                         },
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: Card(
-                            elevation: 2,
-                            child: Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    _showMeaning ? word.meaningKo : word.word,
-                                    style: Theme.of(context).textTheme.headlineLarge,
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Text(
-                                    _showMeaning ? word.exampleKo : word.exampleEn,
-                                    style: Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                  const Spacer(),
-                                  Text(
-                                    _showMeaning
-                                        ? '누르고 있으면 뜻이 보여요'
-                                        : '누르고 있으면 뜻이 보여요 · 왼쪽 스와이프: 알고 있음',
-                                    style: Theme.of(context).textTheme.labelMedium,
-                                  ),
-                                ],
+                        child: TweenAnimationBuilder<Offset>(
+                          key: ValueKey(_index),
+                          tween: Tween(
+                            begin: Offset(_nextCardEnterFromX, 0),
+                            end: Offset.zero,
+                          ),
+                          duration: const Duration(milliseconds: 220),
+                          curve: Curves.easeOutCubic,
+                          builder: (context, value, child) {
+                            return FractionalTranslation(
+                              translation: value,
+                              child: AnimatedOpacity(
+                                duration: const Duration(milliseconds: 180),
+                                opacity: 1,
+                                child: child,
+                              ),
+                            );
+                          },
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: Card(
+                              elevation: 2,
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      _showMeaning ? word.meaningKo : word.word,
+                                      style: Theme.of(context).textTheme.headlineLarge,
+                                    ),
+                                    const SizedBox(height: 12),
+                                    Text(
+                                      _showMeaning ? word.exampleKo : word.exampleEn,
+                                      style: Theme.of(context).textTheme.bodyLarge,
+                                    ),
+                                    const Spacer(),
+                                    Text(
+                                      _showMeaning
+                                          ? '누르고 있으면 뜻이 보여요'
+                                          : '누르고 있으면 뜻이 보여요 · 왼쪽 스와이프: 알고 있음',
+                                      style: Theme.of(context).textTheme.labelMedium,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
