@@ -13,10 +13,18 @@ class RepeatoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const seed = Color(0xFF1E7D68);
+
     return MaterialApp(
       title: 'Repeato',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1E7D68)),
+        colorScheme: ColorScheme.fromSeed(seedColor: seed, brightness: Brightness.light),
+        useMaterial3: true,
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: seed, brightness: Brightness.dark),
+        useMaterial3: true,
       ),
       home: const AppRoot(),
     );
