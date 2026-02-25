@@ -323,7 +323,7 @@ class _TodayScreenState extends State<TodayScreen> {
                         onTapDown: (_) => setState(() => _showMeaning = true),
                         onTapUp: (_) => setState(() => _showMeaning = false),
                         onTapCancel: () => setState(() => _showMeaning = false),
-                        // Swipe right = "알고 있음" (known).
+                        // Swipe left = "알고 있음" (known).
                         // Use distance threshold (not only velocity) for better reliability
                         // on iOS Safari / web touch interactions.
                         onHorizontalDragStart: (details) {
@@ -333,7 +333,7 @@ class _TodayScreenState extends State<TodayScreen> {
                         onHorizontalDragUpdate: (details) {
                           if (_swipeHandled || _dragStartX == null) return;
                           final deltaX = details.globalPosition.dx - _dragStartX!;
-                          if (deltaX > 56) {
+                          if (deltaX < -56) {
                             _swipeHandled = true;
                             _answer(true);
                           }
@@ -374,7 +374,7 @@ class _TodayScreenState extends State<TodayScreen> {
                                   Text(
                                     _showMeaning
                                         ? '누르고 있으면 뜻이 보여요'
-                                        : '누르고 있으면 뜻이 보여요 · 오른쪽 스와이프: 알고 있음',
+                                        : '누르고 있으면 뜻이 보여요 · 왼쪽 스와이프: 알고 있음',
                                     style: Theme.of(context).textTheme.labelMedium,
                                   ),
                                 ],
