@@ -219,6 +219,8 @@ class _TodayScreenState extends State<TodayScreen> {
   int _known = 0;
   int _again = 0;
   bool _showMeaning = false;
+  double? _dragStartX;
+  bool _swipeHandled = false;
 
   @override
   void initState() {
@@ -322,10 +324,32 @@ class _TodayScreenState extends State<TodayScreen> {
                         onTapUp: (_) => setState(() => _showMeaning = false),
                         onTapCancel: () => setState(() => _showMeaning = false),
                         // Swipe right = "알고 있음" (known).
-                        onHorizontalDragEnd: (details) {
-                          final vx = details.velocity.pixelsPerSecond.dx;
-                          if (vx > 400) {
+                        // Use distance threshold (not only velocity) for better reliability
+                        // on iOS Safari / web touch interactions.
+                        onHorizontalDragStart: (details) {
+                          _dragStartX = details.globalPosition.dx;
+                          _swipeHandled = false;
+                        },
+                        onHorizontalDragUpdate: (details) {
+                          if (_swipeHandled || _dragStartX == null) return;
+                          final deltaX = details.globalPosition.dx - _dragStartX!;
+                          if (deltaX > 56) {
+                            _swipeHandled = true;
                             _answer(true);
+                          }
+                        },
+                        onHorizontalDragEnd: (_) {
+                          _dragStartX = null;
+                          _swipeHandled = false;
+                          if (_showMeaning && mounted) {
+                            setState(() => _showMeaning = false);
+                          }
+                        },
+                        onHorizontalDragCancel: () {
+                          _dragStartX = null;
+                          _swipeHandled = false;
+                          if (_showMeaning && mounted) {
+                            setState(() => _showMeaning = false);
                           }
                         },
                         child: SizedBox(
