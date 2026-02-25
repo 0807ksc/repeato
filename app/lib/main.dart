@@ -264,110 +264,133 @@ class _TodayScreenState extends State<TodayScreen> {
     final word = widget.cards[_index % widget.cards.length];
     final progress = _target == 0 ? 0.0 : (_index / _target).clamp(0.0, 1.0);
 
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Today', style: Theme.of(context).textTheme.headlineMedium),
-          const SizedBox(height: 4),
-          const Text('중2 초급 영어 · PDF 기반 120단어'),
-          const SizedBox(height: 16),
-          Wrap(
-            spacing: 8,
-            children: [
-              ChoiceChip(
-                label: const Text('빠른 30카드'),
-                selected: _target == 30,
-                onSelected: (_) => _setTarget(30),
+    // Make layout responsive: keep content readable on wide screens
+    // while still filling the width on phones.
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        const maxContentWidth = 560.0;
+        final contentWidth = constraints.maxWidth > maxContentWidth
+            ? maxContentWidth
+            : constraints.maxWidth;
+
+        return Center(
+          child: SizedBox(
+            width: contentWidth,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Today', style: Theme.of(context).textTheme.headlineMedium),
+                  const SizedBox(height: 4),
+                  const Text('중2 초급 영어 · PDF 기반 120단어'),
+                  const SizedBox(height: 16),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      ChoiceChip(
+                        label: const Text('빠른 30카드'),
+                        selected: _target == 30,
+                        onSelected: (_) => _setTarget(30),
+                      ),
+                      ChoiceChip(
+                        label: const Text('집중 60카드'),
+                        selected: _target == 60,
+                        onSelected: (_) => _setTarget(60),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  LinearProgressIndicator(value: progress),
+                  const SizedBox(height: 8),
+                  Text('진행: $_index / $_target · 정답 $_known · 다시보기 $_again'),
+                  const SizedBox(height: 20),
+                  if (!done)
+                    Expanded(
+                      child: InkWell(
+                        onTap: () => setState(() => _showMeaning = !_showMeaning),
+                        borderRadius: BorderRadius.circular(16),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Card(
+                            elevation: 2,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _showMeaning ? word.meaningKo : word.word,
+                                    style: Theme.of(context).textTheme.headlineLarge,
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    _showMeaning ? word.exampleKo : word.exampleEn,
+                                    style: Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                  const Spacer(),
+                                  Text(
+                                    _showMeaning ? '탭하면 영어 단어 보기' : '탭하면 뜻 보기',
+                                    style: Theme.of(context).textTheme.labelMedium,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  else
+                    Expanded(
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Card(
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text('오늘 목표 달성'),
+                                  const SizedBox(height: 8),
+                                  Text('정답 $_known · 다시보기 $_again'),
+                                  const SizedBox(height: 12),
+                                  FilledButton(
+                                    onPressed: () => _setTarget(_target),
+                                    child: const Text('다시 시작'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (!done)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton(
+                            onPressed: () => _answer(false),
+                            child: const Text('다시 보기'),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: FilledButton(
+                            onPressed: () => _answer(true),
+                            child: const Text('알고 있음'),
+                          ),
+                        ),
+                      ],
+                    ),
+                ],
               ),
-              ChoiceChip(
-                label: const Text('집중 60카드'),
-                selected: _target == 60,
-                onSelected: (_) => _setTarget(60),
-              ),
-            ],
+            ),
           ),
-          const SizedBox(height: 12),
-          LinearProgressIndicator(value: progress),
-          const SizedBox(height: 8),
-          Text('진행: $_index / $_target · 정답 $_known · 다시보기 $_again'),
-          const SizedBox(height: 20),
-          if (!done)
-            Expanded(
-              child: InkWell(
-                onTap: () => setState(() => _showMeaning = !_showMeaning),
-                borderRadius: BorderRadius.circular(16),
-                child: Card(
-                  elevation: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          _showMeaning ? word.meaningKo : word.word,
-                          style: Theme.of(context).textTheme.headlineLarge,
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          _showMeaning ? word.exampleKo : word.exampleEn,
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        const Spacer(),
-                        Text(
-                          _showMeaning ? '탭하면 영어 단어 보기' : '탭하면 뜻 보기',
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            )
-          else
-            Expanded(
-              child: Card(
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text('오늘 목표 달성'),
-                        const SizedBox(height: 8),
-                        Text('정답 $_known · 다시보기 $_again'),
-                        const SizedBox(height: 12),
-                        FilledButton(
-                          onPressed: () => _setTarget(_target),
-                          child: const Text('다시 시작'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          if (!done)
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () => _answer(false),
-                    child: const Text('다시 보기'),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: FilledButton(
-                    onPressed: () => _answer(true),
-                    child: const Text('알고 있음'),
-                  ),
-                ),
-              ],
-            ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
