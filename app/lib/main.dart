@@ -308,9 +308,18 @@ class _TodayScreenState extends State<TodayScreen> {
                   const SizedBox(height: 20),
                   if (!done)
                     Expanded(
-                      child: InkWell(
-                        onTap: () => setState(() => _showMeaning = !_showMeaning),
-                        borderRadius: BorderRadius.circular(16),
+                      child: GestureDetector(
+                        // Press-and-hold to reveal the meaning; release to hide.
+                        onTapDown: (_) => setState(() => _showMeaning = true),
+                        onTapUp: (_) => setState(() => _showMeaning = false),
+                        onTapCancel: () => setState(() => _showMeaning = false),
+                        // Swipe right = "알고 있음" (known).
+                        onHorizontalDragEnd: (details) {
+                          final vx = details.velocity.pixelsPerSecond.dx;
+                          if (vx > 400) {
+                            _answer(true);
+                          }
+                        },
                         child: SizedBox(
                           width: double.infinity,
                           child: Card(
@@ -331,7 +340,9 @@ class _TodayScreenState extends State<TodayScreen> {
                                   ),
                                   const Spacer(),
                                   Text(
-                                    _showMeaning ? '탭하면 영어 단어 보기' : '탭하면 뜻 보기',
+                                    _showMeaning
+                                        ? '누르고 있으면 뜻이 보여요'
+                                        : '누르고 있으면 뜻이 보여요 · 오른쪽 스와이프: 알고 있음',
                                     style: Theme.of(context).textTheme.labelMedium,
                                   ),
                                 ],
@@ -368,22 +379,12 @@ class _TodayScreenState extends State<TodayScreen> {
                       ),
                     ),
                   if (!done)
-                    Row(
-                      children: [
-                        Expanded(
-                          child: OutlinedButton(
-                            onPressed: () => _answer(false),
-                            child: const Text('다시 보기'),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: FilledButton(
-                            onPressed: () => _answer(true),
-                            child: const Text('알고 있음'),
-                          ),
-                        ),
-                      ],
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        onPressed: () => _answer(false),
+                        child: const Text('다시 보기'),
+                      ),
                     ),
                 ],
               ),
