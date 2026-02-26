@@ -249,8 +249,8 @@ class _TodayScreenState extends State<TodayScreen> {
     setState(() {
       // Card transition direction:
       // - known (left swipe): next card enters from right
-      // - again (button): next card enters from left
-      _nextCardEnterFromX = isKnown ? 0.18 : -0.18;
+      // - again (right swipe): next card enters from left
+      _nextCardEnterFromX = isKnown ? 0.20 : -0.20;
 
       if (isKnown) {
         _known++;
@@ -339,9 +339,14 @@ class _TodayScreenState extends State<TodayScreen> {
                         onHorizontalDragUpdate: (details) {
                           if (_swipeHandled || _dragStartX == null) return;
                           final deltaX = details.globalPosition.dx - _dragStartX!;
+
+                          // Left swipe: known / Right swipe: again
                           if (deltaX < -56) {
                             _swipeHandled = true;
                             _answer(true);
+                          } else if (deltaX > 56) {
+                            _swipeHandled = true;
+                            _answer(false);
                           }
                         },
                         onHorizontalDragEnd: (_) {
@@ -398,7 +403,7 @@ class _TodayScreenState extends State<TodayScreen> {
                                     Text(
                                       _showMeaning
                                           ? '누르고 있으면 뜻이 보여요'
-                                          : '누르고 있으면 뜻이 보여요 · 왼쪽 스와이프: 알고 있음',
+                                          : '누르고 있으면 뜻이 보여요 · 왼쪽: 알고 있음 / 오른쪽: 다시 보기',
                                       style: Theme.of(context).textTheme.labelMedium,
                                     ),
                                   ],
