@@ -341,10 +341,12 @@ class _TodayScreenState extends State<TodayScreen> {
                           final deltaX = details.globalPosition.dx - _dragStartX!;
 
                           // Left swipe: known / Right swipe: again
-                          if (deltaX < -56) {
+                          // Keep threshold low so web/trackpad/touch all feel responsive.
+                          const swipeThreshold = 24.0;
+                          if (deltaX < -swipeThreshold) {
                             _swipeHandled = true;
                             _answer(true);
-                          } else if (deltaX > 56) {
+                          } else if (deltaX > swipeThreshold) {
                             _swipeHandled = true;
                             _answer(false);
                           }
