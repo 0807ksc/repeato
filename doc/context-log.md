@@ -159,3 +159,130 @@
 - 근거: 즉시 적용 가능하고 세션 간 일관성을 유지하기 쉽기 때문.
 - 영향 범위: 모든 작업의 기록/이월/정리 방식.
 - 후속 작업: 다음 작업부터 inbox/log/next-actions를 실제 운영하며 필요 시 경량화.
+
+- 날짜: 2026-02-24
+- 결정: 이번 저장소 상태 점검 작업 Agent 세트는 `PM + Technical Architect + Frontend Engineer + QA Engineer`로 운영한다.
+- 근거: 요청이 제품 방향/구현 상태/미완료 리스크를 동시에 판단하는 성격이어서 범위 판단, 기술 검토, 코드 확인, 품질 관점이 모두 필요했기 때문.
+- 영향 범위: 상태 진단 결과, 우선순위 큐 정렬, 다음 3개 실행 작업 정의.
+- 후속 작업: 합의된 다음 작업 3개를 기준으로 설계-구현-검증 루프를 시작.
+
+- 날짜: 2026-02-24
+- 결정: 현재 상태는 `M2 초기 학습 루프 MVP 완료 + 정책/스펙 다수 미확정 + Add/Profile 기능 플레이스홀더`로 판단한다.
+- 근거: `app/lib/main.dart`에서 Today 루프만 실동작하고 Add/Profile가 다음 단계 안내 문구로 남아 있으며, `doc/plan-checklist.md` 핵심 체크 항목이 대부분 미완료 상태이기 때문.
+- 영향 범위: 다음 스프린트는 신규 기능 확장보다 정책 확정(카드/스케줄/KPI)과 스케줄러 구현을 우선해야 함.
+- 후속 작업: `doc/next-actions.md` 상위 3개 항목을 산출물 단위로 구체화.
+
+- 날짜: 2026-03-08
+- 결정: `Today` 탭 상세 기획은 `doc/work/repeato-today-tab-spec-v1.md`로 통합하고, 기존 메뉴 스펙 문서는 요약/참조 역할로 유지한다.
+- 근거: 기존 `Today` 정의가 메뉴 스펙과 인터뷰 결과에 분산돼 있었고, 3차 검토 및 2회 리드백 이력을 한 문서에서 추적할 필요가 있기 때문이다.
+- 영향 범위: `doc/work/repeato-menu-and-screen-spec-v1.md`, `doc/work/index.md`, `doc/project-context.md`.
+- 후속 작업: 구현 착수 시 새 문서를 기준으로 `Today` 상태 UI와 이벤트 스키마를 구체화한다.
+
+- 날짜: 2026-03-08
+- 결정: 전체 탭 상세화는 `PM Agent` 오케스트레이션 하에 병렬 시작하고, 선행작업이 필요한 탭은 `blocked` 상태로 대기시키는 방식으로 운영한다.
+- 근거: 사용자 요청이 각 탭에 동일한 상세화 프로세스를 반복하되, 서버/다른 탭 Agent와의 연동 질문과 작업 순서 조율까지 포함하고 있기 때문이다.
+- 영향 범위: `AGENTS.md`, `doc/app-agent-organization.md`, `doc/work/repeato-tab-orchestration-v1.md`, 각 탭 상세 문서.
+- 후속 작업: KPI/이벤트 스키마와 동기화/결제 범위가 정리되면 `Insights`, `Profile`의 blocked 상태를 해제한다.
+
+- 날짜: 2026-03-08
+- 결정: `Decks`, `Add`, `Insights`, `Profile` 탭도 각각 독립 상세 문서로 관리하고, 필요 시 `Backend Engineer`를 조건부로 참여시킨다.
+- 근거: 각 탭이 서로 다른 연동 포인트(덱 상태, 카드 저장, 이벤트 집계, 동기화/결제)를 갖고 있어 단일 문서로는 추적이 어렵기 때문이다.
+- 영향 범위: `doc/work/repeato-decks-tab-spec-v1.md`, `doc/work/repeato-add-tab-spec-v1.md`, `doc/work/repeato-insights-tab-spec-v1.md`, `doc/work/repeato-profile-tab-spec-v1.md`.
+- 후속 작업: 각 탭의 사용자 확인 질문을 실제 인터뷰/검증 시나리오로 전환한다.
+
+- 날짜: 2026-03-08
+- 결정: 최초 버전에서는 동기화/결제 서버 구현을 하지 않고, `Google Drive appDataFolder` 기반 서버리스 동기화안과 결제 상태 모델만 설계한다.
+- 근거: 사용자 요청이 동기화/결제 서버 범위는 기획안만 원하며, 현재 MVP 우선순위는 로컬 학습 경험과 SQLite 기반 상태 저장이기 때문이다.
+- 영향 범위: `doc/work/repeato-local-first-architecture-v1.md`, `doc/work/repeato-profile-tab-spec-v1.md`, `doc/work/repeato-service-open-plan-v1.md`.
+- 후속 작업: MVP-3에서 결제 구현이 실제 범위에 들어오면 PM이 서버리스 백엔드 필요성을 재판단한다.
+
+- 날짜: 2026-03-08
+- 결정: 탭 간 충돌 검토 결과는 공통 상태 키와 집계 규칙으로 조정하고, 치명적 기획 충돌은 없는 것으로 판단한다.
+- 근거: `Today` 완료 정의, `Decks` 상태, `Add` 저장 반영 시점, `Insights` 분모, `Profile` 목표/동기화 노출을 일관 규칙으로 맞출 수 있기 때문이다.
+- 영향 범위: `doc/work/repeato-cross-tab-conflict-review-v1.md`, 탭별 상세 문서, SQLite 상태 모델.
+- 후속 작업: 공통 상태 키를 코드 구조 분리 시점에 모델 클래스로 고정한다.
+
+- 날짜: 2026-03-08
+- 결정: QA는 현재 버전에 대해 `Today` MVP 자동 검증과 전체 시나리오 문서 시뮬레이션을 수행하고, 전체 탭 통합 승인은 로컬 저장 도입 이후로 미룬다.
+- 근거: 현재 자동 테스트는 `Today` 루프 일부만 커버하고 있으며, Decks/Add/Profile은 아직 문서/플레이스홀더 단계이기 때문이다.
+- 영향 범위: `doc/work/repeato-qa-master-scenario-v1.md`, `app/test/widget_test.dart`, 릴리즈 게이트.
+- 후속 작업: SQLite 도입 후 재실행/복원/탭 간 정합성 테스트를 추가한다.
+
+- 날짜: 2026-03-08
+- 결정: 모든 후속 작업은 착수 전에 `doc/work/repeato-delivery-organization-v1.md` 기준으로 담당 조직과 `#STAGE-*`, `#TASK-*`, `#ORG-*` 태그를 먼저 지정한다.
+- 근거: 현재까지 역할 문서는 있었지만 실제 작업 단위별 책임 배치와 태깅 기준이 분리돼 있지 않아 조율 비용이 증가했기 때문이다.
+- 영향 범위: `AGENTS.md`, 향후 `doc/work` 산출물, `doc/next-actions.md` 작업 태깅 방식.
+- 후속 작업: 다음 구현 작업부터 task 라인마다 조직 태그를 병기한다.
+
+- 날짜: 2026-03-08
+- 결정: 반복 작업은 `개발 -> QA -> 사용자 그룹 피드백 -> PM 결정 -> 기획 변경 -> 사용자 의사결정 요청` 루프로 운영하고, 첫 반복 결과는 `doc/work/repeato-iteration-001-loop-v1.md`에 기록한다.
+- 근거: 사용자 요청이 한 번에 완성본을 내는 방식보다 반복 루프와 의사결정 게이트를 명시적으로 원했기 때문이다.
+- 영향 범위: 향후 작업 진행 방식, 사용자 피드백 문서화, PM 의사결정 기록 방식.
+- 후속 작업: 다음 반복부터는 각 기능 구현 전에 GitHub tracking 상태와 사용자 피드백 대상을 함께 점검한다.
+
+- 날짜: 2026-03-08
+- 결정: `resume workflow` 재개 결과, 다음 구현 대상은 유지하되 현재 세션 상태를 `GitHub issue pending`으로 복원하고 구현 착수는 보류한다.
+- 근거: `doc/work/repeato-resume-snapshot-2026-03-08-v1.md` 기준 1순위 작업은 `Add 직접 입력 MVP 구현`이지만, 2026-03-08 현재 `gh auth status`에서 기본 계정 토큰이 invalid이고 작업 브랜치도 `main`이어서 `이슈 -> 브랜치 -> 구현` 강제 절차를 충족하지 못하기 때문이다.
+- 영향 범위: `doc/context-inbox.md`, `doc/next-actions.md`, 다음 개발 착수 순서, GitHub tracking workflow 적용 방식.
+- 후속 작업: GitHub 인증 복구 후 `Add 직접 입력 MVP` 이슈 생성, 3인 개발 검토 기록, `feat/<issue-number>-add-direct-input-mvp` 브랜치에서 구현을 시작한다.
+- 후속 작업: 다음 반복 착수 전에 사용자에게 1순위 구현 항목을 확인받는다.
+
+- 날짜: 2026-03-08
+- 결정: 개발 조직 workflow의 기본 품질 기준으로 테스트 라인 커버리지 70% 이상 유지를 추가하고, 이슈/PR/QA 게이트에 모두 연결한다.
+- 근거: 사용자가 개발 조직 차원에서 커버리지 70% 유지를 명시적으로 요구했고, 문서 규칙만 두면 누락되기 쉬우므로 GitHub tracking 템플릿과 QA 게이트까지 함께 강제해야 실제 운영이 가능하기 때문이다.
+- 영향 범위: `AGENTS.md`, `doc/context-workflow.md`, `doc/app-agent-organization.md`, `doc/work/repeato-github-tracking-workflow-v1.md`, `doc/work/repeato-delivery-organization-v1.md`, `.github/ISSUE_TEMPLATE/feature-task.yml`, `.github/PULL_REQUEST_TEMPLATE.md`.
+- 후속 작업: 다음 개발 이슈부터 coverage plan을 이슈에 기록하고, PR에는 실제 line coverage 측정값을 남긴다.
+
+- 날짜: 2026-03-08
+- 결정: 현재 컨텍스트를 공유하는 `workflow 조직 세션`은 `doc/work` 문서로 열고, Workflow Enablement Group의 활성 세션 기준점으로 운영한다.
+- 근거: 별도 런타임 세션을 시스템적으로 유지하는 기능은 없지만, 현재 컨텍스트/참조 문서/역할/열린 안건을 한 문서에 고정하면 다음 턴과 다음 세션에서 동일한 조직 맥락으로 재개할 수 있기 때문이다.
+- 영향 범위: `doc/work` 산출물 체계, workflow 재개 방식, 조직 간 컨텍스트 공유 방식.
+- 후속 작업: 세션 문서에 현재 활성 작업, 참조 문서, 오픈 안건, 다음 실행 순서를 유지한다.
+
+- 날짜: 2026-03-08
+- 결정: `Add 직접 입력 MVP`는 GitHub 이슈 `#1`과 브랜치 `feat/1-add-direct-input-mvp`에서 진행하고, 구현 범위는 로컬 메모리 기반 직접 입력/저장/Today 이동/Decks 반영으로 고정한다.
+- 근거: `Add` 탭 1순위 구현을 workflow 규칙에 맞춰 실제 이슈-브랜치 체인으로 시작해야 했고, 현재 앱 구조에서는 SQLite 전에 AppRoot가 카드 목록을 상태로 소유하는 방식이 가장 작은 단위의 검증 가능 구현이기 때문이다.
+- 영향 범위: `app/lib/app_root.dart`, `app/lib/screens/add_screen.dart`, `app/test/widget_test.dart`, GitHub issue `#1`.
+- 후속 작업: PR 단계에서 coverage 결과와 회귀 범위를 본문에 기록하고, 다음 구현은 `Deck 상세 화면과 Today 연결`로 이어간다.
+
+- 날짜: 2026-03-08
+- 결정: 이번 `Add 직접 입력 MVP` 검증 결과는 `flutter analyze` 통과, `flutter test --coverage` 통과, line coverage `84.31%`로 기록한다.
+- 근거: 개발 조직 workflow에 새로 추가한 품질 기준(테스트 라인 커버리지 70% 이상 유지)을 실제 첫 구현 작업에 즉시 적용해야 하기 때문이다.
+- 영향 범위: QA 게이트, PR 본문 커버리지 기록, 다음 개발 이슈의 coverage plan 작성 방식.
+- 후속 작업: 다음 개발 이슈부터 coverage plan과 실제 line coverage 수치를 동일한 포맷으로 누적한다.
+
+- 날짜: 2026-03-08
+- 결정: `Add 직접 입력 MVP` 변경은 선택 커밋 `8780e79`로 정리하고 PR `#2 Add direct input MVP and workflow coverage gate`를 생성한다.
+- 근거: 사용자가 미커밋 변경 정리와 깨끗한 PR 생성을 우선 요청했고, 현재 작업 트리에는 이번 PR과 무관한 문서 변경이 함께 남아 있어 선택 스테이징과 별도 커밋/PR 분리가 필요했기 때문이다.
+- 영향 범위: GitHub issue `#1`, branch `feat/1-add-direct-input-mvp`, PR `#2`, 로컬 미커밋 변경 관리 방식.
+- 후속 작업: PR `#2` 기준 수동 QA를 수행하고, 다음 작업은 별도 이슈/브랜치로 `Deck 상세 화면과 Today 연결`을 시작한다.
+
+- 날짜: 2026-03-08
+- 결정: 개발 작업은 GitHub 이슈, 이슈 번호 포함 브랜치, PR, QA, 머지 순서를 강제하고, 구현 전에는 Development Lead 포함 3인 검토를 필수로 둔다.
+- 근거: 사용자 요청이 개발 절차의 추적성과 역할 분담을 강하게 요구했고, 작업 누락과 범위 드리프트를 줄이려면 GitHub tracking을 강제해야 하기 때문이다.
+- 영향 범위: `AGENTS.md`, `.github/ISSUE_TEMPLATE/feature-task.yml`, `.github/PULL_REQUEST_TEMPLATE.md`, 향후 개발 작업 시작 방식.
+- 후속 작업: GitHub 인증 복구 후 실제 이슈/브랜치/PR 생성 흐름을 즉시 적용한다.
+
+- 날짜: 2026-03-08
+- 결정: 작업/조직 관리 절차를 제품 기능과 분리하기 위해 Workflow Enablement Group을 신설하고, 모든 조직 작업에 workflow 분리 관점을 병행 적용한다.
+- 근거: PM과 각 조직 리더의 운영 절차를 나중에 skill/plugin으로 분리하려면, 기능 개발과 동시에 workflow 산출물을 별도로 추출해야 하기 때문이다.
+- 영향 범위: `doc/work/repeato-workflow-agent-group-v1.md`, `doc/work/repeato-workflow-extraction-v1.md`, `doc/work/repeato-org-leader-workflow-v1.md`, `doc/work/repeato-delivery-organization-v1.md`.
+- 후속 작업: 다음 작업부터 workflow 관련 산출물은 `#TASK-WORKFLOW` 태그로 별도 누적한다.
+
+- 날짜: 2026-03-08
+- 결정: 현재 작업 컨텍스트 백업과 다음 세션 resume 기준은 `doc/work/repeato-resume-snapshot-2026-03-08-v1.md`를 단일 시작점으로 사용한다.
+- 근거: 내부 대화 상태는 직접 저장할 수 없으므로, 문서/작업 큐/코드 상태를 한 문서에 묶어 재개 기준을 명확히 해야 하기 때문이다.
+- 영향 범위: 이후 세션 재개 방식, context 복원 절차, 사용자 resume 프롬프트.
+- 후속 작업: 다음 세션 시작 시 snapshot 문서와 `doc/next-actions.md`를 먼저 읽고 작업을 재개한다.
+
+- 날짜: 2026-03-08
+- 결정: backup/resume 절차는 특정 snapshot 문서에 종속하지 않고 Workflow Enablement Group이 관리하는 공통 workflow(`repeato-backup-resume-workflow-v1.md`)와 template(`repeato-resume-snapshot-template-v1.md`)로 재사용한다.
+- 근거: 이후 모든 반복 작업과 다른 workflow 분리 작업에서도 동일한 backup/resume 구조를 재사용해야 하기 때문이다.
+- 영향 범위: `doc/work/repeato-backup-resume-workflow-v1.md`, `doc/work/repeato-resume-snapshot-template-v1.md`, `doc/work/repeato-workflow-agent-group-v1.md`, `doc/work/repeato-workflow-extraction-v1.md`.
+- 후속 작업: 새 snapshot 생성 시 template를 기준으로 작성하고, latest snapshot만 resume 기준으로 지정한다.
+
+- 날짜: 2026-03-08
+- 결정: 현재 세션 상태에 대해 backup workflow를 실행하고, 최신 resume 기준은 `doc/work/repeato-resume-snapshot-2026-03-08-v1.md`로 재확정한다.
+- 근거: 다음 세션에서 동일한 문서 기준으로 바로 resume 할 수 있게 최신 산출물과 blocked 상태를 snapshot에 반영해야 하기 때문이다.
+- 영향 범위: `doc/work/repeato-resume-snapshot-2026-03-08-v1.md`, 이후 세션 재개 절차.
+- 후속 작업: resume 시 snapshot + `doc/next-actions.md` + `doc/context-log.md`를 함께 읽고 시작한다.

@@ -1,17 +1,16 @@
-# app
+# Repeato App
 
-A new Flutter project.
+## Local Run
+- `flutter pub get`
+- `flutter run`
 
-## Getting Started
+## Test
+- `flutter test`
+- `flutter analyze`
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## GitHub Pages Preview
+- GitHub Pages workflow: [`.github/workflows/pages.yml`](/Users/sungchulkang/workspace/my/repeato/.github/workflows/pages.yml)
+- Web build command:
+  - `flutter build web --release --base-href "/repeato/"`
+- 배포가 `main` 브랜치에 반영되면 GitHub Pages에서 웹 앱으로 확인할 수 있다.
+- 이번 리뷰 빌드는 각 탭 상단 설명 문구를 통해 사용자 그룹 테스트 포인트를 바로 확인할 수 있게 구성했다.
