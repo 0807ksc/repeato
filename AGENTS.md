@@ -30,6 +30,8 @@
 - 작은 단위로 변경하고, 각 변경은 검증 가능해야 한다.
 - 기존 파일/구조를 우선 존중하고 불필요한 리팩터링을 피한다.
 - 사용자 요청 범위를 벗어나는 확장은 하지 않는다.
+- 개발 조직은 테스트 라인 커버리지 70% 이상을 유지하도록 작업한다.
+- 커버리지가 70% 아래로 내려갈 가능성이 있으면 구현 전에 원인/보완계획/예외 승인 필요 여부를 workflow에 기록한다.
 
 ## 요청 분류/반영 규칙
 - 공통 workflow 설계/절차/템플릿/재사용성에 대한 요청은 `doc/context-workflow.md`와 관련 공통 자산(`skills/context-workflow`)에 반영한다.
@@ -39,10 +41,21 @@
 
 ## 작업별 Agent 호출 규칙
 - 모든 작업 시작 시 `doc/app-agent-organization.md`의 호출 규칙으로 이번 작업 Agent 세트를 먼저 선택한다.
+- 작업 시작 전에는 `doc/work/repeato-delivery-organization-v1.md` 기준으로 담당 조직, 단계 태그, 작업 태그를 먼저 지정한다.
+- 개발 작업은 `doc/work/repeato-github-tracking-workflow-v1.md` 기준의 `이슈 -> 브랜치 -> 구현 -> PR -> QA -> 머지` 절차를 필수로 따른다.
+- 개발 작업의 테스트 검증에는 커버리지 확인을 포함하고, PR에는 현재 커버리지 결과를 남긴다.
+- 구현 시작 전에는 Development Lead 포함 3명의 개발자가 역할을 나눠 구현 방안을 검토하고, 그 결과를 GitHub 이슈에 남긴다.
+- GitHub 인증이 막혀 이슈 생성이 불가하면 `GitHub issue pending` 상태로 기록하고, 실제 PR 전에는 반드시 복구한다.
 - 선택된 Agent 세트는 `doc/context-log.md`에 작업 결정으로 기록한다.
 - Repeato 작업이면 `doc/repeato-agent-extension.md`를 추가 적용하고, 기획 단계에서 Education/Cognitive Science Agent 동시 검토를 수행한다.
 - 구현 작업은 최소 `Architect + Engineer + QA` 조합을 유지한다.
 - 정책/요구사항 작업은 최소 `PM + (Designer 또는 Architect)` 조합을 유지한다.
+- 여러 탭 작업을 병렬로 진행할 때는 `PM Agent`를 상위 오케스트레이터로 두고, 탭별 Agent는 PM을 통해 선행작업/질문/대기 상태를 공유한다.
+- 탭 간 연동 이슈가 생기면 관련 탭 Agent를 추가 호출해 질의/응답과 합의 결과를 각 탭 문서에 남긴다.
+- 동기화/결제/집계/가져오기 등 서버 의존성이 확인되면 `Backend Engineer`를 해당 탭 라운드에 즉시 추가한다.
+- 5개 탭 병렬 검토와 `ready / blocked / in_review / done` 상태 운영은 `doc/work/repeato-tab-orchestration-v1.md`를 따른다.
+- 각 단계/작업 항목 문서에는 가능한 한 `#STAGE-*`, `#TASK-*`, `#ORG-*` 태그를 명시한다.
+- 작업/조직 관리에서 재사용 가능한 규칙은 Workflow Enablement Group이 분리해 `doc/work/repeato-workflow-extraction-v1.md` 계열 문서로 축적한다.
 - 모든 프롬프트 작업은 아래 강제 순서를 따른다:
 - `PM + Architect` 사전 검토(기존 스펙 충돌/서비스 취지 적합성)
 - `Architect` 상세 작업 계획 수립

@@ -1,0 +1,59 @@
+name: Feature Task
+description: Repeato feature/task tracking with required implementation review before coding
+title: "[Task] "
+labels:
+  - task
+body:
+  - type: textarea
+    id: background
+    attributes:
+      label: Background
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+    validations:
+      required: true
+  - type: textarea
+    id: non_scope
+    attributes:
+      label: Out of Scope
+  - type: textarea
+    id: implementation_review
+    attributes:
+      label: 3-Developer Implementation Review
+      description: Development Lead, Feature Engineer, Integration Engineer conclusions
+    validations:
+      required: true
+  - type: textarea
+    id: role_split
+    attributes:
+      label: Role Split
+    validations:
+      required: true
+  - type: textarea
+    id: qa_points
+    attributes:
+      label: QA Checkpoints
+    validations:
+      required: true
+  - type: textarea
+    id: coverage_plan
+    attributes:
+      label: Test Coverage Plan
+      description: Note target line coverage, test scope, and any expected risk to the 70% baseline
+    validations:
+      required: true
+  - type: textarea
+    id: user_feedback
+    attributes:
+      label: User Feedback Need
+      description: Note if user group feedback is required in this iteration
