@@ -258,6 +258,18 @@
 - 후속 작업: PR `#2` 기준 수동 QA를 수행하고, 다음 작업은 별도 이슈/브랜치로 `Deck 상세 화면과 Today 연결`을 시작한다.
 
 - 날짜: 2026-03-08
+- 결정: `Deck 상세 화면과 Today 연결` 작업은 GitHub 이슈 `#3`과 브랜치 `feat/3-decks-today-link`에서 진행하고, 범위는 덱 상세 진입/요약 정보/`학습 시작` CTA 연결로 제한한다.
+- 근거: 다음 우선순위 작업을 기존 workflow에 맞춰 즉시 시작해야 했고, 현재 다중 덱/SQLite 상태 모델이 아직 없으므로 단일 대표 덱 기준의 상세 화면 연결이 가장 작은 검증 가능 단위이기 때문이다.
+- 영향 범위: `app/lib/app_root.dart`, `app/lib/screens/decks_screen.dart`, `app/test/widget_test.dart`, GitHub issue `#3`.
+- 후속 작업: PR 단계에서 Deck 상세 노출 정보와 Today 이동 회귀 범위를 본문에 기록한다.
+
+- 날짜: 2026-03-08
+- 결정: 이번 `Deck 상세 화면과 Today 연결` 검증 결과는 `flutter analyze` 통과, `flutter test --coverage` 통과, line coverage `85.59%`로 기록한다.
+- 근거: 새 workflow 규칙에 따라 모든 개발 반복에서 테스트 라인 커버리지 70% 이상 유지 여부를 실제 수치로 남겨야 하기 때문이다.
+- 영향 범위: QA 게이트, PR 본문 커버리지 기록, 다음 개발 이슈의 coverage plan 누적 방식.
+- 후속 작업: 다음 작업에서도 동일한 coverage 계산 방식(`coverage/lcov.info`)을 사용한다.
+
+- 날짜: 2026-03-08
 - 결정: 개발 작업은 GitHub 이슈, 이슈 번호 포함 브랜치, PR, QA, 머지 순서를 강제하고, 구현 전에는 Development Lead 포함 3인 검토를 필수로 둔다.
 - 근거: 사용자 요청이 개발 절차의 추적성과 역할 분담을 강하게 요구했고, 작업 누락과 범위 드리프트를 줄이려면 GitHub tracking을 강제해야 하기 때문이다.
 - 영향 범위: `AGENTS.md`, `.github/ISSUE_TEMPLATE/feature-task.yml`, `.github/PULL_REQUEST_TEMPLATE.md`, 향후 개발 작업 시작 방식.

@@ -85,4 +85,33 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.textContaining('카드 121개'), findsOneWidget);
   });
+
+  testWidgets('Deck detail can start Today and reflects custom card count', (WidgetTester tester) async {
+    await tester.pumpWidget(const RepeatoApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Add').last);
+    await tester.pumpAndSettle();
+
+    final fields = find.byType(TextFormField);
+    await tester.enterText(fields.at(0), 'portable');
+    await tester.enterText(fields.at(1), '휴대용의');
+    await tester.enterText(fields.at(2), '여행 영어');
+    await tester.tap(find.text('카드 저장'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Decks').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('중2 초급 영어 120'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Deck Detail'), findsOneWidget);
+    expect(find.text('121개'), findsOneWidget);
+    expect(find.text('1개'), findsOneWidget);
+
+    await tester.tap(find.text('학습 시작'));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('진행: 0 /'), findsOneWidget);
+  });
 }

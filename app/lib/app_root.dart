@@ -41,6 +41,7 @@ class _AppRootState extends State<AppRoot> {
           ..clear()
           ..addAll(cards);
         _isLoading = false;
+        _stats = SessionStats(target: 30, completed: 0, known: 0, unsure: 0, again: 0, done: false);
       });
     } catch (error) {
       if (!mounted) return;
@@ -137,7 +138,11 @@ class _AppRootState extends State<AppRoot> {
         cards: _cards,
         onStatsChanged: (s) => setState(() => _stats = s),
       ),
-      DecksScreen(totalCards: _cards.length),
+      DecksScreen(
+        totalCards: _cards.length,
+        customCards: _cards.where((card) => card.level == 'custom').length,
+        onStartToday: () => setState(() => _currentIndex = 0),
+      ),
       AddScreen(
         key: const ValueKey('add-screen'),
         onAddCard: _addCard,

@@ -1,8 +1,8 @@
 # Next Actions
 
 ## Priority Queue
-1. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` Deck 상세 화면과 Today 연결 구현
-2. [ ] (P1) `#STAGE-C #TASK-DATA #TASK-APP #ORG-ARCH #ORG-DATA #ORG-FE` Flutter 로컬 SQLite 저장 계층과 도메인 모델 설계안을 코드 구조로 내리기 (`doc/work/repeato-local-first-architecture-v1.md`)
+1. [ ] (P1) `#STAGE-C #TASK-DATA #TASK-APP #ORG-ARCH #ORG-DATA #ORG-FE` Flutter 로컬 SQLite 저장 계층과 도메인 모델 설계안을 코드 구조로 내리기 (`doc/work/repeato-local-first-architecture-v1.md`)
+2. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` Deck 상태 모델 확장(진행 중/일시중지/완료)과 상세 정보 고도화
 3. [ ] (P1) `#STAGE-C #TASK-WORKFLOW #ORG-WF-ARCH #ORG-WF-LIB #ORG-WF-AUTO #ORG-PM` workflow 조직 세션 기준 문서 유지 및 coverage 70% 운영 규칙을 다음 개발 이슈/PR에 계속 적용
 4. [ ] (P1) `#STAGE-B #TASK-LEARNING #TASK-TAB #ORG-PM #ORG-DESIGN #ORG-EDU #ORG-COG` 카드 템플릿/정답 판정/세션 규칙과 공통 상태 키 확정 (`doc/plan-checklist.md` + `doc/work/repeato-cross-tab-conflict-review-v1.md`)
 5. [ ] (P1) `#STAGE-C #TASK-DATA #ORG-PM #ORG-DATA #ORG-ARCH` KPI/이벤트 스키마 확정 후 `Insights` 구현 착수 (`doc/work/repeato-insights-tab-spec-v1.md`)
@@ -14,6 +14,11 @@
 - Flutter line coverage 측정/기록 방식은 다음 개발 이슈에서 실제 명령과 보고 포맷을 고정할 필요가 있음
 
 ## Done in This Iteration
+- Deck 상세 화면 진입 및 `학습 시작` CTA로 Today 이동 연결
+- Add로 증가한 카드 수를 Deck 상세에 반영
+- `flutter analyze` 통과
+- `flutter test --coverage` 통과
+- 라인 커버리지 `85.59%` 확인
 - Add 직접 입력 MVP 이슈 생성(`#1`) 및 브랜치 생성(`feat/1-add-direct-input-mvp`)
 - Add 직접 입력 폼 구현(앞면/뒷면/덱)
 - 저장 후 CTA 구현(`계속 추가`, `Today로 이동`)
