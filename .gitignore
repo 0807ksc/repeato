@@ -1,0 +1,12 @@
+# OS / editor noise
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Local environments
+.venv/
+
+# Tooling output
+*.log
+app/coverage/

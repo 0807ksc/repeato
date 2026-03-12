@@ -252,6 +252,12 @@
 - 후속 작업: 다음 개발 이슈부터 coverage plan과 실제 line coverage 수치를 동일한 포맷으로 누적한다.
 
 - 날짜: 2026-03-08
+- 결정: `Add 직접 입력 MVP` 변경은 선택 커밋 `8780e79`로 정리하고 PR `#2 Add direct input MVP and workflow coverage gate`를 생성한다.
+- 근거: 사용자가 미커밋 변경 정리와 깨끗한 PR 생성을 우선 요청했고, 현재 작업 트리에는 이번 PR과 무관한 문서 변경이 함께 남아 있어 선택 스테이징과 별도 커밋/PR 분리가 필요했기 때문이다.
+- 영향 범위: GitHub issue `#1`, branch `feat/1-add-direct-input-mvp`, PR `#2`, 로컬 미커밋 변경 관리 방식.
+- 후속 작업: PR `#2` 기준 수동 QA를 수행하고, 다음 작업은 별도 이슈/브랜치로 `Deck 상세 화면과 Today 연결`을 시작한다.
+
+- 날짜: 2026-03-08
 - 결정: 개발 작업은 GitHub 이슈, 이슈 번호 포함 브랜치, PR, QA, 머지 순서를 강제하고, 구현 전에는 Development Lead 포함 3인 검토를 필수로 둔다.
 - 근거: 사용자 요청이 개발 절차의 추적성과 역할 분담을 강하게 요구했고, 작업 누락과 범위 드리프트를 줄이려면 GitHub tracking을 강제해야 하기 때문이다.
 - 영향 범위: `AGENTS.md`, `.github/ISSUE_TEMPLATE/feature-task.yml`, `.github/PULL_REQUEST_TEMPLATE.md`, 향후 개발 작업 시작 방식.

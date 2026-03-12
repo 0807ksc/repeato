@@ -70,18 +70,102 @@
 - 설명: Repeato 필수 메뉴/화면 구조 상세 설계
 - 사용 시점: 기능 상세 기획, 와이어프레임, UI 구현 착수 시
 
-5. `doc/work/repeato-tab-icon-system-v1.md`
+5. `doc/work/repeato-today-tab-spec-v1.md`
+- 설명: `Today` 탭 통합 상세 기획 및 리드백 반영 문서
+- 사용 시점: Today 탭 구현/테스트/사용성 검증 시
+
+6. `doc/work/repeato-decks-tab-spec-v1.md`
+- 설명: `Decks` 탭 상세 기획 및 연동 질문 문서
+- 사용 시점: 덱 구조/상태/Today 연동 검토 시
+
+7. `doc/work/repeato-add-tab-spec-v1.md`
+- 설명: `Add` 탭 상세 기획 및 입력/가져오기 정책 문서
+- 사용 시점: 카드 입력 UX 및 저장 정책 검토 시
+
+8. `doc/work/repeato-insights-tab-spec-v1.md`
+- 설명: `Insights` 탭 상세 기획 및 KPI/이벤트 검토 문서
+- 사용 시점: 통계 UX/지표 정의/이벤트 스키마 설계 시
+
+9. `doc/work/repeato-profile-tab-spec-v1.md`
+- 설명: `Profile` 탭 상세 기획 및 동기화/결제/보안 검토 문서
+- 사용 시점: 계정/동기화/결제 UX와 서버 범위 검토 시
+
+10. `doc/work/repeato-tab-orchestration-v1.md`
+- 설명: 5개 탭 병렬 검토와 PM 조율 기준 문서
+- 사용 시점: 탭별 선행작업/대기/재개 순서 조율 시
+
+11. `doc/work/repeato-delivery-organization-v1.md`
+- 설명: 작업 시작 전 조직도, 단계별 책임, 태깅 규칙 문서
+- 사용 시점: 작업 착수 전 담당 조직 세팅과 task 태깅 시
+
+12. `doc/work/repeato-github-tracking-workflow-v1.md`
+- 설명: GitHub 이슈/브랜치/PR/머지 강제 추적 절차 문서
+- 사용 시점: 개발 작업 착수 전 GitHub tracking 절차 확인 시
+
+13. `doc/work/repeato-workflow-extraction-v1.md`
+- 설명: 작업/조직 관리 절차를 skill/plugin으로 분리하기 위한 산출물 문서
+- 사용 시점: workflow 분리 후보와 부가 산출물 관리 시
+
+14. `doc/work/repeato-org-leader-workflow-v1.md`
+- 설명: 조직 리더별 task 관리 분리 규칙 문서
+- 사용 시점: PM/각 조직 리더의 task 운영 절차 분리 시
+
+15. `doc/work/repeato-workflow-agent-group-v1.md`
+- 설명: workflow 분리/추출 전담 Agent 그룹 정의 문서
+- 사용 시점: 조직별 workflow 분리 협업 시
+
+16. `doc/work/repeato-backup-resume-workflow-v1.md`
+- 설명: Workflow Enablement Group이 관리하는 재사용 가능한 backup/resume 표준 workflow
+- 사용 시점: 세션 종료 전 context 백업과 다음 세션 resume 준비 시
+
+17. `doc/work/repeato-resume-snapshot-template-v1.md`
+- 설명: resume snapshot 문서 템플릿
+- 사용 시점: 새 snapshot 문서 작성 시
+
+18. `doc/work/repeato-cross-tab-conflict-review-v1.md`
+- 설명: 탭 간 충돌 범위와 PM 조정안 정리 문서
+- 사용 시점: 구현 전 공통 상태/정렬/완료 기준 충돌 해소 시
+
+19. `doc/work/repeato-qa-master-scenario-v1.md`
+- 설명: 전체 시나리오 기반 QA 테스트 계획 및 시뮬레이션 결과
+- 사용 시점: QA 시나리오 확정, 회귀 기준 수립 시
+
+20. `doc/work/repeato-local-first-architecture-v1.md`
+- 설명: 앱 도메인, 데이터 모델, SQLite, 다중 디바이스 동기화, 서버리스 판단 문서
+- 사용 시점: 로컬 저장/동기화/도메인 설계 확정 시
+
+21. `doc/work/repeato-service-open-plan-v1.md`
+- 설명: PM 조율 기준 서비스 오픈까지의 실행 계획 문서
+- 사용 시점: 단계별 실행 계획과 blocked 해제 조건 관리 시
+
+22. `doc/work/repeato-user-feedback-groups-v1.md`
+- 설명: 사용자 그룹 구성과 피드백 설명 스크립트 문서
+- 사용 시점: 반복 작업의 사용자 피드백 수집 준비 시
+
+23. `doc/work/repeato-iteration-001-loop-v1.md`
+- 설명: 첫 반복의 개발-QA-사용자 피드백-PM 결정 결과 문서
+- 사용 시점: 반복 작업 히스토리와 다음 우선순위 결정 시
+
+24. `doc/work/repeato-resume-snapshot-2026-03-08-v1.md`
+- 설명: 현재 작업 컨텍스트 백업 및 resume 시작 기준 문서
+- 사용 시점: 다음 세션에서 context 복원 후 작업 재개 시
+
+25. `doc/work/repeato-tab-icon-system-v1.md`
 - 설명: Repeato 탭바 아이콘 시스템 및 적용 가이드
 - 사용 시점: 탭바 시각 자산 적용/교체 시
 
-6. `doc/work/repeato-user-interview-001.md`
+26. `doc/work/repeato-user-interview-001.md`
 - 설명: 핵심 사용자 인터뷰 결과(v1)
 - 사용 시점: 상세 기획 의사결정(목표/콘텐츠/리마인드/학습 루프) 시
 
-7. `doc/work/repeato-platform-strategy-v1.md`
+27. `doc/work/repeato-platform-strategy-v1.md`
 - 설명: 플랫폼 전략(case1/case2) 비교 및 최종 권고안
 - 사용 시점: 앱 구조/과금 구조/배포 전략 결정 시
 
-8. `doc/work/repeato-m2-initial-build-v1.md`
+28. `doc/work/repeato-m2-initial-build-v1.md`
 - 설명: 중2 초급 영어 초기버전 구현 산출물(v1)
 - 사용 시점: 개발 결과 리뷰/다음 구현 단계 정의 시
+
+29. `doc/work/repeato-workflow-org-session-2026-03-08-v1.md`
+- 설명: 현재 컨텍스트 공유용 workflow 조직 활성 세션 문서
+- 사용 시점: workflow 규칙 반영 상태 확인, 다음 세션 재개 시

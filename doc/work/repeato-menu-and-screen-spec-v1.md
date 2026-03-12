@@ -38,6 +38,9 @@
 목적:
 - 오늘 해야 할 복습을 가장 빠르게 완료
 
+상세 참조:
+- `doc/work/repeato-today-tab-spec-v1.md`
+
 핵심 화면:
 1. Today Home
 - 오늘 복습 카드 수
@@ -58,10 +61,15 @@
 - 오답 카드 우선 재노출
 - 짧은 세션 반복(10분 기본, 30분 확장)
 - 목표 단위는 시간보다 카드 수 중심
+- 완료/권장 완료 상태를 구분해 표시
+- 연체가 많은 날에도 추천 묶음 단위로 부담을 분절
 
 ### 3.2 Decks
 목적:
 - 학습 과제(덱) 생성/관리
+
+상세 참조:
+- `doc/work/repeato-decks-tab-spec-v1.md`
 
 핵심 화면:
 1. Deck List
@@ -85,6 +93,9 @@
 목적:
 - 학습 콘텐츠를 빠르게 추가
 
+상세 참조:
+- `doc/work/repeato-add-tab-spec-v1.md`
+
 핵심 화면:
 1. Add Entry
 - `직접 입력`, `템플릿 선택`, `가져오기`(CSV/텍스트)
@@ -107,6 +118,9 @@
 목적:
 - 학습 지속성과 기억 유지 상태를 확인
 
+상세 참조:
+- `doc/work/repeato-insights-tab-spec-v1.md`
+
 핵심 화면:
 1. Dashboard
 - 오늘 완료율, 7일 연속 학습, 기억 유지 점수
@@ -127,6 +141,9 @@
 ### 3.5 Profile
 목적:
 - 계정/동기화/결제/앱 설정 관리
+
+상세 참조:
+- `doc/work/repeato-profile-tab-spec-v1.md`
 
 핵심 화면:
 1. Account & Sync
