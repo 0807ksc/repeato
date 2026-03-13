@@ -148,12 +148,20 @@ class _AppRootState extends State<AppRoot> {
         onAddCard: _addCard,
         onNavigateToday: () => setState(() => _currentIndex = 0),
       ),
-      InsightsScreen(stats: _stats),
+      InsightsScreen(
+        stats: _stats,
+        onStartToday: () => setState(() => _currentIndex = 0),
+      ),
       const ProfileScreen(),
     ];
 
     return Scaffold(
-      body: SafeArea(child: screens[_currentIndex]),
+      body: SafeArea(
+        child: IndexedStack(
+          index: _currentIndex,
+          children: screens,
+        ),
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
         onDestinationSelected: (i) => setState(() => _currentIndex = i),

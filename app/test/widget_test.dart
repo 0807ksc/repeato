@@ -53,8 +53,8 @@ void main() {
     await tester.tap(find.text('Insights').last);
     await tester.pumpAndSettle();
 
-    expect(find.text('헷갈림'), findsWidgets);
-    expect(find.text('1건'), findsOneWidget);
+    expect(find.text('오늘 상태'), findsOneWidget);
+    expect(find.textContaining('헷갈림 1건'), findsOneWidget);
   });
 
   testWidgets('Add tab validates, saves a card, and can move to Today', (WidgetTester tester) async {
@@ -113,5 +113,29 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.textContaining('진행: 0 /'), findsOneWidget);
+  });
+
+  testWidgets('Insights action can move back to Today with KPI cards visible', (WidgetTester tester) async {
+    await tester.pumpWidget(const RepeatoApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('헷갈림').first);
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Insights').last);
+    await tester.pumpAndSettle();
+
+    expect(find.text('오늘 완료율'), findsOneWidget);
+    expect(find.text('정답률'), findsOneWidget);
+    expect(find.text('오늘 상태'), findsOneWidget);
+    expect(find.text('진행 중'), findsOneWidget);
+
+    final retryButton = find.widgetWithText(FilledButton, '약점 다시 학습');
+    await tester.ensureVisible(retryButton);
+    await tester.pumpAndSettle();
+    await tester.tap(retryButton);
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('진행: 1 /'), findsOneWidget);
   });
 }
