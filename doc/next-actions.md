@@ -1,11 +1,13 @@
 # Next Actions
 
 ## Priority Queue
-1. [ ] (P1) `#STAGE-C #TASK-DATA #TASK-APP #ORG-ARCH #ORG-DATA #ORG-FE` Flutter 로컬 SQLite 저장 계층과 도메인 모델 설계안을 코드 구조로 내리기 (`doc/work/repeato-local-first-architecture-v1.md`)
-2. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` Deck 상태 모델 확장(진행 중/일시중지/완료)과 상세 정보 고도화
-3. [ ] (P1) `#STAGE-C #TASK-WORKFLOW #ORG-WF-ARCH #ORG-WF-LIB #ORG-WF-AUTO #ORG-PM` workflow 조직 세션 기준 문서 유지 및 coverage 70% 운영 규칙을 다음 개발 이슈/PR에 계속 적용
-4. [ ] (P1) `#STAGE-B #TASK-LEARNING #TASK-TAB #ORG-PM #ORG-DESIGN #ORG-EDU #ORG-COG` 카드 템플릿/정답 판정/세션 규칙과 공통 상태 키 확정 (`doc/plan-checklist.md` + `doc/work/repeato-cross-tab-conflict-review-v1.md`)
-5. [ ] (P1) `#STAGE-C #TASK-DATA #ORG-PM #ORG-DATA #ORG-ARCH` KPI/이벤트 스키마 확정 후 `Insights` 구현 착수 (`doc/work/repeato-insights-tab-spec-v1.md`)
+1. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DESIGN #ORG-QA` `Profile` 1차 반복: 학습 환경/리마인드/진도 요약 카드 추가 및 설정 CTA 정리
+2. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` `Today` 2차 반복: 세션 리셋/목표 변경/약점 재진입 흐름 고도화
+3. [ ] (P1) `#STAGE-C #TASK-DATA #TASK-APP #ORG-ARCH #ORG-DATA #ORG-FE` Flutter 로컬 SQLite 저장 계층과 도메인 모델 설계안을 코드 구조로 내리기 (`doc/work/repeato-local-first-architecture-v1.md`)
+4. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` Deck 상태 모델 확장(진행 중/일시중지/완료)과 상세 정보 고도화
+5. [ ] (P1) `#STAGE-C #TASK-WORKFLOW #ORG-WF-ARCH #ORG-WF-LIB #ORG-WF-AUTO #ORG-PM` workflow 조직 세션 기준 문서 유지 및 coverage 70% 운영 규칙을 다음 개발 이슈/PR에 계속 적용
+6. [ ] (P1) `#STAGE-B #TASK-LEARNING #TASK-TAB #ORG-PM #ORG-DESIGN #ORG-EDU #ORG-COG` 카드 템플릿/정답 판정/세션 규칙과 공통 상태 키 확정 (`doc/plan-checklist.md` + `doc/work/repeato-cross-tab-conflict-review-v1.md`)
+7. [ ] (P1) `#STAGE-C #TASK-DATA #ORG-PM #ORG-DATA #ORG-ARCH` KPI/이벤트 스키마 확정 후 `Insights` 2차 구현 착수 (`doc/work/repeato-insights-tab-spec-v1.md`)
 6. [ ] (P2) `#STAGE-E #TASK-SYNC #TASK-SERVERLESS #ORG-DATA #ORG-SEC #ORG-SRE` 동기화/결제는 기획안 유지, Google Drive 기반 서버리스안 상세 검토만 진행
 7. [ ] (P2) `#STAGE-B #TASK-TAB #ORG-PM #ORG-DESIGN #ORG-QA` 각 탭 사용자 확인 질문을 인터뷰 스크립트로 전환하고 실제 피드백 수집
 
@@ -14,6 +16,12 @@
 - Flutter line coverage 측정/기록 방식은 다음 개발 이슈에서 실제 명령과 보고 포맷을 고정할 필요가 있음
 
 ## Done in This Iteration
+- Insights KPI 카드(오늘 완료율/정답률/오늘 상태) 추가
+- Insights에서 `약점 다시 학습` CTA로 Today 재진입 연결
+- 탭 전환 시 세션 상태 유지되도록 `IndexedStack` 적용
+- `flutter analyze` 통과
+- `flutter test --coverage` 통과
+- 라인 커버리지 `87.43%` 확인
 - Deck 상세 화면 진입 및 `학습 시작` CTA로 Today 이동 연결
 - Add로 증가한 카드 수를 Deck 상세에 반영
 - `flutter analyze` 통과

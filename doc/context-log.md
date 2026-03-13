@@ -298,3 +298,15 @@
 - 근거: 다음 세션에서 동일한 문서 기준으로 바로 resume 할 수 있게 최신 산출물과 blocked 상태를 snapshot에 반영해야 하기 때문이다.
 - 영향 범위: `doc/work/repeato-resume-snapshot-2026-03-08-v1.md`, 이후 세션 재개 절차.
 - 후속 작업: resume 시 snapshot + `doc/next-actions.md` + `doc/context-log.md`를 함께 읽고 시작한다.
+
+- 날짜: 2026-03-13
+- 결정: `Insights` 1차 반복은 GitHub 이슈 `#5`와 브랜치 `feat/5-insights-dashboard-cta`에서 진행하고, 범위는 핵심 KPI 3개와 Today 재진입 CTA, 탭 상태 보존으로 제한한다.
+- 근거: 사용자가 각 메뉴별로 동일한 개발 루프를 반복 수행하길 요청했고, 현재 Insights는 이벤트 스키마 확정 전에도 작은 단위의 사용자 가치(KPI 요약과 즉시 재학습 연결)를 검증할 수 있기 때문이다.
+- 영향 범위: `app/lib/app_root.dart`, `app/lib/screens/insights_screen.dart`, `app/test/widget_test.dart`, GitHub issue `#5`.
+- 후속 작업: PR 본문에 KPI 범위 제한과 탭 상태 보존 이유를 명시하고, 다음 메뉴 반복은 `Profile` 또는 `Today` 2차 작업으로 넘긴다.
+
+- 날짜: 2026-03-13
+- 결정: 이번 `Insights` 1차 반복 검증 결과는 `flutter analyze` 통과, `flutter test --coverage` 통과, line coverage `87.43%`로 기록한다.
+- 근거: 개발 조직 workflow의 품질 기준인 line coverage 70% 이상 유지를 메뉴 반복 작업에도 동일하게 적용해야 하기 때문이다.
+- 영향 범위: QA 게이트, PR 본문 커버리지 기록, 다음 메뉴 반복의 검증 포맷.
+- 후속 작업: 다음 메뉴 반복에서도 동일한 coverage 계산 명령(`coverage/lcov.info` 기반)을 유지한다.
