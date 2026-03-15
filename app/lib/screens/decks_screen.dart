@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../models/deck_summary.dart';
 import '../widgets/review_note_card.dart';
 
 class DecksScreen extends StatelessWidget {
   const DecksScreen({
     super.key,
-    required this.totalCards,
-    required this.customCards,
-    required this.onStartToday,
+    required this.decks,
+    required this.selectedDeckId,
+    required this.onStudyDeck,
   });
 
-  final int totalCards;
-  final int customCards;
-  final VoidCallback onStartToday;
+  final List<DeckSummary> decks;
+  final String selectedDeckId;
+  final ValueChanged<String> onStudyDeck;
 
   @override
   Widget build(BuildContext context) {
@@ -27,26 +28,29 @@ class DecksScreen extends StatelessWidget {
               '실제 편집/중지는 다음 개발 반복에서 들어갑니다.',
         ),
         const SizedBox(height: 12),
-        Card(
-          child: ListTile(
-            leading: const Icon(Icons.menu_book),
-            title: const Text('중2 초급 영어 120'),
-            subtitle: Text('카드 $totalCards개 · 다음 복습: 오늘 · 상태: 진행 중'),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => DeckDetailScreen(
-                  totalCards: totalCards,
-                  customCards: customCards,
-                  onStartToday: () {
-                    Navigator.of(context).pop();
-                    onStartToday();
-                  },
+        for (final deck in decks)
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.menu_book),
+              title: Text(deck.name),
+              subtitle: Text(
+                '카드 ${deck.totalCards}개 · 직접 추가 ${deck.customCards}개 · 상태: ${deck.id == selectedDeckId ? '선택됨' : '대기'}',
+              ),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => DeckDetailScreen(
+                    deck: deck,
+                    isSelected: deck.id == selectedDeckId,
+                    onStartToday: () {
+                      Navigator.of(context).pop();
+                      onStudyDeck(deck.id);
+                    },
+                  ),
                 ),
               ),
             ),
           ),
-        ),
       ],
     );
   }
@@ -55,13 +59,13 @@ class DecksScreen extends StatelessWidget {
 class DeckDetailScreen extends StatelessWidget {
   const DeckDetailScreen({
     super.key,
-    required this.totalCards,
-    required this.customCards,
+    required this.deck,
+    required this.isSelected,
     required this.onStartToday,
   });
 
-  final int totalCards;
-  final int customCards;
+  final DeckSummary deck;
+  final bool isSelected;
   final VoidCallback onStartToday;
 
   @override
@@ -71,23 +75,23 @@ class DeckDetailScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Text('중2 초급 영어 120', style: Theme.of(context).textTheme.headlineSmall),
+          Text(deck.name, style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: 8),
           Text(
-            '오늘 복습 우선 덱 · 바로 Today로 돌아가 학습을 시작할 수 있습니다.',
+            '선택한 덱만 Today에서 바로 학습할 수 있습니다.',
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           const SizedBox(height: 16),
           Card(
             child: ListTile(
               title: const Text('카드 수'),
-              subtitle: Text('$totalCards개'),
+              subtitle: Text('${deck.totalCards}개'),
             ),
           ),
           Card(
             child: ListTile(
               title: const Text('직접 추가 카드'),
-              subtitle: Text('$customCards개'),
+              subtitle: Text('${deck.customCards}개'),
             ),
           ),
           const Card(
@@ -103,10 +107,13 @@ class DeckDetailScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
+          if (isSelected)
+            const Chip(label: Text('현재 선택된 덱')),
+          const SizedBox(height: 8),
           FilledButton.icon(
             onPressed: onStartToday,
             icon: const Icon(Icons.play_arrow),
-            label: const Text('학습 시작'),
+            label: const Text('이 덱 학습'),
           ),
         ],
       ),

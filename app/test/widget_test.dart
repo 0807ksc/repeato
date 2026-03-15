@@ -11,6 +11,7 @@ void main() {
     expect(find.text('Today'), findsWidgets);
     expect(find.text('Decks'), findsOneWidget);
     expect(find.text('Insights'), findsOneWidget);
+    expect(find.text('중2 초급 영어 · Iteration 1 리뷰 빌드'), findsOneWidget);
   });
 
   testWidgets('Advances card on Again button tap', (WidgetTester tester) async {
@@ -129,7 +130,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Decks'), findsWidgets);
-    expect(find.text('중2 초급 영어 120'), findsOneWidget);
+    expect(find.text('중2 초급 영어'), findsOneWidget);
   });
 
   testWidgets('Insights shows recent change and next review cards', (WidgetTester tester) async {
@@ -176,7 +177,7 @@ void main() {
 
     await tester.tap(find.text('Decks').last);
     await tester.pumpAndSettle();
-    expect(find.textContaining('카드 121개'), findsOneWidget);
+    expect(find.text('여행 영어'), findsOneWidget);
   });
 
   testWidgets('Deck detail can start Today and reflects custom card count', (WidgetTester tester) async {
@@ -195,17 +196,36 @@ void main() {
 
     await tester.tap(find.text('Decks').last);
     await tester.pumpAndSettle();
-    await tester.tap(find.text('중2 초급 영어 120'));
+    await tester.tap(find.text('중2 초급 영어'));
     await tester.pumpAndSettle();
 
     expect(find.text('Deck Detail'), findsOneWidget);
-    expect(find.text('121개'), findsOneWidget);
-    expect(find.text('1개'), findsOneWidget);
+    expect(find.text('120개'), findsOneWidget);
+    expect(find.text('0개'), findsOneWidget);
 
-    await tester.tap(find.text('학습 시작'));
+    await tester.tap(find.text('이 덱 학습'));
     await tester.pumpAndSettle();
 
     expect(find.textContaining('진행: 0 /'), findsOneWidget);
+  });
+
+  testWidgets('Decks shows Cheonjamun sample deck and can study it', (WidgetTester tester) async {
+    await tester.pumpWidget(const RepeatoApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Decks').last);
+    await tester.pumpAndSettle();
+
+    expect(find.text('중2 초급 영어'), findsOneWidget);
+    expect(find.text('천자문 입문'), findsOneWidget);
+
+    await tester.tap(find.text('천자문 입문'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('이 덱 학습'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('천자문 입문 · Iteration 1 리뷰 빌드'), findsOneWidget);
+    expect(find.text('天'), findsOneWidget);
   });
 
   testWidgets('Insights action can move back to Today with KPI cards visible', (WidgetTester tester) async {
