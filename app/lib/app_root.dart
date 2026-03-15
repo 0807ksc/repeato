@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'models/session_stats.dart';
+import 'models/deck_summary.dart';
 import 'models/word_card.dart';
 import 'screens/add_screen.dart';
 import 'screens/decks_screen.dart';
@@ -23,6 +24,7 @@ class _AppRootState extends State<AppRoot> {
   int _currentIndex = 0;
   SessionStats _stats = SessionStats.empty;
   final List<WordCard> _cards = [];
+  String _selectedDeckId = 'm2_beginner_english';
   bool _isLoading = true;
   Object? _loadError;
 
@@ -53,23 +55,29 @@ class _AppRootState extends State<AppRoot> {
   }
 
   Future<List<WordCard>> _loadCards() async {
-    const assetPath = 'assets/data/m2_beginner_words.json';
-    debugPrint('[Repeato] loadCards: start ($assetPath)');
+    const assetPaths = [
+      'assets/data/m2_beginner_words.json',
+      'assets/data/cheonjamun_sample.json',
+    ];
+    final cards = <WordCard>[];
 
     try {
-      final raw = await rootBundle
-          .loadString(assetPath)
-          .timeout(const Duration(seconds: 5), onTimeout: () {
-        throw TimeoutException('Timed out loading asset: $assetPath');
-      });
-      debugPrint('[Repeato] loadCards: loaded raw (${raw.length} chars)');
+      for (final assetPath in assetPaths) {
+        debugPrint('[Repeato] loadCards: start ($assetPath)');
+        final raw = await rootBundle
+            .loadString(assetPath)
+            .timeout(const Duration(seconds: 5), onTimeout: () {
+          throw TimeoutException('Timed out loading asset: $assetPath');
+        });
+        debugPrint('[Repeato] loadCards: loaded raw (${raw.length} chars)');
 
-      final List<dynamic> decoded = jsonDecode(raw) as List<dynamic>;
-      debugPrint('[Repeato] loadCards: decoded list (${decoded.length} items)');
+        final List<dynamic> decoded = jsonDecode(raw) as List<dynamic>;
+        debugPrint('[Repeato] loadCards: decoded list (${decoded.length} items)');
 
-      final cards = decoded
-          .map((e) => WordCard.fromJson(e as Map<String, dynamic>))
-          .toList();
+        cards.addAll(
+          decoded.map((e) => WordCard.fromJson(e as Map<String, dynamic>)),
+        );
+      }
       debugPrint('[Repeato] loadCards: done (${cards.length} cards)');
       return cards;
     } catch (e, st) {
@@ -94,6 +102,8 @@ class _AppRootState extends State<AppRoot> {
       exampleKo: '$meaningKo 예문',
       level: 'custom',
       category: deck,
+      deckId: deck.trim().toLowerCase().replaceAll(' ', '_'),
+      deckName: deck,
     );
 
     setState(() {
@@ -101,6 +111,34 @@ class _AppRootState extends State<AppRoot> {
       if (moveToToday) {
         _currentIndex = 0;
       }
+    });
+  }
+
+  List<DeckSummary> _buildDecks() {
+    final grouped = <String, List<WordCard>>{};
+    for (final card in _cards) {
+      grouped.putIfAbsent(card.deckId, () => []).add(card);
+    }
+
+    final decks = grouped.entries
+        .map(
+          (entry) => DeckSummary(
+            id: entry.key,
+            name: entry.value.first.deckName,
+            totalCards: entry.value.length,
+            customCards: entry.value.where((card) => card.level == 'custom').length,
+          ),
+        )
+        .toList()
+      ..sort((a, b) => a.name.compareTo(b.name));
+    return decks;
+  }
+
+  void _openDeckStudy(String deckId) {
+    setState(() {
+      _selectedDeckId = deckId;
+      _currentIndex = 0;
+      _stats = SessionStats.empty;
     });
   }
 
@@ -133,15 +171,24 @@ class _AppRootState extends State<AppRoot> {
       );
     }
 
+    final decks = _buildDecks();
+    final selectedDeck = decks.firstWhere(
+      (deck) => deck.id == _selectedDeckId,
+      orElse: () => decks.first,
+    );
+    final selectedCards = _cards.where((card) => card.deckId == selectedDeck.id).toList();
+
     final screens = <Widget>[
       TodayScreen(
-        cards: _cards,
+        key: ValueKey('today-${selectedDeck.id}'),
+        cards: selectedCards,
+        deckName: selectedDeck.name,
         onStatsChanged: (s) => setState(() => _stats = s),
       ),
       DecksScreen(
-        totalCards: _cards.length,
-        customCards: _cards.where((card) => card.level == 'custom').length,
-        onStartToday: () => setState(() => _currentIndex = 0),
+        decks: decks,
+        selectedDeckId: selectedDeck.id,
+        onStudyDeck: _openDeckStudy,
       ),
       AddScreen(
         key: const ValueKey('add-screen'),
@@ -150,14 +197,14 @@ class _AppRootState extends State<AppRoot> {
       ),
       InsightsScreen(
         stats: _stats,
-        deckName: '중2 초급 영어',
-        totalCards: _cards.length,
+        deckName: selectedDeck.name,
+        totalCards: selectedDeck.totalCards,
         onStartToday: () => setState(() => _currentIndex = 0),
         onOpenDeck: () => setState(() => _currentIndex = 1),
       ),
       ProfileScreen(
         stats: _stats,
-        totalCards: _cards.length,
+        totalCards: selectedDeck.totalCards,
         onResumeToday: () => setState(() => _currentIndex = 0),
       ),
     ];

@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1001,
+    "word": "天",
+    "meaning_ko": "하늘 천",
+    "example_en": "Cheonjamun sample: 天 means sky.",
+    "example_ko": "천자문 샘플: 天은 하늘을 뜻한다.",
+    "level": "cheonjamun_basic",
+    "category": "hanja",
+    "deck_id": "cheonjamun_basic",
+    "deck_name": "천자문 입문"
+  },
+  {
+    "id": 1002,
+    "word": "地",
+    "meaning_ko": "땅 지",
+    "example_en": "Cheonjamun sample: 地 means ground.",
+    "example_ko": "천자문 샘플: 地는 땅을 뜻한다.",
+    "level": "cheonjamun_basic",
+    "category": "hanja",
+    "deck_id": "cheonjamun_basic",
+    "deck_name": "천자문 입문"
+  },
+  {
+    "id": 1003,
+    "word": "玄",
+    "meaning_ko": "검을 현",
+    "example_en": "Cheonjamun sample: 玄 means dark or deep.",
+    "example_ko": "천자문 샘플: 玄은 검거나 깊음을 뜻한다.",
+    "level": "cheonjamun_basic",
+    "category": "hanja",
+    "deck_id": "cheonjamun_basic",
+    "deck_name": "천자문 입문"
+  },
+  {
+    "id": 1004,
+    "word": "黃",
+    "meaning_ko": "누를 황",
+    "example_en": "Cheonjamun sample: 黃 means yellow.",
+    "example_ko": "천자문 샘플: 黃은 누런빛을 뜻한다.",
+    "level": "cheonjamun_basic",
+    "category": "hanja",
+    "deck_id": "cheonjamun_basic",
+    "deck_name": "천자문 입문"
+  },
+  {
+    "id": 1005,
+    "word": "宇",
+    "meaning_ko": "집 우",
+    "example_en": "Cheonjamun sample: 宇 can mean house or universe.",
+    "example_ko": "천자문 샘플: 宇는 집 또는 우주를 뜻한다.",
+    "level": "cheonjamun_basic",
+    "category": "hanja",
+    "deck_id": "cheonjamun_basic",
+    "deck_name": "천자문 입문"
+  },
+  {
+    "id": 1006,
+    "word": "宙",
+    "meaning_ko": "집 주",
+    "example_en": "Cheonjamun sample: 宙 is used in universe.",
+    "example_ko": "천자문 샘플: 宙는 우주를 나타낼 때 쓰인다.",
+    "level": "cheonjamun_basic",
+    "category": "hanja",
+    "deck_id": "cheonjamun_basic",
+    "deck_name": "천자문 입문"
+  },
+  {
+    "id": 1007,
+    "word": "洪",
+    "meaning_ko": "넓을 홍",
+    "example_en": "Cheonjamun sample: 洪 means vast or grand.",
+    "example_ko": "천자문 샘플: 洪은 넓고 큰 것을 뜻한다.",
+    "level": "cheonjamun_basic",
+    "category": "hanja",
+    "deck_id": "cheonjamun_basic",
+    "deck_name": "천자문 입문"
+  },
+  {
+    "id": 1008,
+    "word": "荒",
+    "meaning_ko": "거칠 황",
+    "example_en": "Cheonjamun sample: 荒 means wild or rough.",
+    "example_ko": "천자문 샘플: 荒은 거칠고 황량함을 뜻한다.",
+    "level": "cheonjamun_basic",
+    "category": "hanja",
+    "deck_id": "cheonjamun_basic",
+    "deck_name": "천자문 입문"
+  }
+]

@@ -7,10 +7,12 @@ class TodayScreen extends StatefulWidget {
   const TodayScreen({
     super.key,
     required this.cards,
+    required this.deckName,
     required this.onStatsChanged,
   });
 
   final List<WordCard> cards;
+  final String deckName;
   final ValueChanged<SessionStats> onStatsChanged;
 
   @override
@@ -120,7 +122,7 @@ class _TodayScreenState extends State<TodayScreen> {
                 children: [
                   Text('Today', style: Theme.of(context).textTheme.headlineMedium),
                   const SizedBox(height: 4),
-                  const Text('중2 초급 영어 · Iteration 1 리뷰 빌드'),
+                  Text('${widget.deckName} · Iteration 1 리뷰 빌드'),
                   const SizedBox(height: 8),
                   Text(
                     '리뷰 포인트: 3단계 평가와 짧은 세션 흐름',
