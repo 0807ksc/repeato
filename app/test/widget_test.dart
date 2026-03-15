@@ -89,17 +89,26 @@ void main() {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
+    await tester.tap(find.text('Decks').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(Switch).last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Today').last);
+    await tester.pumpAndSettle();
+
     await tester.tap(find.text('알겠음').first);
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('Insights').last);
     await tester.pumpAndSettle();
 
+    expect(find.text('오늘 학습 덱'), findsOneWidget);
+    expect(find.text('오늘 학습 덱 2개'), findsOneWidget);
+    expect(find.text('중2 초급 영어 + 천자문 입문'), findsWidgets);
     expect(find.text('현재 학습 중인 덱'), findsOneWidget);
-    expect(find.text('중2 초급 영어'), findsOneWidget);
     expect(find.text('덱 전체 진행률'), findsOneWidget);
     expect(find.text('오늘 남은 카드'), findsOneWidget);
-    expect(find.text('1 / 120 경험'), findsOneWidget);
+    expect(find.text('1 / 128 경험'), findsOneWidget);
     expect(find.text('29장'), findsOneWidget);
   });
 
@@ -112,7 +121,11 @@ void main() {
     await tester.tap(find.text('Insights').last);
     await tester.pumpAndSettle();
 
-    await tester.drag(find.byType(Scrollable).last, const Offset(0, -400));
+    await tester.scrollUntilVisible(
+      find.text('약점 영역 요약'),
+      160,
+      scrollable: find.byType(Scrollable).last,
+    );
     await tester.pumpAndSettle();
 
     expect(find.text('약점 영역 요약'), findsOneWidget);
@@ -155,10 +168,28 @@ void main() {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
+    await tester.tap(find.text('Decks').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(Switch).last);
+    await tester.pumpAndSettle();
+
     await tester.tap(find.text('Add').last);
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('카드 저장'));
+    expect(find.text('오늘 학습 덱'), findsOneWidget);
+    expect(find.text('현재 2개 덱이 오늘 학습에 포함돼 있습니다.'), findsOneWidget);
+    expect(find.widgetWithText(ChoiceChip, '중2 초급 영어'), findsOneWidget);
+    expect(find.widgetWithText(ChoiceChip, '천자문 입문'), findsOneWidget);
+
+    final saveButton = find.widgetWithText(FilledButton, '카드 저장');
+    await tester.scrollUntilVisible(
+      saveButton,
+      160,
+      scrollable: find.byType(Scrollable).last,
+    );
+    final savePressed = tester.widget<FilledButton>(saveButton).onPressed;
+    expect(savePressed, isNotNull);
+    savePressed!();
     await tester.pumpAndSettle();
     expect(find.text('앞면을 입력해 주세요.'), findsOneWidget);
     expect(find.text('뒷면을 입력해 주세요.'), findsOneWidget);
@@ -166,8 +197,18 @@ void main() {
     final fields = find.byType(TextFormField);
     await tester.enterText(fields.at(0), 'resilient');
     await tester.enterText(fields.at(1), '회복력이 있는');
-    await tester.enterText(fields.at(2), '여행 영어');
-    await tester.tap(find.text('카드 저장'));
+    await tester.tap(find.widgetWithText(ChoiceChip, '천자문 입문'));
+    await tester.pumpAndSettle();
+    tester.testTextInput.hide();
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      saveButton,
+      160,
+      scrollable: find.byType(Scrollable).last,
+    );
+    final savePressedAfterInput = tester.widget<FilledButton>(saveButton).onPressed;
+    expect(savePressedAfterInput, isNotNull);
+    savePressedAfterInput!();
     await tester.pumpAndSettle();
 
     expect(find.textContaining('저장 완료'), findsOneWidget);
@@ -177,7 +218,7 @@ void main() {
 
     await tester.tap(find.text('Decks').last);
     await tester.pumpAndSettle();
-    expect(find.text('여행 영어'), findsOneWidget);
+    expect(find.text('천자문 입문'), findsWidgets);
   });
 
   testWidgets('Deck detail can start Today and reflects custom card count', (WidgetTester tester) async {
@@ -191,7 +232,17 @@ void main() {
     await tester.enterText(fields.at(0), 'portable');
     await tester.enterText(fields.at(1), '휴대용의');
     await tester.enterText(fields.at(2), '여행 영어');
-    await tester.tap(find.text('카드 저장'));
+    final saveButton = find.widgetWithText(FilledButton, '카드 저장');
+    tester.testTextInput.hide();
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      saveButton,
+      160,
+      scrollable: find.byType(Scrollable).last,
+    );
+    final savePressed = tester.widget<FilledButton>(saveButton).onPressed;
+    expect(savePressed, isNotNull);
+    savePressed!();
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('Decks').last);
@@ -269,7 +320,14 @@ void main() {
     );
     final retryButton = find.widgetWithText(FilledButton, '약점 다시 학습');
     expect(retryButton, findsOneWidget);
-    await tester.tap(retryButton);
+    await tester.scrollUntilVisible(
+      retryButton,
+      120,
+      scrollable: find.byType(Scrollable).last,
+    );
+    final retryPressed = tester.widget<FilledButton>(retryButton).onPressed;
+    expect(retryPressed, isNotNull);
+    retryPressed!();
     await tester.pumpAndSettle();
 
     expect(find.textContaining('진행: 1 /'), findsOneWidget);

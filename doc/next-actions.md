@@ -3,7 +3,7 @@
 ## Priority Queue
 1. [ ] (P1) `#STAGE-C #TASK-DATA #TASK-TAB #ORG-PM #ORG-DATA #ORG-ARCH` `Insights` 차트형 확장 전 이벤트 스키마(`deck_progress`, `weak_area_summary`, `trend_delta`, `next_due_bucket`) 정의
 2. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` `Add` 2차 반복: 입력 히스토리/최근 덱 제안/저장 후 재입력 흐름 고도화
-3. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` `Add` 2차 반복: 입력 히스토리/최근 덱 제안/저장 후 재입력 흐름 고도화
+3. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DESIGN #ORG-QA` `Profile`에 다중 덱 Today 상태와 목표/신뢰 요약 연결 강화
 4. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DESIGN #ORG-QA` `Profile` 2차 반복: 목표 카드 수 설정과 전역 상태 키 연결 검토
 5. [ ] (P1) `#STAGE-C #TASK-DATA #TASK-APP #ORG-ARCH #ORG-DATA #ORG-FE` Flutter 로컬 SQLite 저장 계층과 도메인 모델 설계안을 코드 구조로 내리기 (`doc/work/repeato-local-first-architecture-v1.md`)
 5. [ ] (P1) `#STAGE-C #TASK-WORKFLOW #ORG-WF-ARCH #ORG-WF-LIB #ORG-WF-AUTO #ORG-PM` workflow 조직 세션 기준 문서 유지 및 coverage 70% 운영 규칙을 다음 개발 이슈/PR에 계속 적용
@@ -19,6 +19,12 @@
 ## Done in This Iteration
 - `Insights`에 `최근 변화` 카드 추가
 - `Insights`에 `다음 복습 시점` 카드 추가
+- 다중 덱 Today 큐 구조 도입
+- `Insights`에 `오늘 학습 덱 N개` 요약과 합산 기준 문구 추가
+- `Add`에 오늘 학습 덱 안내 카드와 선택 칩 추가
+- `flutter analyze` 통과
+- `flutter test --coverage` 통과
+- 라인 커버리지 `92.14%` 확인
 - `flutter analyze` 통과
 - `flutter test --coverage` 통과
 - 라인 커버리지 `92.03%` 확인

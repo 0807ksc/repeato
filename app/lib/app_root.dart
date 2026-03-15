@@ -191,6 +191,7 @@ class _AppRootState extends State<AppRoot> {
     }
     final todayDecks = decks.where((deck) => _todayStudyDeckIds.contains(deck.id)).toList();
     final todayDeckLabel = todayDecks.map((deck) => deck.name).join(' + ');
+    final todayDeckNames = todayDecks.map((deck) => deck.name).toList();
     final todayCards = _cards.where((card) => _todayStudyDeckIds.contains(card.deckId)).toList();
     final screens = <Widget>[
       TodayScreen(
@@ -209,11 +210,13 @@ class _AppRootState extends State<AppRoot> {
         key: const ValueKey('add-screen'),
         onAddCard: _addCard,
         onNavigateToday: () => setState(() => _currentIndex = 0),
+        todayStudyDeckNames: todayDeckNames,
       ),
       InsightsScreen(
         stats: _stats,
         deckName: todayDeckLabel,
         totalCards: todayCards.length,
+        todayStudyDeckNames: todayDeckNames,
         onStartToday: () => setState(() => _currentIndex = 0),
         onOpenDeck: () => setState(() => _currentIndex = 1),
       ),

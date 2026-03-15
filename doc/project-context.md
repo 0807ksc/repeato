@@ -173,3 +173,11 @@
 30. `doc/work/repeato-insights-user-needs-review-2026-03-15-v1.md`
 - 설명: `Insights`에서 사용자가 실제로 보고 싶어하는 항목에 대한 3차 회의체 재검토 문서
 - 사용 시점: `Insights` KPI 우선순위 재정의, 덱 전체 진행률/오늘 잔량/약점 요약 구현 범위 확정 시
+
+31. `doc/work/repeato-multi-deck-daily-study-review-2026-03-15-v1.md`
+- 설명: 하루 학습을 여러 덱으로 운영하는 방향에 대한 재협의 및 2차 구현 기준 문서
+- 사용 시점: 단일 덱 Today 구조를 다중 덱 Today 큐 구조로 전환할 때
+
+32. `doc/work/repeato-multi-deck-cross-tab-alignment-2026-03-15-v1.md`
+- 설명: 다중 덱 Today 상태를 `Insights`와 `Add`까지 일관되게 확장하기 위한 3차 협의 문서
+- 사용 시점: 다중 덱 상태를 교차 탭으로 반영할 때
