@@ -352,3 +352,15 @@
 - 근거: 개발 workflow 품질 기준인 line coverage 70% 이상 유지 규칙을 이번 `Insights` 반복에도 동일하게 적용해야 하기 때문이다.
 - 영향 범위: QA 게이트, PR 본문 커버리지 기록, 다음 `Insights` 반복의 검증 포맷.
 - 후속 작업: 다음 반복에서도 `coverage/lcov.info` 기반 line coverage 계산식을 유지한다.
+
+- 날짜: 2026-03-15
+- 결정: `Insights` 2차 반복은 GitHub 이슈 `#13`과 브랜치 `feat/13-insights-weak-summary`에서 진행하고, 범위는 약점 영역 요약 카드, 약점 해석 문구, `덱 확인하기` CTA 추가로 제한한다.
+- 근거: 덱 전체 진행률과 오늘 남은 양을 본 뒤 사용자가 다음으로 궁금해하는 것은 `무엇이 약점인지`와 `덱 쪽으로 어떻게 넘어가는지`였기 때문이다.
+- 영향 범위: `app/lib/app_root.dart`, `app/lib/screens/insights_screen.dart`, `app/test/widget_test.dart`, GitHub issue `#13`.
+- 후속 작업: 다음 반복에서는 최근 변화와 다음 복습 시점 카드를 추가한다.
+
+- 날짜: 2026-03-15
+- 결정: 이번 `Insights 약점 영역 요약과 덱 확인 CTA` 반복 검증 결과는 `flutter analyze` 통과, `flutter test --coverage` 통과, line coverage `91.65%`로 기록한다.
+- 근거: 반복 구현에서도 line coverage 70% 이상 유지 규칙을 지속 적용해야 하기 때문이다.
+- 영향 범위: QA 게이트, PR 본문 커버리지 기록, 다음 `Insights` 반복의 검증 포맷.
+- 후속 작업: 다음 반복에서도 `coverage/lcov.info` 기반 line coverage 계산식을 유지한다.

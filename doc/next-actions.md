@@ -1,8 +1,8 @@
 # Next Actions
 
 ## Priority Queue
-1. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DATA #ORG-QA` `Insights` 2차 반복: 약점 영역 요약과 덱 맥락 CTA 고도화
-2. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DATA #ORG-QA` `Insights` 3차 반복: 최근 변화/다음 복습 시점 카드 추가
+1. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DATA #ORG-QA` `Insights` 3차 반복: 최근 변화/다음 복습 시점 카드 추가
+2. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` `Add` 2차 반복: 입력 히스토리/최근 덱 제안/저장 후 재입력 흐름 고도화
 3. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` `Add` 2차 반복: 입력 히스토리/최근 덱 제안/저장 후 재입력 흐름 고도화
 4. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DESIGN #ORG-QA` `Profile` 2차 반복: 목표 카드 수 설정과 전역 상태 키 연결 검토
 5. [ ] (P1) `#STAGE-C #TASK-DATA #TASK-APP #ORG-ARCH #ORG-DATA #ORG-FE` Flutter 로컬 SQLite 저장 계층과 도메인 모델 설계안을 코드 구조로 내리기 (`doc/work/repeato-local-first-architecture-v1.md`)
@@ -17,6 +17,11 @@
 - Flutter line coverage 측정/기록 방식은 다음 개발 이슈에서 실제 명령과 보고 포맷을 고정할 필요가 있음
 
 ## Done in This Iteration
+- `Insights`에 `약점 영역 요약` 카드 추가
+- `덱 확인하기` CTA 추가 및 `Decks` 탭 이동 연결
+- `flutter analyze` 통과
+- `flutter test --coverage` 통과
+- 라인 커버리지 `91.65%` 확인
 - `Insights`에 `현재 학습 중인 덱` 카드 추가
 - `Insights`에 덱 전체 진행률과 오늘 남은 카드 수 노출
 - `Insights` 스펙 문서에 덱 단위 진행 맥락 반영
