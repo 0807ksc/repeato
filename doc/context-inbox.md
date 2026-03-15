@@ -17,17 +17,18 @@
 
 ## Active
 - 날짜: 2026-03-15
-- 작업 주제: Insights 최근 변화와 다음 복습 시점 카드 구현
+- 작업 주제: 다중 덱 Today 상태를 Insights와 Add에 반영 3차
 - 임시 컨텍스트:
-  - GitHub 이슈 `#15 Insights 최근 변화와 다음 복습 시점 카드 추가` 생성 완료
-  - 작업 브랜치 `feat/15-insights-trend-next-review` 생성 완료
-  - `Insights`에 `최근 변화` 카드 추가
-  - `Insights`에 `다음 복습 시점` 카드 추가
+  - GitHub 이슈 `#21 다중 덱 오늘 학습 상태를 Insights와 Add에 반영 3차` 생성 완료
+  - 작업 브랜치 `feat/21-multi-deck-insights-add` 생성 완료
+  - `Insights`에 `오늘 학습 덱 N개` 요약과 합산 기준 문구 추가
+  - `Add`에 오늘 학습 덱 안내 카드와 선택 칩 추가
+  - 다중 덱 시나리오 위젯 테스트 추가/보정
   - 현재 로컬 세션 기준 해석 문구와 예상 복습 문구를 노출
   - `flutter analyze` 통과
-  - `flutter test --coverage` 통과, line coverage 92.03%
+  - `flutter test --coverage` 통과, line coverage 92.14%
 - 검증 필요:
-  - 장기 이벤트 스키마 없이 최근 변화/다음 복습을 어디까지 추정치로 허용할지
-  - 이후 `Insights` 차트형 확장을 언제 시작할지
+  - 오늘 학습 덱 추천에서 최근 입력 히스토리까지 확장할지
+  - 다중 덱 상태를 Profile에도 더 명시적으로 노출할지
 - 메모:
-  - 현재 최근 변화/다음 복습 시점은 장기 히스토리가 아니라 현재 세션 기준 해석 문구를 사용함
+  - 현재 Add는 오늘 학습 덱 선택 칩을 제공하지만 자동 추천 로직/영속 저장은 아직 없다

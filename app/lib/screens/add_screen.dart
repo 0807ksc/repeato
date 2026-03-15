@@ -7,6 +7,7 @@ class AddScreen extends StatefulWidget {
     super.key,
     required this.onAddCard,
     required this.onNavigateToday,
+    required this.todayStudyDeckNames,
   });
 
   final void Function({
@@ -16,6 +17,7 @@ class AddScreen extends StatefulWidget {
     required bool moveToToday,
   }) onAddCard;
   final VoidCallback onNavigateToday;
+  final List<String> todayStudyDeckNames;
 
   @override
   State<AddScreen> createState() => _AddScreenState();
@@ -66,7 +68,27 @@ class _AddScreenState extends State<AddScreen> {
   }
 
   @override
+  void didUpdateWidget(covariant AddScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.todayStudyDeckNames.isEmpty) {
+      return;
+    }
+
+    final currentDeck = _deckController.text.trim();
+    if (currentDeck.isEmpty || currentDeck == '직접 추가' || !widget.todayStudyDeckNames.contains(currentDeck)) {
+      _deckController.text = widget.todayStudyDeckNames.first;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (widget.todayStudyDeckNames.isNotEmpty &&
+        (_deckController.text.trim().isEmpty ||
+            _deckController.text.trim() == '직접 추가' ||
+            !widget.todayStudyDeckNames.contains(_deckController.text.trim()))) {
+      _deckController.text = widget.todayStudyDeckNames.first;
+    }
+
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -74,7 +96,41 @@ class _AddScreenState extends State<AddScreen> {
         const SizedBox(height: 12),
         const ReviewNoteCard(
           title: '리뷰 설명',
-          body: '사용자 그룹에는 "직접 입력 후 Today로 복귀하는 흐름이 자연스러운지"를 확인해 달라고 안내합니다.',
+          body: '사용자 그룹에는 "오늘 학습 중인 덱 맥락이 Add에서도 자연스럽게 이어지는지"를 확인해 달라고 안내합니다.',
+        ),
+        const SizedBox(height: 12),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('오늘 학습 덱', style: Theme.of(context).textTheme.titleMedium),
+                const SizedBox(height: 8),
+                Text(
+                  widget.todayStudyDeckNames.isEmpty
+                      ? '활성화된 오늘 학습 덱이 없습니다.'
+                      : '현재 ${widget.todayStudyDeckNames.length}개 덱이 오늘 학습에 포함돼 있습니다.',
+                ),
+                if (widget.todayStudyDeckNames.isNotEmpty) ...[
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: widget.todayStudyDeckNames
+                        .map(
+                          (deckName) => ChoiceChip(
+                            label: Text(deckName),
+                            selected: _deckController.text.trim() == deckName,
+                            onSelected: (_) => setState(() => _deckController.text = deckName),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ],
+              ],
+            ),
+          ),
         ),
         if (_lastSavedWord != null) ...[
           const SizedBox(height: 12),

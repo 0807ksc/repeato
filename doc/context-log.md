@@ -10,6 +10,18 @@
 ---
 
 ## Entries
+- 날짜: 2026-03-15
+- 결정: 하루 학습은 단일 덱이 아니라 여러 덱을 함께 담는 `todayStudyDeckIds` 구조로 운영하고, 이를 `Today -> Insights -> Add`에 일관되게 반영한다.
+- 근거: 사용자가 하루 학습을 여러 덱으로 구성하는 실제 사용 맥락을 명시했고, Today만 다중 덱을 지원하면 다른 탭에서 현재 학습 맥락이 끊기기 때문이다.
+- 영향 범위: `app/lib/app_root.dart`, `app/lib/screens/decks_screen.dart`, `app/lib/screens/today_screen.dart`, `app/lib/screens/insights_screen.dart`, `app/lib/screens/add_screen.dart`, `app/test/widget_test.dart`, GitHub 이슈 `#19`, `#21`, 관련 협의 문서 2종.
+- 후속 작업: `Profile`의 다중 덱 표시 강화, `Add` 입력 히스토리/최근 덱 제안, 이벤트 스키마 정의.
+
+- 날짜: 2026-03-15
+- 결정: 다중 덱 교차 탭 정합성 3차 구현의 검증 기준은 `flutter analyze` 통과, `flutter test --coverage` 통과, line coverage `92.14%`로 기록한다.
+- 근거: 개발 조직 품질 기준으로 70% 이상 커버리지를 유지해야 하며, 이번 반복은 다중 덱 회귀 테스트가 추가된 교차 탭 변경이기 때문이다.
+- 영향 범위: GitHub 이슈 `#21`, PR 본문 검증 섹션, QA 게이트 보고 포맷.
+- 후속 작업: 다음 개발 이슈에서도 동일 포맷으로 커버리지 수치를 누적한다.
+
 - 날짜: 2026-02-22
 - 결정: 중2 초급 영어 초기버전(v1)은 PDF 기반 120단어 데이터셋으로 Today 학습 루프가 동작하는 5탭 앱으로 구현한다.
 - 근거: 사용자 요청의 1차 타깃(중2 초급)과 즉시 학습 시작 요구를 가장 빠르게 검증할 수 있는 범위이기 때문.

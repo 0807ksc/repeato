@@ -9,6 +9,7 @@ class InsightsScreen extends StatelessWidget {
     required this.stats,
     required this.deckName,
     required this.totalCards,
+    required this.todayStudyDeckNames,
     required this.onStartToday,
     required this.onOpenDeck,
   });
@@ -16,6 +17,7 @@ class InsightsScreen extends StatelessWidget {
   final SessionStats stats;
   final String deckName;
   final int totalCards;
+  final List<String> todayStudyDeckNames;
   final VoidCallback onStartToday;
   final VoidCallback onOpenDeck;
 
@@ -43,6 +45,9 @@ class InsightsScreen extends StatelessWidget {
         : solved == 0
             ? '아직 시작 전'
             : '진행 중';
+    final todayDeckSummary = todayStudyDeckNames.length <= 2
+        ? todayStudyDeckNames.join(' + ')
+        : '${todayStudyDeckNames.take(2).join(', ')} 외 ${todayStudyDeckNames.length - 2}개';
 
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -53,6 +58,30 @@ class InsightsScreen extends StatelessWidget {
           title: '리뷰 설명',
           body: '이번 반복에서는 현재 학습 중인 덱의 전체 진행 감각과 오늘 남은 양을 먼저 보이게 합니다. '
               '주간/월간 추이와 장기 지표는 이벤트 스키마 확정 후 확장합니다.',
+        ),
+        const SizedBox(height: 12),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('오늘 학습 덱', style: Theme.of(context).textTheme.titleMedium),
+                const SizedBox(height: 8),
+                Text(
+                  '오늘 학습 덱 ${todayStudyDeckNames.length}개',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 6),
+                Text(todayDeckSummary, style: Theme.of(context).textTheme.bodyMedium),
+                const SizedBox(height: 12),
+                Text(
+                  '아래 진행률과 남은 카드는 선택된 오늘 학습 덱 전체를 합산한 기준입니다.',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
+            ),
+          ),
         ),
         const SizedBox(height: 12),
         Card(
