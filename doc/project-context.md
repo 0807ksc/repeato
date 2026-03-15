@@ -169,3 +169,7 @@
 29. `doc/work/repeato-workflow-org-session-2026-03-08-v1.md`
 - 설명: 현재 컨텍스트 공유용 workflow 조직 활성 세션 문서
 - 사용 시점: workflow 규칙 반영 상태 확인, 다음 세션 재개 시
+
+30. `doc/work/repeato-insights-user-needs-review-2026-03-15-v1.md`
+- 설명: `Insights`에서 사용자가 실제로 보고 싶어하는 항목에 대한 3차 회의체 재검토 문서
+- 사용 시점: `Insights` KPI 우선순위 재정의, 덱 전체 진행률/오늘 잔량/약점 요약 구현 범위 확정 시

@@ -150,6 +150,8 @@ class _AppRootState extends State<AppRoot> {
       ),
       InsightsScreen(
         stats: _stats,
+        deckName: '중2 초급 영어',
+        totalCards: _cards.length,
         onStartToday: () => setState(() => _currentIndex = 0),
       ),
       ProfileScreen(

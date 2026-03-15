@@ -16,17 +16,18 @@
   - 
 
 ## Active
-- 날짜: 2026-03-13
-- 작업 주제: Today 세션 제어와 리셋 흐름 개선
+- 날짜: 2026-03-15
+- 작업 주제: Insights 덱 전체 진행률과 오늘 남은 카드 구현
 - 임시 컨텍스트:
-  - GitHub 이슈 `#9 Today 세션 제어와 리셋 흐름 개선` 생성 완료
-  - 작업 브랜치 `feat/9-today-session-controls` 생성 완료
-  - Today 상단에 세션 제어 카드와 명시적 `현재 세션 다시 시작` CTA를 추가
-  - 목표 변경(`빠른 30카드`, `집중 60카드`) 흐름을 세션 제어 카드 안에서 명확화
+  - GitHub 이슈 `#11 Insights 덱 전체 진행률과 오늘 남은 카드 추가` 생성 완료
+  - 작업 브랜치 `feat/11-insights-deck-progress` 생성 완료
+  - `Insights`에 `현재 학습 중인 덱` 카드 추가
+  - 덱 전체 진행률과 오늘 남은 카드 수 노출 구현
+  - `doc/work/repeato-insights-user-needs-review-2026-03-15-v1.md`와 `repeato-insights-tab-spec-v1.md` 연결 완료
   - `flutter analyze` 통과
-  - `flutter test --coverage` 통과, line coverage 90.65%
+  - `flutter test --coverage` 통과, line coverage 91.53%
 - 검증 필요:
-  - 다음 반복을 Add 2차 또는 Decks 2차 중 어디로 둘지
-  - Today 3차에서 약점 카드 재도전 큐를 실제로 둘지
+  - `덱 전체 진행률`을 현재 세션 경험 기준에서 장기 진행 기준으로 바꾸려면 어떤 저장 모델이 필요한지
+  - 다음 반복을 약점 영역 요약과 CTA 고도화로 바로 이어갈지
 - 메모:
-  - coverage 70% 기준은 이번 작업에서도 충족됨
+  - 현재 구현의 덱 전체 진행률은 영속 학습 이력이 아니라 현재 세션 기준 경험 카드 수를 사용함

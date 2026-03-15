@@ -334,3 +334,21 @@
 - 근거: 반복 구현에서도 line coverage 70% 이상 유지 규칙을 지속적으로 증명해야 하기 때문이다.
 - 영향 범위: QA 게이트, PR 본문 커버리지 기록, 다음 반복의 검증 포맷.
 - 후속 작업: 다음 반복에서도 `coverage/lcov.info` 기반 line coverage 계산식을 유지한다.
+
+- 날짜: 2026-03-15
+- 결정: `Insights`에서 사용자가 실제로 보고 싶어하는 항목에 대해 3차 회의체 재검토를 수행하고, `현재 학습 중인 덱 전체 진행률`을 핵심 항목으로 확정한다.
+- 근거: 사용자가 `중2 초급 영어를 하고 있는데 해당 아이템의 전체 진행률을 보고 싶다`는 예시를 직접 제시했고, 기존 `Insights` 문서가 오늘 KPI 3개 중심이라 덱 단위 맥락을 충분히 설명하지 못했기 때문이다.
+- 영향 범위: `doc/work/repeato-insights-user-needs-review-2026-03-15-v1.md`, `doc/work/repeato-insights-tab-spec-v1.md` 후속 개정 범위, 향후 `Insights` 구현 우선순위.
+- 후속 작업: `Insights` 2차 구현 범위는 `덱 전체 진행률 + 오늘 남은 카드 + 약점 요약 + CTA`를 최소 세트로 잡는다.
+
+- 날짜: 2026-03-15
+- 결정: `Insights` 1차 후속 반복은 GitHub 이슈 `#11`과 브랜치 `feat/11-insights-deck-progress`에서 진행하고, 범위는 `현재 학습 중인 덱` 카드, 덱 전체 진행률, 오늘 남은 카드, 관련 스펙 문서 연결로 제한한다.
+- 근거: 방금 수행한 사용자 요구 3차 검토의 첫 구현 단위로 가장 직접적인 사용자 질문인 `현재 덱 전체 진행률`과 `오늘 남은 양`을 먼저 화면에 반영하는 것이 적절했기 때문이다.
+- 영향 범위: `app/lib/app_root.dart`, `app/lib/screens/insights_screen.dart`, `app/test/widget_test.dart`, `doc/work/repeato-insights-tab-spec-v1.md`, GitHub issue `#11`.
+- 후속 작업: 다음 반복에서는 약점 영역 요약과 CTA를 덱 맥락 기준으로 더 구체화한다.
+
+- 날짜: 2026-03-15
+- 결정: 이번 `Insights 덱 전체 진행률과 오늘 남은 카드` 반복 검증 결과는 `flutter analyze` 통과, `flutter test --coverage` 통과, line coverage `91.53%`로 기록한다.
+- 근거: 개발 workflow 품질 기준인 line coverage 70% 이상 유지 규칙을 이번 `Insights` 반복에도 동일하게 적용해야 하기 때문이다.
+- 영향 범위: QA 게이트, PR 본문 커버리지 기록, 다음 `Insights` 반복의 검증 포맷.
+- 후속 작업: 다음 반복에서도 `coverage/lcov.info` 기반 line coverage 계산식을 유지한다.

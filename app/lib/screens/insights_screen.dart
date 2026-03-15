@@ -7,10 +7,14 @@ class InsightsScreen extends StatelessWidget {
   const InsightsScreen({
     super.key,
     required this.stats,
+    required this.deckName,
+    required this.totalCards,
     required this.onStartToday,
   });
 
   final SessionStats stats;
+  final String deckName;
+  final int totalCards;
   final VoidCallback onStartToday;
 
   @override
@@ -18,6 +22,9 @@ class InsightsScreen extends StatelessWidget {
     final solved = stats.known + stats.unsure + stats.again;
     final accuracy = solved == 0 ? 0 : ((stats.known / solved) * 100).round();
     final completionRate = stats.target == 0 ? 0 : ((stats.completed / stats.target) * 100).round();
+    final deckProgressCount = stats.completed > totalCards ? totalCards : stats.completed;
+    final deckProgressRate = totalCards == 0 ? 0 : ((deckProgressCount / totalCards) * 100).round();
+    final todayRemaining = stats.target - stats.completed < 0 ? 0 : stats.target - stats.completed;
     final todayStatus = stats.done
         ? '오늘 목표 달성'
         : solved == 0
@@ -31,8 +38,42 @@ class InsightsScreen extends StatelessWidget {
         const SizedBox(height: 12),
         const ReviewNoteCard(
           title: '리뷰 설명',
-          body: '이번 반복에서는 핵심 KPI 3개와 다음 행동 연결만 강화합니다. '
+          body: '이번 반복에서는 현재 학습 중인 덱의 전체 진행 감각과 오늘 남은 양을 먼저 보이게 합니다. '
               '주간/월간 추이와 장기 지표는 이벤트 스키마 확정 후 확장합니다.',
+        ),
+        const SizedBox(height: 12),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('현재 학습 중인 덱', style: Theme.of(context).textTheme.titleMedium),
+                const SizedBox(height: 8),
+                Text(deckName, style: Theme.of(context).textTheme.titleLarge),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _MetricCard(
+                        title: '덱 전체 진행률',
+                        value: '$deckProgressRate%',
+                        subtitle: '$deckProgressCount / $totalCards 경험',
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _MetricCard(
+                        title: '오늘 남은 카드',
+                        value: '$todayRemaining장',
+                        subtitle: '오늘 목표 ${stats.target}장 기준',
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ),
         const SizedBox(height: 12),
         Text('핵심 KPI', style: Theme.of(context).textTheme.titleMedium),

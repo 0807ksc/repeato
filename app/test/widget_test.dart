@@ -78,8 +78,28 @@ void main() {
     await tester.tap(find.text('Insights').last);
     await tester.pumpAndSettle();
 
+    await tester.drag(find.byType(Scrollable).last, const Offset(0, -300));
+    await tester.pumpAndSettle();
     expect(find.text('오늘 상태'), findsOneWidget);
     expect(find.textContaining('헷갈림 1건'), findsOneWidget);
+  });
+
+  testWidgets('Insights shows current deck progress and remaining cards', (WidgetTester tester) async {
+    await tester.pumpWidget(const RepeatoApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('알겠음').first);
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Insights').last);
+    await tester.pumpAndSettle();
+
+    expect(find.text('현재 학습 중인 덱'), findsOneWidget);
+    expect(find.text('중2 초급 영어'), findsOneWidget);
+    expect(find.text('덱 전체 진행률'), findsOneWidget);
+    expect(find.text('오늘 남은 카드'), findsOneWidget);
+    expect(find.text('1 / 120 경험'), findsOneWidget);
+    expect(find.text('29장'), findsOneWidget);
   });
 
   testWidgets('Add tab validates, saves a card, and can move to Today', (WidgetTester tester) async {
@@ -150,6 +170,8 @@ void main() {
     await tester.tap(find.text('Insights').last);
     await tester.pumpAndSettle();
 
+    await tester.drag(find.byType(Scrollable).last, const Offset(0, -300));
+    await tester.pumpAndSettle();
     expect(find.text('오늘 완료율'), findsOneWidget);
     expect(find.text('정답률'), findsOneWidget);
     expect(find.text('오늘 상태'), findsOneWidget);
