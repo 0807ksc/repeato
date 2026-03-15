@@ -24,7 +24,7 @@ class _AppRootState extends State<AppRoot> {
   int _currentIndex = 0;
   SessionStats _stats = SessionStats.empty;
   final List<WordCard> _cards = [];
-  String _selectedDeckId = 'm2_beginner_english';
+  final Set<String> _todayStudyDeckIds = {'m2_beginner_english'};
   bool _isLoading = true;
   Object? _loadError;
 
@@ -127,6 +127,7 @@ class _AppRootState extends State<AppRoot> {
             name: entry.value.first.deckName,
             totalCards: entry.value.length,
             customCards: entry.value.where((card) => card.level == 'custom').length,
+            isRecommendedToday: entry.key == 'm2_beginner_english' || entry.key == 'cheonjamun_basic',
           ),
         )
         .toList()
@@ -134,10 +135,23 @@ class _AppRootState extends State<AppRoot> {
     return decks;
   }
 
-  void _openDeckStudy(String deckId) {
+  void _startDeckStudyNow(String deckId) {
     setState(() {
-      _selectedDeckId = deckId;
+      _todayStudyDeckIds
+        ..clear()
+        ..add(deckId);
       _currentIndex = 0;
+      _stats = SessionStats.empty;
+    });
+  }
+
+  void _toggleTodayDeck(String deckId) {
+    setState(() {
+      if (_todayStudyDeckIds.contains(deckId) && _todayStudyDeckIds.length > 1) {
+        _todayStudyDeckIds.remove(deckId);
+      } else {
+        _todayStudyDeckIds.add(deckId);
+      }
       _stats = SessionStats.empty;
     });
   }
@@ -172,23 +186,24 @@ class _AppRootState extends State<AppRoot> {
     }
 
     final decks = _buildDecks();
-    final selectedDeck = decks.firstWhere(
-      (deck) => deck.id == _selectedDeckId,
-      orElse: () => decks.first,
-    );
-    final selectedCards = _cards.where((card) => card.deckId == selectedDeck.id).toList();
-
+    if (_todayStudyDeckIds.isEmpty && decks.isNotEmpty) {
+      _todayStudyDeckIds.add(decks.first.id);
+    }
+    final todayDecks = decks.where((deck) => _todayStudyDeckIds.contains(deck.id)).toList();
+    final todayDeckLabel = todayDecks.map((deck) => deck.name).join(' + ');
+    final todayCards = _cards.where((card) => _todayStudyDeckIds.contains(card.deckId)).toList();
     final screens = <Widget>[
       TodayScreen(
-        key: ValueKey('today-${selectedDeck.id}'),
-        cards: selectedCards,
-        deckName: selectedDeck.name,
+        key: ValueKey('today-${_todayStudyDeckIds.join('-')}'),
+        cards: todayCards,
+        deckName: todayDeckLabel,
         onStatsChanged: (s) => setState(() => _stats = s),
       ),
       DecksScreen(
         decks: decks,
-        selectedDeckId: selectedDeck.id,
-        onStudyDeck: _openDeckStudy,
+        todayStudyDeckIds: _todayStudyDeckIds,
+        onToggleTodayDeck: _toggleTodayDeck,
+        onStudyDeckNow: _startDeckStudyNow,
       ),
       AddScreen(
         key: const ValueKey('add-screen'),
@@ -197,14 +212,14 @@ class _AppRootState extends State<AppRoot> {
       ),
       InsightsScreen(
         stats: _stats,
-        deckName: selectedDeck.name,
-        totalCards: selectedDeck.totalCards,
+        deckName: todayDeckLabel,
+        totalCards: todayCards.length,
         onStartToday: () => setState(() => _currentIndex = 0),
         onOpenDeck: () => setState(() => _currentIndex = 1),
       ),
       ProfileScreen(
         stats: _stats,
-        totalCards: selectedDeck.totalCards,
+        totalCards: todayCards.length,
         onResumeToday: () => setState(() => _currentIndex = 0),
       ),
     ];
