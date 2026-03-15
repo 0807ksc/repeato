@@ -27,6 +27,12 @@ class InsightsScreen extends StatelessWidget {
     final deckProgressCount = stats.completed > totalCards ? totalCards : stats.completed;
     final deckProgressRate = totalCards == 0 ? 0 : ((deckProgressCount / totalCards) * 100).round();
     final todayRemaining = stats.target - stats.completed < 0 ? 0 : stats.target - stats.completed;
+    final recentChangeLabel = stats.completed == 0
+        ? '아직 변화 데이터가 적습니다'
+        : accuracy >= 70
+            ? '정답률이 안정적으로 유지되고 있습니다'
+            : '재복습 비중이 높아 다시 확인이 필요합니다';
+    final nextReviewLabel = todayRemaining == 0 ? '오늘 세션 마감 후 다음 묶음 계산' : '오늘 안에 다음 복습 묶음이 이어집니다';
     final weakFocus = stats.again > stats.unsure
         ? '기억이 거의 나지 않는 카드가 더 많습니다.'
         : stats.unsure > 0
@@ -88,6 +94,46 @@ class InsightsScreen extends StatelessWidget {
         _MetricCard(title: '오늘 완료율', value: '$completionRate%', subtitle: '${stats.completed}/${stats.target} 완료'),
         _MetricCard(title: '정답률', value: '$accuracy%', subtitle: '알겠음 ${stats.known} / 전체 $solved'),
         _MetricCard(title: '오늘 상태', value: todayStatus, subtitle: '헷갈림 ${stats.unsure}건 · 모르겠음 ${stats.again}건'),
+        const SizedBox(height: 8),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('최근 변화', style: Theme.of(context).textTheme.titleMedium),
+                const SizedBox(height: 8),
+                Text(recentChangeLabel),
+                const SizedBox(height: 6),
+                Text(
+                  '현재 세션 기준 ${stats.completed}장 진행 · 정답률 $accuracy%',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('다음 복습 시점', style: Theme.of(context).textTheme.titleMedium),
+                const SizedBox(height: 8),
+                Text(nextReviewLabel),
+                const SizedBox(height: 6),
+                Text(
+                  todayRemaining == 0
+                      ? '예상: 내일 오전 첫 복습 묶음이 준비됩니다.'
+                      : '예상: 남은 $todayRemaining장을 마치면 바로 다음 복습 카드가 이어집니다.',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
+            ),
+          ),
+        ),
         const SizedBox(height: 8),
         Card(
           child: Padding(
