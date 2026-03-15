@@ -102,6 +102,32 @@ void main() {
     expect(find.text('29장'), findsOneWidget);
   });
 
+  testWidgets('Insights weak summary can open Decks tab', (WidgetTester tester) async {
+    await tester.pumpWidget(const RepeatoApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('모르겠음').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Insights').last);
+    await tester.pumpAndSettle();
+
+    await tester.drag(find.byType(Scrollable).last, const Offset(0, -400));
+    await tester.pumpAndSettle();
+
+    expect(find.text('약점 영역 요약'), findsOneWidget);
+    expect(find.text('기억이 거의 나지 않는 카드가 더 많습니다.'), findsOneWidget);
+    expect(find.text('모르겠음 1장'), findsOneWidget);
+
+    final openDeckButton = find.widgetWithText(OutlinedButton, '덱 확인하기');
+    await tester.ensureVisible(openDeckButton);
+    await tester.pumpAndSettle();
+    await tester.tap(openDeckButton);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Decks'), findsWidgets);
+    expect(find.text('중2 초급 영어 120'), findsOneWidget);
+  });
+
   testWidgets('Add tab validates, saves a card, and can move to Today', (WidgetTester tester) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
@@ -177,6 +203,8 @@ void main() {
     expect(find.text('오늘 상태'), findsOneWidget);
     expect(find.text('진행 중'), findsOneWidget);
 
+    await tester.drag(find.byType(Scrollable).last, const Offset(0, -250));
+    await tester.pumpAndSettle();
     final retryButton = find.widgetWithText(FilledButton, '약점 다시 학습');
     await tester.ensureVisible(retryButton);
     await tester.pumpAndSettle();

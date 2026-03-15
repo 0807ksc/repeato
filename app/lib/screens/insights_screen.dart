@@ -10,12 +10,14 @@ class InsightsScreen extends StatelessWidget {
     required this.deckName,
     required this.totalCards,
     required this.onStartToday,
+    required this.onOpenDeck,
   });
 
   final SessionStats stats;
   final String deckName;
   final int totalCards;
   final VoidCallback onStartToday;
+  final VoidCallback onOpenDeck;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,11 @@ class InsightsScreen extends StatelessWidget {
     final deckProgressCount = stats.completed > totalCards ? totalCards : stats.completed;
     final deckProgressRate = totalCards == 0 ? 0 : ((deckProgressCount / totalCards) * 100).round();
     final todayRemaining = stats.target - stats.completed < 0 ? 0 : stats.target - stats.completed;
+    final weakFocus = stats.again > stats.unsure
+        ? '기억이 거의 나지 않는 카드가 더 많습니다.'
+        : stats.unsure > 0
+            ? '헷갈리는 카드가 더 많아 빠른 재확인이 필요합니다.'
+            : '뚜렷한 약점 응답은 아직 많지 않습니다.';
     final todayStatus = stats.done
         ? '오늘 목표 달성'
         : solved == 0
@@ -88,6 +95,30 @@ class InsightsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text('약점 영역 요약', style: Theme.of(context).textTheme.titleMedium),
+                const SizedBox(height: 8),
+                Text(weakFocus),
+                const SizedBox(height: 12),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    Chip(label: Text('헷갈림 ${stats.unsure}장')),
+                    Chip(label: Text('모르겠음 ${stats.again}장')),
+                    Chip(label: Text('남은 카드 $todayRemaining장')),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 Text('다음 행동', style: Theme.of(context).textTheme.titleMedium),
                 const SizedBox(height: 8),
                 Text(
@@ -96,10 +127,21 @@ class InsightsScreen extends StatelessWidget {
                       : '현재 세션 기준으로 약점 카드가 많지 않습니다. 그래도 Today에서 바로 이어갈 수 있습니다.',
                 ),
                 const SizedBox(height: 12),
-                FilledButton.icon(
-                  onPressed: onStartToday,
-                  icon: const Icon(Icons.refresh),
-                  label: const Text('약점 다시 학습'),
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  children: [
+                    FilledButton.icon(
+                      onPressed: onStartToday,
+                      icon: const Icon(Icons.refresh),
+                      label: const Text('약점 다시 학습'),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: onOpenDeck,
+                      icon: const Icon(Icons.menu_book_outlined),
+                      label: const Text('덱 확인하기'),
+                    ),
+                  ],
                 ),
               ],
             ),
