@@ -1,10 +1,10 @@
 # Next Actions
 
 ## Priority Queue
-1. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` `Today` 2차 반복: 세션 리셋/목표 변경/약점 재진입 흐름 고도화
-2. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DESIGN #ORG-QA` `Profile` 2차 반복: 목표 카드 수 설정과 전역 상태 키 연결 검토
-3. [ ] (P1) `#STAGE-C #TASK-DATA #TASK-APP #ORG-ARCH #ORG-DATA #ORG-FE` Flutter 로컬 SQLite 저장 계층과 도메인 모델 설계안을 코드 구조로 내리기 (`doc/work/repeato-local-first-architecture-v1.md`)
-4. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` Deck 상태 모델 확장(진행 중/일시중지/완료)과 상세 정보 고도화
+1. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` `Add` 2차 반복: 입력 히스토리/최근 덱 제안/저장 후 재입력 흐름 고도화
+2. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` `Decks` 2차 반복: 덱 카드 상태 배지와 정렬/필터 기본값 고도화
+3. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DESIGN #ORG-QA` `Profile` 2차 반복: 목표 카드 수 설정과 전역 상태 키 연결 검토
+4. [ ] (P1) `#STAGE-C #TASK-DATA #TASK-APP #ORG-ARCH #ORG-DATA #ORG-FE` Flutter 로컬 SQLite 저장 계층과 도메인 모델 설계안을 코드 구조로 내리기 (`doc/work/repeato-local-first-architecture-v1.md`)
 5. [ ] (P1) `#STAGE-C #TASK-WORKFLOW #ORG-WF-ARCH #ORG-WF-LIB #ORG-WF-AUTO #ORG-PM` workflow 조직 세션 기준 문서 유지 및 coverage 70% 운영 규칙을 다음 개발 이슈/PR에 계속 적용
 6. [ ] (P1) `#STAGE-B #TASK-LEARNING #TASK-TAB #ORG-PM #ORG-DESIGN #ORG-EDU #ORG-COG` 카드 템플릿/정답 판정/세션 규칙과 공통 상태 키 확정 (`doc/plan-checklist.md` + `doc/work/repeato-cross-tab-conflict-review-v1.md`)
 7. [ ] (P1) `#STAGE-C #TASK-DATA #ORG-PM #ORG-DATA #ORG-ARCH` KPI/이벤트 스키마 확정 후 `Insights` 2차 구현 착수 (`doc/work/repeato-insights-tab-spec-v1.md`)
@@ -16,6 +16,12 @@
 - Flutter line coverage 측정/기록 방식은 다음 개발 이슈에서 실제 명령과 보고 포맷을 고정할 필요가 있음
 
 ## Done in This Iteration
+- Today 상단 세션 제어 카드 추가
+- `현재 세션 다시 시작` CTA 추가
+- 목표 변경 흐름(`빠른 30카드`, `집중 60카드`) 명확화
+- `flutter analyze` 통과
+- `flutter test --coverage` 통과
+- 라인 커버리지 `90.65%` 확인
 - Profile에 오늘 학습 요약 카드 추가
 - Profile에 로컬 저장 상태와 약한 리마인드 설명 추가
 - `Today 이어서 학습` CTA 연결
