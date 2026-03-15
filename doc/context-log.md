@@ -322,3 +322,15 @@
 - 근거: 메뉴 반복 작업에서도 테스트 line coverage 70% 이상 유지 규칙을 동일하게 적용해야 하기 때문이다.
 - 영향 범위: QA 게이트, PR 본문 커버리지 기록, 다음 반복의 검증 포맷.
 - 후속 작업: 다음 반복에서도 `coverage/lcov.info` 기반 line coverage 계산식을 유지한다.
+
+- 날짜: 2026-03-13
+- 결정: `Today` 2차 반복은 GitHub 이슈 `#9`와 브랜치 `feat/9-today-session-controls`에서 진행하고, 범위는 세션 제어 카드, 명시적 리셋 CTA, 목표 변경 흐름 명확화로 제한한다.
+- 근거: 각 메뉴별 반복 작업을 계속 진행하는 현재 루프에서 `Today`는 핵심 사용 흐름이므로, 데이터 모델 확장 전에 세션 제어를 더 명확히 보여주는 작은 반복이 우선 가치가 높기 때문이다.
+- 영향 범위: `app/lib/screens/today_screen.dart`, `app/test/widget_test.dart`, GitHub issue `#9`.
+- 후속 작업: 다음 반복은 `Add` 2차 또는 `Decks` 2차 중 하나로 넘기고, `Today` 3차에서는 약점 카드 재도전 큐 도입 여부를 검토한다.
+
+- 날짜: 2026-03-13
+- 결정: 이번 `Today` 2차 반복 검증 결과는 `flutter analyze` 통과, `flutter test --coverage` 통과, line coverage `90.65%`로 기록한다.
+- 근거: 반복 구현에서도 line coverage 70% 이상 유지 규칙을 지속적으로 증명해야 하기 때문이다.
+- 영향 범위: QA 게이트, PR 본문 커버리지 기록, 다음 반복의 검증 포맷.
+- 후속 작업: 다음 반복에서도 `coverage/lcov.info` 기반 line coverage 계산식을 유지한다.

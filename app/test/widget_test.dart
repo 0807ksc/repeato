@@ -25,11 +25,31 @@ void main() {
     expect(find.textContaining('진행: 1 /'), findsOneWidget);
   });
 
+  testWidgets('Today session controls can reset progress and switch target', (WidgetTester tester) async {
+    await tester.pumpWidget(const RepeatoApp());
+    await tester.pumpAndSettle();
+
+    expect(find.text('세션 제어'), findsOneWidget);
+    await tester.tap(find.text('헷갈림').first);
+    await tester.pumpAndSettle();
+    expect(find.textContaining('진행: 1 / 30'), findsOneWidget);
+
+    await tester.tap(find.text('현재 세션 다시 시작'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('진행: 0 / 30'), findsOneWidget);
+
+    await tester.tap(find.text('집중 60카드'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('진행: 0 / 60'), findsOneWidget);
+  });
+
   testWidgets('Swipe gestures advance card (left=known, right=again)', (WidgetTester tester) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
-    final card = find.byType(Card).first;
+    final card = find.byWidgetPredicate(
+      (widget) => widget is GestureDetector && widget.onHorizontalDragStart != null,
+    );
     expect(find.textContaining('진행: 0 /'), findsOneWidget);
 
     // Left swipe => known
@@ -38,7 +58,12 @@ void main() {
     expect(find.textContaining('진행: 1 /'), findsOneWidget);
 
     // Right swipe => dont know
-    await tester.drag(card, const Offset(220, 0));
+    await tester.drag(
+      find.byWidgetPredicate(
+        (widget) => widget is GestureDetector && widget.onHorizontalDragStart != null,
+      ),
+      const Offset(220, 0),
+    );
     await tester.pumpAndSettle();
     expect(find.textContaining('진행: 2 /'), findsOneWidget);
   });

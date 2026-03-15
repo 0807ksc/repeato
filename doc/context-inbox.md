@@ -17,16 +17,16 @@
 
 ## Active
 - 날짜: 2026-03-13
-- 작업 주제: Profile 신뢰 요약 카드 및 Today 복귀 CTA 구현
+- 작업 주제: Today 세션 제어와 리셋 흐름 개선
 - 임시 컨텍스트:
-  - GitHub 이슈 `#7 [Task] Improve Profile trust summary and Today resume CTA` 생성 완료
-  - 작업 브랜치 `feat/7-profile-trust-summary` 생성 완료
-  - Profile에 오늘 학습 요약, 로컬 저장 상태, 약한 리마인드, `Today 이어서 학습` CTA를 추가
-  - Today 세션 상태를 Profile에서도 읽을 수 있도록 앱 루트 연결
+  - GitHub 이슈 `#9 Today 세션 제어와 리셋 흐름 개선` 생성 완료
+  - 작업 브랜치 `feat/9-today-session-controls` 생성 완료
+  - Today 상단에 세션 제어 카드와 명시적 `현재 세션 다시 시작` CTA를 추가
+  - 목표 변경(`빠른 30카드`, `집중 60카드`) 흐름을 세션 제어 카드 안에서 명확화
   - `flutter analyze` 통과
-  - `flutter test --coverage` 통과, line coverage 88.25%
+  - `flutter test --coverage` 통과, line coverage 90.65%
 - 검증 필요:
-  - 다음 반복을 Today 2차 세션 제어 개선으로 바로 이어갈지
-  - Profile 2차에서 목표 카드 수 설정까지 연결할지
+  - 다음 반복을 Add 2차 또는 Decks 2차 중 어디로 둘지
+  - Today 3차에서 약점 카드 재도전 큐를 실제로 둘지
 - 메모:
   - coverage 70% 기준은 이번 작업에서도 충족됨

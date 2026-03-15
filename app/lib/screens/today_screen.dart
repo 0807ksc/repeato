@@ -86,6 +86,17 @@ class _TodayScreenState extends State<TodayScreen> {
     });
   }
 
+  void _resetSession() {
+    setState(() {
+      _index = 0;
+      _known = 0;
+      _unsure = 0;
+      _again = 0;
+      _showMeaning = false;
+      _emitStats();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final done = _index >= _target;
@@ -116,21 +127,47 @@ class _TodayScreenState extends State<TodayScreen> {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const SizedBox(height: 12),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: [
-                      ChoiceChip(
-                        label: const Text('빠른 30카드'),
-                        selected: _target == 30,
-                        onSelected: (_) => _setTarget(30),
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('세션 제어', style: Theme.of(context).textTheme.titleMedium),
+                          const SizedBox(height: 8),
+                          Text(
+                            done
+                                ? '오늘 목표를 완료했습니다. 같은 목표로 다시 시작하거나 목표 수를 바꿀 수 있습니다.'
+                                : _index == 0
+                                    ? '아직 세션을 시작하지 않았습니다. 목표 카드 수를 고르고 바로 시작하세요.'
+                                    : '현재 세션이 진행 중입니다. 목표를 바꾸거나 같은 목표로 다시 시작할 수 있습니다.',
+                          ),
+                          const SizedBox(height: 12),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: [
+                              ChoiceChip(
+                                label: const Text('빠른 30카드'),
+                                selected: _target == 30,
+                                onSelected: (_) => _setTarget(30),
+                              ),
+                              ChoiceChip(
+                                label: const Text('집중 60카드'),
+                                selected: _target == 60,
+                                onSelected: (_) => _setTarget(60),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          OutlinedButton.icon(
+                            onPressed: _resetSession,
+                            icon: const Icon(Icons.restart_alt),
+                            label: const Text('현재 세션 다시 시작'),
+                          ),
+                        ],
                       ),
-                      ChoiceChip(
-                        label: const Text('집중 60카드'),
-                        selected: _target == 60,
-                        onSelected: (_) => _setTarget(60),
-                      ),
-                    ],
+                    ),
                   ),
                   const SizedBox(height: 12),
                   LinearProgressIndicator(value: progress),
