@@ -364,3 +364,15 @@
 - 근거: 반복 구현에서도 line coverage 70% 이상 유지 규칙을 지속 적용해야 하기 때문이다.
 - 영향 범위: QA 게이트, PR 본문 커버리지 기록, 다음 `Insights` 반복의 검증 포맷.
 - 후속 작업: 다음 반복에서도 `coverage/lcov.info` 기반 line coverage 계산식을 유지한다.
+
+- 날짜: 2026-03-15
+- 결정: `Insights` 3차 반복은 GitHub 이슈 `#15`와 브랜치 `feat/15-insights-trend-next-review`에서 진행하고, 범위는 `최근 변화` 카드와 `다음 복습 시점` 카드 추가로 제한한다.
+- 근거: 사용자가 `전체에서 얼마나 했는지`와 `무엇이 약한지`를 본 다음, 자연스럽게 궁금해하는 것은 `내가 나아지고 있는지`와 `다음에 무엇이 오는지`이기 때문이다.
+- 영향 범위: `app/lib/screens/insights_screen.dart`, `app/test/widget_test.dart`, GitHub issue `#15`.
+- 후속 작업: 장기 이벤트 스키마 확정 전까지는 현재 세션 기준 해석 문구를 유지하고, 차트형 확장은 별도 이슈로 분리한다.
+
+- 날짜: 2026-03-15
+- 결정: 이번 `Insights 최근 변화와 다음 복습 시점 카드` 반복 검증 결과는 `flutter analyze` 통과, `flutter test --coverage` 통과, line coverage `92.03%`로 기록한다.
+- 근거: `Insights` 3차 반복에도 line coverage 70% 이상 유지 규칙을 동일하게 적용해야 하기 때문이다.
+- 영향 범위: QA 게이트, PR 본문 커버리지 기록, 이후 `Insights` 차트형 확장의 검증 포맷.
+- 후속 작업: 이후 차트형 확장 작업에서도 `coverage/lcov.info` 기반 line coverage 계산식을 유지한다.

@@ -118,14 +118,36 @@ void main() {
     expect(find.text('기억이 거의 나지 않는 카드가 더 많습니다.'), findsOneWidget);
     expect(find.text('모르겠음 1장'), findsOneWidget);
 
+    await tester.scrollUntilVisible(
+      find.text('덱 확인하기'),
+      120,
+      scrollable: find.byType(Scrollable).last,
+    );
     final openDeckButton = find.widgetWithText(OutlinedButton, '덱 확인하기');
-    await tester.ensureVisible(openDeckButton);
-    await tester.pumpAndSettle();
+    expect(openDeckButton, findsOneWidget);
     await tester.tap(openDeckButton);
     await tester.pumpAndSettle();
 
     expect(find.text('Decks'), findsWidgets);
     expect(find.text('중2 초급 영어 120'), findsOneWidget);
+  });
+
+  testWidgets('Insights shows recent change and next review cards', (WidgetTester tester) async {
+    await tester.pumpWidget(const RepeatoApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('알겠음').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Insights').last);
+    await tester.pumpAndSettle();
+
+    await tester.drag(find.byType(Scrollable).last, const Offset(0, -450));
+    await tester.pumpAndSettle();
+
+    expect(find.text('최근 변화'), findsOneWidget);
+    expect(find.text('다음 복습 시점'), findsOneWidget);
+    expect(find.text('정답률이 안정적으로 유지되고 있습니다'), findsOneWidget);
+    expect(find.textContaining('예상:'), findsWidgets);
   });
 
   testWidgets('Add tab validates, saves a card, and can move to Today', (WidgetTester tester) async {
@@ -203,11 +225,13 @@ void main() {
     expect(find.text('오늘 상태'), findsOneWidget);
     expect(find.text('진행 중'), findsOneWidget);
 
-    await tester.drag(find.byType(Scrollable).last, const Offset(0, -250));
-    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.text('약점 다시 학습'),
+      120,
+      scrollable: find.byType(Scrollable).last,
+    );
     final retryButton = find.widgetWithText(FilledButton, '약점 다시 학습');
-    await tester.ensureVisible(retryButton);
-    await tester.pumpAndSettle();
+    expect(retryButton, findsOneWidget);
     await tester.tap(retryButton);
     await tester.pumpAndSettle();
 
