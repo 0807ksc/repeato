@@ -138,4 +138,29 @@ void main() {
 
     expect(find.textContaining('진행: 1 /'), findsOneWidget);
   });
+
+  testWidgets('Profile shows trust summary and can resume Today', (WidgetTester tester) async {
+    await tester.pumpWidget(const RepeatoApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('알겠음').first);
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Profile').last);
+    await tester.pumpAndSettle();
+
+    expect(find.text('오늘 학습 요약'), findsOneWidget);
+    expect(find.textContaining('1/30 진행'), findsOneWidget);
+    expect(find.text('로컬 저장 상태'), findsOneWidget);
+    expect(find.text('로컬 전용'), findsOneWidget);
+    expect(find.text('Today 이어서 학습'), findsOneWidget);
+
+    final resumeButton = find.widgetWithText(FilledButton, 'Today 이어서 학습');
+    await tester.ensureVisible(resumeButton);
+    await tester.pumpAndSettle();
+    await tester.tap(resumeButton);
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('진행: 1 /'), findsOneWidget);
+  });
 }

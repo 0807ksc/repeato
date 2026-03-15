@@ -17,16 +17,16 @@
 
 ## Active
 - 날짜: 2026-03-13
-- 작업 주제: Insights KPI 대시보드 및 Today 재진입 CTA 구현
+- 작업 주제: Profile 신뢰 요약 카드 및 Today 복귀 CTA 구현
 - 임시 컨텍스트:
-  - GitHub 이슈 `#5 [Task] Enhance Insights dashboard and action CTA` 생성 완료
-  - 작업 브랜치 `feat/5-insights-dashboard-cta` 생성 완료
-  - Insights에 핵심 KPI 3개(오늘 완료율, 정답률, 오늘 상태)와 `약점 다시 학습` CTA를 추가
-  - 탭 전환 시 Today 세션 상태가 유지되도록 `IndexedStack` 기반 앱 셸로 변경
+  - GitHub 이슈 `#7 [Task] Improve Profile trust summary and Today resume CTA` 생성 완료
+  - 작업 브랜치 `feat/7-profile-trust-summary` 생성 완료
+  - Profile에 오늘 학습 요약, 로컬 저장 상태, 약한 리마인드, `Today 이어서 학습` CTA를 추가
+  - Today 세션 상태를 Profile에서도 읽을 수 있도록 앱 루트 연결
   - `flutter analyze` 통과
-  - `flutter test --coverage` 통과, line coverage 87.43%
+  - `flutter test --coverage` 통과, line coverage 88.25%
 - 검증 필요:
-  - 다음 반복을 Profile 1차 설정/학습 환경 카드로 둘지, Today 2차 세션 제어 개선으로 둘지
-  - Insights 후속 범위를 이벤트 스키마 전의 lightweight 추세 카드까지 허용할지
+  - 다음 반복을 Today 2차 세션 제어 개선으로 바로 이어갈지
+  - Profile 2차에서 목표 카드 수 설정까지 연결할지
 - 메모:
   - coverage 70% 기준은 이번 작업에서도 충족됨

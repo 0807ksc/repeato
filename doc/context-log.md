@@ -310,3 +310,15 @@
 - 근거: 개발 조직 workflow의 품질 기준인 line coverage 70% 이상 유지를 메뉴 반복 작업에도 동일하게 적용해야 하기 때문이다.
 - 영향 범위: QA 게이트, PR 본문 커버리지 기록, 다음 메뉴 반복의 검증 포맷.
 - 후속 작업: 다음 메뉴 반복에서도 동일한 coverage 계산 명령(`coverage/lcov.info` 기반)을 유지한다.
+
+- 날짜: 2026-03-13
+- 결정: `Profile` 1차 반복은 GitHub 이슈 `#7`과 브랜치 `feat/7-profile-trust-summary`에서 진행하고, 범위는 오늘 학습 요약, 로컬 저장 상태, 약한 리마인드, Today 복귀 CTA로 제한한다.
+- 근거: `Profile` 탭은 설정 허브보다 신뢰 확인 화면이 우선이며, 서버 범위를 열지 않고도 현재 세션 요약과 로컬 상태를 보여주는 작은 단위 개선이 가능하기 때문이다.
+- 영향 범위: `app/lib/app_root.dart`, `app/lib/screens/profile_screen.dart`, `app/test/widget_test.dart`, GitHub issue `#7`.
+- 후속 작업: 다음 반복은 `Today` 2차 세션 제어 개선으로 넘기고, `Profile` 2차에서는 목표 카드 수 설정 연결 여부를 검토한다.
+
+- 날짜: 2026-03-13
+- 결정: 이번 `Profile` 1차 반복 검증 결과는 `flutter analyze` 통과, `flutter test --coverage` 통과, line coverage `88.25%`로 기록한다.
+- 근거: 메뉴 반복 작업에서도 테스트 line coverage 70% 이상 유지 규칙을 동일하게 적용해야 하기 때문이다.
+- 영향 범위: QA 게이트, PR 본문 커버리지 기록, 다음 반복의 검증 포맷.
+- 후속 작업: 다음 반복에서도 `coverage/lcov.info` 기반 line coverage 계산식을 유지한다.

@@ -152,7 +152,11 @@ class _AppRootState extends State<AppRoot> {
         stats: _stats,
         onStartToday: () => setState(() => _currentIndex = 0),
       ),
-      const ProfileScreen(),
+      ProfileScreen(
+        stats: _stats,
+        totalCards: _cards.length,
+        onResumeToday: () => setState(() => _currentIndex = 0),
+      ),
     ];
 
     return Scaffold(
