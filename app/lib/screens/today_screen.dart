@@ -101,6 +101,24 @@ class _TodayScreenState extends State<TodayScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.cards.isEmpty) {
+      return ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          Text('Today', style: Theme.of(context).textTheme.headlineMedium),
+          const SizedBox(height: 8),
+          Text('${widget.deckName} · Iteration 1 리뷰 빌드'),
+          const SizedBox(height: 12),
+          const Card(
+            child: ListTile(
+              title: Text('오늘 학습 덱이 비어 있습니다'),
+              subtitle: Text('Decks에서 오늘 학습에 포함할 덱을 1개 이상 선택해 주세요.'),
+            ),
+          ),
+        ],
+      );
+    }
+
     final done = _index >= _target;
     final word = widget.cards[_index % widget.cards.length];
     final progress = _target == 0 ? 0.0 : (_index / _target).clamp(0.0, 1.0);

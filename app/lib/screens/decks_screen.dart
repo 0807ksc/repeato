@@ -7,13 +7,15 @@ class DecksScreen extends StatelessWidget {
   const DecksScreen({
     super.key,
     required this.decks,
-    required this.selectedDeckId,
-    required this.onStudyDeck,
+    required this.todayStudyDeckIds,
+    required this.onToggleTodayDeck,
+    required this.onStudyDeckNow,
   });
 
   final List<DeckSummary> decks;
-  final String selectedDeckId;
-  final ValueChanged<String> onStudyDeck;
+  final Set<String> todayStudyDeckIds;
+  final ValueChanged<String> onToggleTodayDeck;
+  final ValueChanged<String> onStudyDeckNow;
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +36,21 @@ class DecksScreen extends StatelessWidget {
               leading: const Icon(Icons.menu_book),
               title: Text(deck.name),
               subtitle: Text(
-                '카드 ${deck.totalCards}개 · 직접 추가 ${deck.customCards}개 · 상태: ${deck.id == selectedDeckId ? '선택됨' : '대기'}',
+                '카드 ${deck.totalCards}개 · 직접 추가 ${deck.customCards}개 · 상태: ${todayStudyDeckIds.contains(deck.id) ? '오늘 학습 포함' : '대기'}',
               ),
-              trailing: const Icon(Icons.chevron_right),
+              trailing: Switch(
+                value: todayStudyDeckIds.contains(deck.id),
+                onChanged: (_) => onToggleTodayDeck(deck.id),
+              ),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute<void>(
                   builder: (_) => DeckDetailScreen(
                     deck: deck,
-                    isSelected: deck.id == selectedDeckId,
-                    onStartToday: () {
+                    isSelected: todayStudyDeckIds.contains(deck.id),
+                    onToggleTodayDeck: () => onToggleTodayDeck(deck.id),
+                    onStudyNow: () {
                       Navigator.of(context).pop();
-                      onStudyDeck(deck.id);
+                      onStudyDeckNow(deck.id);
                     },
                   ),
                 ),
@@ -61,12 +67,14 @@ class DeckDetailScreen extends StatelessWidget {
     super.key,
     required this.deck,
     required this.isSelected,
-    required this.onStartToday,
+    required this.onToggleTodayDeck,
+    required this.onStudyNow,
   });
 
   final DeckSummary deck;
   final bool isSelected;
-  final VoidCallback onStartToday;
+  final VoidCallback onToggleTodayDeck;
+  final VoidCallback onStudyNow;
 
   @override
   Widget build(BuildContext context) {
@@ -108,12 +116,23 @@ class DeckDetailScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           if (isSelected)
-            const Chip(label: Text('현재 선택된 덱')),
+            const Chip(label: Text('오늘 학습 포함')),
           const SizedBox(height: 8),
-          FilledButton.icon(
-            onPressed: onStartToday,
-            icon: const Icon(Icons.play_arrow),
-            label: const Text('이 덱 학습'),
+          Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            children: [
+              OutlinedButton.icon(
+                onPressed: onToggleTodayDeck,
+                icon: const Icon(Icons.playlist_add_check),
+                label: Text(isSelected ? '오늘 학습에서 제외' : '오늘 학습에 추가'),
+              ),
+              FilledButton.icon(
+                onPressed: onStudyNow,
+                icon: const Icon(Icons.play_arrow),
+                label: const Text('지금 바로 학습'),
+              ),
+            ],
           ),
         ],
       ),

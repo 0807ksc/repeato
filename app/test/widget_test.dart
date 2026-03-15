@@ -203,7 +203,7 @@ void main() {
     expect(find.text('120개'), findsOneWidget);
     expect(find.text('0개'), findsOneWidget);
 
-    await tester.tap(find.text('이 덱 학습'));
+    await tester.tap(find.text('지금 바로 학습'));
     await tester.pumpAndSettle();
 
     expect(find.textContaining('진행: 0 /'), findsOneWidget);
@@ -221,11 +221,28 @@ void main() {
 
     await tester.tap(find.text('천자문 입문'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('이 덱 학습'));
+    await tester.tap(find.text('지금 바로 학습'));
     await tester.pumpAndSettle();
 
     expect(find.text('천자문 입문 · Iteration 1 리뷰 빌드'), findsOneWidget);
     expect(find.text('天'), findsOneWidget);
+  });
+
+  testWidgets('Decks can include multiple decks in today study queue', (WidgetTester tester) async {
+    await tester.pumpWidget(const RepeatoApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Decks').last);
+    await tester.pumpAndSettle();
+
+    final hanjaSwitch = find.byType(Switch).last;
+    await tester.tap(hanjaSwitch);
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Today').last);
+    await tester.pumpAndSettle();
+
+    expect(find.text('중2 초급 영어 + 천자문 입문 · Iteration 1 리뷰 빌드'), findsOneWidget);
   });
 
   testWidgets('Insights action can move back to Today with KPI cards visible', (WidgetTester tester) async {
