@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../models/add_history_entry.dart';
 import '../widgets/review_note_card.dart';
 
 class AddScreen extends StatefulWidget {
@@ -8,6 +9,8 @@ class AddScreen extends StatefulWidget {
     required this.onAddCard,
     required this.onNavigateToday,
     required this.todayStudyDeckNames,
+    required this.recentDeckNames,
+    required this.recentEntries,
   });
 
   final void Function({
@@ -15,9 +18,12 @@ class AddScreen extends StatefulWidget {
     required String meaningKo,
     required String deck,
     required bool moveToToday,
-  }) onAddCard;
+  })
+  onAddCard;
   final VoidCallback onNavigateToday;
   final List<String> todayStudyDeckNames;
+  final List<String> recentDeckNames;
+  final List<AddHistoryEntry> recentEntries;
 
   @override
   State<AddScreen> createState() => _AddScreenState();
@@ -28,6 +34,7 @@ class _AddScreenState extends State<AddScreen> {
   final _wordController = TextEditingController();
   final _meaningController = TextEditingController();
   final _deckController = TextEditingController(text: '직접 추가');
+  final _wordFocusNode = FocusNode();
   String? _lastSavedWord;
 
   @override
@@ -35,6 +42,7 @@ class _AddScreenState extends State<AddScreen> {
     _wordController.dispose();
     _meaningController.dispose();
     _deckController.dispose();
+    _wordFocusNode.dispose();
     super.dispose();
   }
 
@@ -61,10 +69,21 @@ class _AddScreenState extends State<AddScreen> {
       _wordController.clear();
       _meaningController.clear();
     });
+    _wordFocusNode.requestFocus();
 
     if (moveToToday) {
       widget.onNavigateToday();
     }
+  }
+
+  void _applyRecentEntry(AddHistoryEntry entry) {
+    setState(() {
+      _wordController.text = entry.word;
+      _meaningController.text = entry.meaningKo;
+      _deckController.text = entry.deckName;
+      _lastSavedWord = null;
+    });
+    _wordFocusNode.requestFocus();
   }
 
   @override
@@ -75,7 +94,7 @@ class _AddScreenState extends State<AddScreen> {
     }
 
     final currentDeck = _deckController.text.trim();
-    if (currentDeck.isEmpty || currentDeck == '직접 추가' || !widget.todayStudyDeckNames.contains(currentDeck)) {
+    if (currentDeck.isEmpty || currentDeck == '직접 추가') {
       _deckController.text = widget.todayStudyDeckNames.first;
     }
   }
@@ -84,8 +103,7 @@ class _AddScreenState extends State<AddScreen> {
   Widget build(BuildContext context) {
     if (widget.todayStudyDeckNames.isNotEmpty &&
         (_deckController.text.trim().isEmpty ||
-            _deckController.text.trim() == '직접 추가' ||
-            !widget.todayStudyDeckNames.contains(_deckController.text.trim()))) {
+            _deckController.text.trim() == '직접 추가')) {
       _deckController.text = widget.todayStudyDeckNames.first;
     }
 
@@ -122,7 +140,8 @@ class _AddScreenState extends State<AddScreen> {
                           (deckName) => ChoiceChip(
                             label: Text(deckName),
                             selected: _deckController.text.trim() == deckName,
-                            onSelected: (_) => setState(() => _deckController.text = deckName),
+                            onSelected: (_) =>
+                                setState(() => _deckController.text = deckName),
                           ),
                         )
                         .toList(),
@@ -132,6 +151,74 @@ class _AddScreenState extends State<AddScreen> {
             ),
           ),
         ),
+        if (widget.recentDeckNames.isNotEmpty) ...[
+          const SizedBox(height: 12),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '최근 사용 덱',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '방금 추가한 덱을 다시 선택해 입력 속도를 유지합니다.',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: widget.recentDeckNames
+                        .map(
+                          (deckName) => ChoiceChip(
+                            label: Text(deckName),
+                            selected: _deckController.text.trim() == deckName,
+                            onSelected: (_) =>
+                                setState(() => _deckController.text = deckName),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+        if (widget.recentEntries.isNotEmpty) ...[
+          const SizedBox(height: 12),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('최근 입력', style: Theme.of(context).textTheme.titleMedium),
+                  const SizedBox(height: 8),
+                  Text(
+                    '직전 입력을 불러와 비슷한 카드를 빠르게 이어서 만들 수 있습니다.',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  const SizedBox(height: 8),
+                  for (final entry in widget.recentEntries)
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.history),
+                      title: Text(entry.word),
+                      subtitle: Text('${entry.meaningKo} · ${entry.deckName}'),
+                      trailing: TextButton(
+                        onPressed: () => _applyRecentEntry(entry),
+                        child: const Text('다시 입력'),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+        ],
         if (_lastSavedWord != null) ...[
           const SizedBox(height: 12),
           Card(
@@ -181,21 +268,29 @@ class _AddScreenState extends State<AddScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.edit_note, color: Theme.of(context).colorScheme.primary),
+                      Icon(
+                        Icons.edit_note,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                       const SizedBox(width: 8),
-                      Text('직접 입력', style: Theme.of(context).textTheme.titleMedium),
+                      Text(
+                        '직접 입력',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
                     ],
                   ),
                   const SizedBox(height: 12),
                   TextFormField(
                     controller: _wordController,
+                    focusNode: _wordFocusNode,
                     decoration: const InputDecoration(
                       labelText: '앞면',
                       hintText: '예: resilient',
                       border: OutlineInputBorder(),
                     ),
-                    validator: (value) =>
-                        value == null || value.trim().isEmpty ? '앞면을 입력해 주세요.' : null,
+                    validator: (value) => value == null || value.trim().isEmpty
+                        ? '앞면을 입력해 주세요.'
+                        : null,
                   ),
                   const SizedBox(height: 12),
                   TextFormField(
@@ -205,8 +300,9 @@ class _AddScreenState extends State<AddScreen> {
                       hintText: '예: 회복력이 있는',
                       border: OutlineInputBorder(),
                     ),
-                    validator: (value) =>
-                        value == null || value.trim().isEmpty ? '뒷면을 입력해 주세요.' : null,
+                    validator: (value) => value == null || value.trim().isEmpty
+                        ? '뒷면을 입력해 주세요.'
+                        : null,
                   ),
                   const SizedBox(height: 12),
                   TextFormField(
@@ -216,8 +312,9 @@ class _AddScreenState extends State<AddScreen> {
                       hintText: '예: 여행 영어',
                       border: OutlineInputBorder(),
                     ),
-                    validator: (value) =>
-                        value == null || value.trim().isEmpty ? '덱 이름을 입력해 주세요.' : null,
+                    validator: (value) => value == null || value.trim().isEmpty
+                        ? '덱 이름을 입력해 주세요.'
+                        : null,
                   ),
                   const SizedBox(height: 12),
                   FilledButton.icon(
