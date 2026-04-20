@@ -26,7 +26,9 @@ void main() {
     expect(find.textContaining('진행: 1 /'), findsOneWidget);
   });
 
-  testWidgets('Today session controls can reset progress and switch target', (WidgetTester tester) async {
+  testWidgets('Today session controls can reset progress and switch target', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
@@ -44,12 +46,15 @@ void main() {
     expect(find.textContaining('진행: 0 / 60'), findsOneWidget);
   });
 
-  testWidgets('Swipe gestures advance card (left=known, right=again)', (WidgetTester tester) async {
+  testWidgets('Swipe gestures advance card (left=known, right=again)', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
     final card = find.byWidgetPredicate(
-      (widget) => widget is GestureDetector && widget.onHorizontalDragStart != null,
+      (widget) =>
+          widget is GestureDetector && widget.onHorizontalDragStart != null,
     );
     expect(find.textContaining('진행: 0 /'), findsOneWidget);
 
@@ -61,7 +66,8 @@ void main() {
     // Right swipe => dont know
     await tester.drag(
       find.byWidgetPredicate(
-        (widget) => widget is GestureDetector && widget.onHorizontalDragStart != null,
+        (widget) =>
+            widget is GestureDetector && widget.onHorizontalDragStart != null,
       ),
       const Offset(220, 0),
     );
@@ -85,7 +91,9 @@ void main() {
     expect(find.textContaining('헷갈림 1건'), findsOneWidget);
   });
 
-  testWidgets('Insights shows current deck progress and remaining cards', (WidgetTester tester) async {
+  testWidgets('Insights shows current deck progress and remaining cards', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
@@ -112,7 +120,9 @@ void main() {
     expect(find.text('29장'), findsOneWidget);
   });
 
-  testWidgets('Insights weak summary can open Decks tab', (WidgetTester tester) async {
+  testWidgets('Insights weak summary can open Decks tab', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
@@ -146,7 +156,9 @@ void main() {
     expect(find.text('중2 초급 영어'), findsOneWidget);
   });
 
-  testWidgets('Insights shows recent change and next review cards', (WidgetTester tester) async {
+  testWidgets('Insights shows recent change and next review cards', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
@@ -164,7 +176,9 @@ void main() {
     expect(find.textContaining('예상:'), findsWidgets);
   });
 
-  testWidgets('Add tab validates, saves a card, and can move to Today', (WidgetTester tester) async {
+  testWidgets('Add tab validates, saves a card, and can move to Today', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
@@ -206,7 +220,9 @@ void main() {
       160,
       scrollable: find.byType(Scrollable).last,
     );
-    final savePressedAfterInput = tester.widget<FilledButton>(saveButton).onPressed;
+    final savePressedAfterInput = tester
+        .widget<FilledButton>(saveButton)
+        .onPressed;
     expect(savePressedAfterInput, isNotNull);
     savePressedAfterInput!();
     await tester.pumpAndSettle();
@@ -221,7 +237,9 @@ void main() {
     expect(find.text('천자문 입문'), findsWidgets);
   });
 
-  testWidgets('Deck detail can start Today and reflects custom card count', (WidgetTester tester) async {
+  testWidgets('Deck detail can start Today and reflects custom card count', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
@@ -260,7 +278,9 @@ void main() {
     expect(find.textContaining('진행: 0 /'), findsOneWidget);
   });
 
-  testWidgets('Decks shows Cheonjamun sample deck and can study it', (WidgetTester tester) async {
+  testWidgets('Decks shows Cheonjamun sample deck and can study it', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
@@ -279,7 +299,9 @@ void main() {
     expect(find.text('天'), findsOneWidget);
   });
 
-  testWidgets('Decks can include multiple decks in today study queue', (WidgetTester tester) async {
+  testWidgets('Decks can include multiple decks in today study queue', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
@@ -296,7 +318,9 @@ void main() {
     expect(find.text('중2 초급 영어 + 천자문 입문 · Iteration 1 리뷰 빌드'), findsOneWidget);
   });
 
-  testWidgets('Insights action can move back to Today with KPI cards visible', (WidgetTester tester) async {
+  testWidgets('Insights action can move back to Today with KPI cards visible', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
@@ -333,7 +357,9 @@ void main() {
     expect(find.textContaining('진행: 1 /'), findsOneWidget);
   });
 
-  testWidgets('Profile shows trust summary and can resume Today', (WidgetTester tester) async {
+  testWidgets('Profile shows trust summary and can resume Today', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const RepeatoApp());
     await tester.pumpAndSettle();
 
@@ -356,5 +382,68 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.textContaining('진행: 1 /'), findsOneWidget);
+  });
+
+  testWidgets('Add shows recent decks and recent entries after save', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const RepeatoApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Add').last);
+    await tester.pumpAndSettle();
+
+    final fields = find.byType(TextFormField);
+    await tester.enterText(fields.at(0), 'portable');
+    await tester.enterText(fields.at(1), '휴대용의');
+    await tester.enterText(fields.at(2), '여행 영어');
+    tester.testTextInput.hide();
+    await tester.pumpAndSettle();
+
+    final saveButton = find.widgetWithText(FilledButton, '카드 저장');
+    await tester.scrollUntilVisible(
+      saveButton,
+      160,
+      scrollable: find.byType(Scrollable).last,
+    );
+    final savePressed = tester.widget<FilledButton>(saveButton).onPressed;
+    expect(savePressed, isNotNull);
+    savePressed!();
+    await tester.pumpAndSettle();
+
+    expect(find.text('최근 사용 덱'), findsOneWidget);
+    expect(find.widgetWithText(ChoiceChip, '여행 영어'), findsOneWidget);
+    expect(find.text('최근 입력'), findsOneWidget);
+    expect(find.text('휴대용의 · 여행 영어'), findsOneWidget);
+
+    final savedFields = find.byType(TextFormField);
+    expect(
+      tester.widget<TextFormField>(savedFields.at(0)).controller!.text,
+      isEmpty,
+    );
+    expect(
+      tester.widget<TextFormField>(savedFields.at(1)).controller!.text,
+      isEmpty,
+    );
+    expect(
+      tester.widget<TextFormField>(savedFields.at(2)).controller!.text,
+      '여행 영어',
+    );
+
+    await tester.tap(find.text('다시 입력').first);
+    await tester.pumpAndSettle();
+
+    expect(
+      tester.widget<TextFormField>(savedFields.at(0)).controller!.text,
+      'portable',
+    );
+    expect(
+      tester.widget<TextFormField>(savedFields.at(1)).controller!.text,
+      '휴대용의',
+    );
+    expect(
+      tester.widget<TextFormField>(savedFields.at(2)).controller!.text,
+      '여행 영어',
+    );
   });
 }
