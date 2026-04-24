@@ -29,12 +29,12 @@
 5. 필수 참조 문서 링크 정리
 6. Git 상태와 GitHub tracking 상태 정리
 7. snapshot 문서를 `doc/work`에 저장
-8. `doc/context-log.md`와 `doc/next-actions.md`에 반영
+8. `doc/context/context-log.md`와 `doc/context/next-actions.md`에 반영
 
 ## 4. resume 표준 절차
 1. 최신 resume snapshot 문서 확인
-2. `doc/next-actions.md` 확인
-3. `doc/context-log.md` 확인
+2. `doc/context/next-actions.md` 확인
+3. `doc/context/context-log.md` 확인
 4. GitHub 인증 상태 확인
 5. 현재 브랜치/issue/PR 상태 확인
 6. 다음 작업 1개 선택

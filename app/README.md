@@ -1,5 +1,8 @@
 # Repeato App
 
+## Canonical Guide
+- 제품 기동/사용 기준 문서: [`doc/work/repeato-product-run-guide-v1.md`](../doc/work/repeato-product-run-guide-v1.md)
+
 ## Local Run
 - `flutter pub get`
 - `flutter run`
@@ -9,7 +12,7 @@
 - `flutter analyze`
 
 ## GitHub Pages Preview
-- GitHub Pages workflow: [`.github/workflows/pages.yml`](/Users/sungchulkang/workspace/my/repeato/.github/workflows/pages.yml)
+- GitHub Pages workflow: [`.github/workflows/pages.yml`](../.github/workflows/pages.yml)
 - Web build command:
   - `flutter build web --release --base-href "/repeato/"`
 - 배포가 `main` 브랜치에 반영되면 GitHub Pages에서 웹 앱으로 확인할 수 있다.

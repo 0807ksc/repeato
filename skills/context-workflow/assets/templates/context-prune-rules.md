@@ -1,16 +1,16 @@
-# Context Prune Rules
+# 컨텍스트 정리 규칙
 
-## Keep
-- Unresolved questions needed for next execution step
-- Active assumptions that still require validation
-- Blocking dependencies not yet resolved
+## 유지
+- 다음 실행 단계에 필요한 미해결 질문
+- 아직 검증이 필요한 활성 가정
+- 아직 해결되지 않은 차단 의존성
 
-## Remove or Move
-- Move confirmed decisions to `doc/context-log.md`
-- Move unfinished executable tasks to `doc/next-actions.md`
-- Remove duplicates, stale guesses, and resolved notes
+## 제거 또는 이동
+- 확정된 결정은 `doc/context/context-log.md`로 이동
+- 미완료 실행 작업은 `doc/context/next-actions.md`로 이동
+- 중복, 오래된 추정, 해결된 메모는 제거
 
-## Prune Checklist
-1. Remove completed or irrelevant temporary notes.
-2. Ensure unresolved items are actionable.
-3. Confirm inbox is minimal before closing the task.
+## 정리 체크리스트
+1. 완료되었거나 관련 없는 임시 메모를 제거한다.
+2. 미해결 항목이 실제로 실행 가능한지 확인한다.
+3. 작업 종료 전에 inbox가 최소 상태인지 확인한다.

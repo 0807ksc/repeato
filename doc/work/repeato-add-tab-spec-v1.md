@@ -7,7 +7,7 @@
 - 범위: `Add` 탭 상세 기획, UX, 앱/서버 연동 검토, 검증 질문
 - 통합 대상:
   - `doc/work/repeato-menu-and-screen-spec-v1.md`의 `3.3 Add`
-  - `doc/plan-checklist.md`의 카드 템플릿 관련 항목
+  - `doc/reference/plan-checklist.md`의 카드 템플릿 관련 항목
 
 ## 1. 작업 프레임
 - 기본 Agent 세트: `PM + Product Designer + Technical Architect + Frontend Engineer + QA Engineer + Education Specialist`
@@ -90,5 +90,5 @@
 - 저장 후 학습으로 이어지는 복귀 경로를 명시한다.
 
 ## 9. 후속 작업
-1. 카드 템플릿 필드 정의를 `doc/plan-checklist.md`에 확정 반영한다.
+1. 카드 템플릿 필드 정의를 `doc/reference/plan-checklist.md`에 확정 반영한다.
 2. 대량 가져오기 중복 규칙을 서버 저장 모델과 맞춘다.

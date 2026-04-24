@@ -80,3 +80,18 @@
 4. GitHub auth readiness checklist
 5. coverage 70% validator / report helper
 6. backup/resume helper script
+
+## 7. 현재 경계 판단(`doc/work` vs `skills`)
+- `doc/work`:
+  - Repeato 전용 정책, 버전이 있는 운영 규칙, 회의 결과, 조직 결정, GitHub tracking 절차를 계속 보존한다.
+- 루트 `README.md`:
+  - 사람이 가장 먼저 읽는 진입 문서로 유지한다.
+- `skills/context-workflow`:
+  - 다른 저장소에도 재사용 가능한 공통 workflow만 둔다.
+- `skills/repeato-workflow`:
+  - Repeato 저장소에서 반복 실행하는 얇은 Codex 지침만 둔다.
+
+결론:
+- 기존 `doc/work` 문서를 통째로 skill로 옮기지 않는다.
+- 권위 문서는 `doc/work` 에 남기고, 반복 실행 규칙만 skill로 추출한다.
+- 사용자의 자연어 요청을 받아 요구사항을 정리하는 시작 단계는 문서보다 우선하며, 문서는 그 결과를 기록하는 역할로 유지한다.

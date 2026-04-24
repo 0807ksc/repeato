@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repeato Backup Resume"
+  short_description: "Create snapshot and resume packets safely"
+  default_prompt: "Use $repeato-backup-resume to draft a resume snapshot or print the restart checklist for the current Repeato session."

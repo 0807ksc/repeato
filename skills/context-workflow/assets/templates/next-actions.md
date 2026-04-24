@@ -1,6 +1,6 @@
-# Next Actions
+# 다음 작업
 
-## Priority Queue
+## 우선순위 큐
 1. [ ] (P1) 
 2. [ ] (P2) 
 3. [ ] (P3) 
@@ -8,5 +8,5 @@
 ## Blocked
 - 
 
-## Done in This Iteration
+## 이번 반복에서 완료
 - 

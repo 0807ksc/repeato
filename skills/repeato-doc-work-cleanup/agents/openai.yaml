@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repeato Doc Cleanup"
+  short_description: "Classify doc/work files and archive candidates"
+  default_prompt: "Use $repeato-doc-work-cleanup to classify doc/work files as Active, Archived, or Issue-managed and prepare the index updates."

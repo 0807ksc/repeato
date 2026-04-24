@@ -2,21 +2,42 @@
 
 ## Priority Queue
 1. [ ] (P1) `#STAGE-C #TASK-DATA #TASK-TAB #ORG-PM #ORG-DATA #ORG-ARCH` `Insights` 차트형 확장 전 이벤트 스키마(`deck_progress`, `weak_area_summary`, `trend_delta`, `next_due_bucket`) 정의
-2. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-ARCH #ORG-QA` `Add` 2차 반복: 입력 히스토리/최근 덱 제안/저장 후 재입력 흐름 고도화
-3. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DESIGN #ORG-QA` `Profile`에 다중 덱 Today 상태와 목표/신뢰 요약 연결 강화
-4. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DESIGN #ORG-QA` `Profile` 2차 반복: 목표 카드 수 설정과 전역 상태 키 연결 검토
+2. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DESIGN #ORG-QA` `Profile`에 다중 덱 Today 상태와 목표/신뢰 요약 연결 강화
+3. [ ] (P1) `#STAGE-D #TASK-TAB #TASK-APP #ORG-FE #ORG-DESIGN #ORG-QA` `Profile` 2차 반복: 목표 카드 수 설정과 전역 상태 키 연결 검토
 5. [ ] (P1) `#STAGE-C #TASK-DATA #TASK-APP #ORG-ARCH #ORG-DATA #ORG-FE` Flutter 로컬 SQLite 저장 계층과 도메인 모델 설계안을 코드 구조로 내리기 (`doc/work/repeato-local-first-architecture-v1.md`)
 5. [ ] (P1) `#STAGE-C #TASK-WORKFLOW #ORG-WF-ARCH #ORG-WF-LIB #ORG-WF-AUTO #ORG-PM` workflow 조직 세션 기준 문서 유지 및 coverage 70% 운영 규칙을 다음 개발 이슈/PR에 계속 적용
-6. [ ] (P1) `#STAGE-B #TASK-LEARNING #TASK-TAB #ORG-PM #ORG-DESIGN #ORG-EDU #ORG-COG` 카드 템플릿/정답 판정/세션 규칙과 공통 상태 키 확정 (`doc/plan-checklist.md` + `doc/work/repeato-cross-tab-conflict-review-v1.md`)
+6. [ ] (P1) `#STAGE-B #TASK-LEARNING #TASK-TAB #ORG-PM #ORG-DESIGN #ORG-EDU #ORG-COG` 카드 템플릿/정답 판정/세션 규칙과 공통 상태 키 확정 (`doc/reference/plan-checklist.md` + `doc/work/repeato-cross-tab-conflict-review-v1.md`)
 7. [ ] (P1) `#STAGE-C #TASK-DATA #ORG-PM #ORG-DATA #ORG-ARCH` KPI/이벤트 스키마 확정 후 `Insights` 2차 구현 착수 (`doc/work/repeato-insights-tab-spec-v1.md`)
 6. [ ] (P2) `#STAGE-E #TASK-SYNC #TASK-SERVERLESS #ORG-DATA #ORG-SEC #ORG-SRE` 동기화/결제는 기획안 유지, Google Drive 기반 서버리스안 상세 검토만 진행
 7. [ ] (P2) `#STAGE-B #TASK-TAB #ORG-PM #ORG-DESIGN #ORG-QA` 각 탭 사용자 확인 질문을 인터뷰 스크립트로 전환하고 실제 피드백 수집
+8. [ ] (P2) `#STAGE-B #TASK-TAB #TASK-SYNC #TASK-COMMERCE #ORG-PM #ORG-DESIGN #ORG-DATA` Marketplace에서 학습 데이터 탐색/가져오기 흐름 기획
+9. [ ] (P2) `#STAGE-C #TASK-APP #TASK-DATA #ORG-ARCH #ORG-FE #ORG-DATA #ORG-QA` 앱 재실행 후 덱/세션/최근 입력을 유지하는 로컬 영속 저장 구조 정의
+10. [ ] (P2) `#STAGE-C #TASK-WORKFLOW #ORG-WF-ARCH #ORG-WF-LIB #ORG-PM` `doc/work` 문서를 `active/archive/issue-managed` 기준으로 재분류하고 GitHub issue canonical source 링크 정리
+10. [ ] (P3) `#STAGE-D #TASK-TAB #ORG-FE #ORG-DESIGN #ORG-QA` 리뷰용 임시 문구(`Iteration 1 리뷰 빌드`, `리뷰 설명`, `Deck Detail`) 사용자 노출 정리
 
 ## Blocked
 - 결제/동기화 서버 범위는 플랫폼 결정(iOS/Android/백엔드 방식) 후 확정 필요
 - Flutter line coverage 측정/기록 방식은 다음 개발 이슈에서 실제 명령과 보고 포맷을 고정할 필요가 있음
 
 ## Done in This Iteration
+- `review-repeato-product` repo-local skill 골격 생성
+- `doc` 구조를 `agents/reference/context/work` 기준으로 재정렬하고 관련 참조 경로를 갱신
+- `doc/work/archive/` 경로와 GitHub issue 우선 spec 운영 규칙 추가
+- 제품 기동/사용 canonical guide 문서 추가(`doc/work/repeato-product-run-guide-v1.md`)
+- 현재 세션 제품 테스트 결과 및 요구사항 후보 문서 추가(`doc/work/repeato-product-review-2026-04-04-v1.md`)
+- 루트 `README.md` 추가: Repeato workflow 그림, 대화형 시작 방식, 단계별 작업/리소스/에이전트 설명, doc/work vs skill 경계 정리
+- `skills/repeato-workflow` 추가: Repeato 전용 얇은 workflow skill 작성
+- `doc/reference/repeato-workflow.md`, `doc/reference/context-workflow.md`, `doc/work/repeato-delivery-organization-v1.md`, `doc/work/repeato-github-tracking-workflow-v1.md`, `doc/work/repeato-workflow-extraction-v1.md`에 대화형 intake 및 자동 배정 규칙 반영
+- `AGENTS.md`, `doc/agents/app-agent-organization.md`, `doc/agents/repeato-agent-extension.md`, `doc/reference/context-workflow.md`, `doc/reference/repeato-workflow.md` 사용자 노출 문구 한국어화
+- `skills/context-workflow` 패키지 본문/템플릿/참조 문서 한국어화
+- `skills/context-workflow/scripts/init_context_workflow.sh` 실행 검증 완료
+- `Add` 2차 반복 이슈 생성(`#23`) 및 브랜치 생성(`feat/23-add-second-iteration`)
+- `Add`에 최근 사용 덱 제안 추가
+- `Add`에 최근 입력 재사용 UI 추가
+- 저장 후 마지막 선택 덱 유지 흐름 반영
+- `flutter analyze` 통과
+- `flutter test --coverage` 통과
+- 라인 커버리지 `92.22%` 확인
 - `Insights`에 `최근 변화` 카드 추가
 - `Insights`에 `다음 복습 시점` 카드 추가
 - 다중 덱 Today 큐 구조 도입
@@ -86,8 +107,8 @@
 - `flutter test`, `flutter analyze` 실행 및 기준 통과 확인
 - PM 오케스트레이션 기준 문서 추가(`doc/work/repeato-tab-orchestration-v1.md`)
 - `Decks`, `Add`, `Insights`, `Profile` 탭 상세 문서 추가
-- `AGENTS.md`와 `doc/app-agent-organization.md`에 병렬 탭 조율/조건부 Backend 참여 규칙 반영
-- `doc/project-context.md`, `doc/work/index.md`, 메뉴 스펙 문서에 탭별 상세 참조 추가
+- `AGENTS.md`와 `doc/agents/app-agent-organization.md`에 병렬 탭 조율/조건부 Backend 참여 규칙 반영
+- `doc/reference/project-context.md`, `doc/work/index.md`, 메뉴 스펙 문서에 탭별 상세 참조 추가
 - 저장소 상태 점검 완료(현재 상태/미완료 지점/다음 3개 작업 제안)
 - 중2 초급 영어 초기버전 앱 구현(`app/lib/main.dart`) 완료
 - PDF 기반 120단어 데이터셋 생성(`app/assets/data/m2_beginner_words.json`)
@@ -98,40 +119,40 @@
 - Case 1(단일 앱 + 인앱콘텐츠) 권고안 확정 및 인덱스 반영
 - 핵심 사용자 인터뷰 결과 문서 추가(`doc/work/repeato-user-interview-001.md`)
 - 메뉴/화면 스펙에 인터뷰 반영(중2 시작, 7:3 비율, 여행 우선, 약한 리마인드)
-- `doc/work/index.md`, `doc/project-context.md`에 인터뷰 문서 인덱스 연결
+- `doc/work/index.md`, `doc/reference/project-context.md`에 인터뷰 문서 인덱스 연결
 - Repeato 탭바 아이콘 v1 생성(SVG 5종 + manifest)
 - 아이콘 시스템 문서 추가(`doc/work/repeato-tab-icon-system-v1.md`)
 - Flutter 앱 적용 스크립트 추가(`scripts/install_repeato_tab_icons.sh`)
 - Repeato 필수 메뉴/화면 상세 설계 문서 추가(`doc/work/repeato-menu-and-screen-spec-v1.md`)
-- `doc/work/index.md`, `doc/project-context.md`에 메뉴 설계 문서 인덱스 연결
+- `doc/work/index.md`, `doc/reference/project-context.md`에 메뉴 설계 문서 인덱스 연결
 - Flutter 로컬 개발환경 스크립트 5종 추가(`scripts/*.sh`)
 - `doc/work/flutter-local-dev-setup-v1.md` 작성 및 work index 연결
 - `project-context` 인덱스에 Flutter 환경 가이드 참조 추가
 - `doc/work` 보존 정책 도입 및 `doc/work/index.md` 추가
 - Repeato 헌법 본문을 `doc/work/repeato-constitution-v1.md`로 분리
-- `doc/project-context.md`를 상세 본문 중심에서 인덱스 허브로 전환
-- `AGENTS.md`/`doc/context-workflow.md`에 `doc/work` 운영 규칙 반영
+- `doc/reference/project-context.md`를 상세 본문 중심에서 인덱스 허브로 전환
+- `AGENTS.md`/`doc/reference/context-workflow.md`에 `doc/work` 운영 규칙 반영
 - Repeato 기획 1~6 항목을 전 Agent 회의체 3차 검토 결과로 확정
-- `doc/project-context.md`에 Repeato 헌법(회의체/3차 검토/최종 결론) 추가
+- `doc/reference/project-context.md`에 Repeato 헌법(회의체/3차 검토/최종 결론) 추가
 - `AGENTS.md`에 Repeato 헌법 운영 규칙(3차 회의체 의무) 추가
 - 프롬프트 입력 후 강제 파이프라인 규칙 추가(사전검토 -> 설계계획 -> 구현 -> 사후검토 -> QA)
-- `doc/app-agent-organization.md`에 필수 게이트 상세 절차 추가
-- `AGENTS.md`와 `doc/context-workflow.md`에 강제 게이트 연결
+- `doc/agents/app-agent-organization.md`에 필수 게이트 상세 절차 추가
+- `AGENTS.md`와 `doc/reference/context-workflow.md`에 강제 게이트 연결
 - `skills/context-workflow` 템플릿에 동일 파이프라인 반영
 - 프롬프트 기반 강제 협업 파이프라인 추가(사전검토/설계계획/사후검토/QA)
-- `AGENTS.md`/`doc/app-agent-organization.md`/`doc/context-workflow.md` 파이프라인 동기화
+- `AGENTS.md`/`doc/agents/app-agent-organization.md`/`doc/reference/context-workflow.md` 파이프라인 동기화
 - `skills/context-workflow` 템플릿에도 동일 강제 게이트 반영
-- 공통 앱 Agent 조직 문서 추가(`doc/app-agent-organization.md`)
-- Repeato 전용 전문가 Agent 확장 문서 추가(`doc/repeato-agent-extension.md`)
-- 작업별 Agent 호출 규칙을 `AGENTS.md`/`doc/context-workflow.md`/`doc/repeato-workflow.md`에 연결
+- 공통 앱 Agent 조직 문서 추가(`doc/agents/app-agent-organization.md`)
+- Repeato 전용 전문가 Agent 확장 문서 추가(`doc/agents/repeato-agent-extension.md`)
+- 작업별 Agent 호출 규칙을 `AGENTS.md`/`doc/reference/context-workflow.md`/`doc/reference/repeato-workflow.md`에 연결
 - `skills/context-workflow` 템플릿에 공통 Agent 조직 포함
 - 요청 자동 분류 규칙 추가(`workflow 반영` vs `Repeato 반영`)
-- `AGENTS.md`/`doc/context-workflow.md`/`doc/repeato-workflow.md` 분류 규칙 동기화
+- `AGENTS.md`/`doc/reference/context-workflow.md`/`doc/reference/repeato-workflow.md` 분류 규칙 동기화
 - `skills/context-workflow` 스킬 패키지 추가(SKILL/스크립트/템플릿/agent integration)
-- `doc/context-workflow.md`에 skill/agent 재사용 섹션 추가
-- Repeato 전용 작업 흐름 분리(`doc/repeato-workflow.md`)
-- `doc/context-workflow.md`를 재사용 가능한 공통 표준으로 개편
+- `doc/reference/context-workflow.md`에 skill/agent 재사용 섹션 추가
+- Repeato 전용 작업 흐름 분리(`doc/reference/repeato-workflow.md`)
+- `doc/reference/context-workflow.md`를 재사용 가능한 공통 표준으로 개편
 - `AGENTS.md`에 Repeato 전용 흐름 참조 추가
-- `doc/plan-checklist.md`를 project-context 기준으로 재정렬
+- `doc/reference/plan-checklist.md`를 project-context 기준으로 재정렬
 - 컨텍스트 운영 문서 5종 추가(`workflow/inbox/log/next-actions/prune-rules`)
 - `AGENTS.md`에 컨텍스트 관리 프로토콜 고정

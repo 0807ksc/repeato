@@ -254,6 +254,47 @@
   - `#STAGE-C #TASK-DATA #ORG-ARCH #ORG-DATA`
   - `#STAGE-F #TASK-QA #ORG-QA #ORG-FE`
 
+## 4.1 자동 배정 규칙
+- 사용자가 태그나 담당 조직을 직접 선택하지 않아도 된다.
+- 요구사항이 대화로 정리되면 에이전트가 아래 기준으로 단계/작업/조직을 자동 배정한다.
+
+### 자동 배정 순서
+1. 요청이 기능 구현, 정책 변경, 데이터 구조, 동기화/결제, workflow 변경 중 어디에 가까운지 판단한다.
+2. 그 요청에 맞는 기본 `Stage`와 `Task`를 고른다.
+3. 필수 조직을 붙이고, 서버 의존성/보안 민감성/학습 정책 여부에 따라 조건부 조직을 추가한다.
+
+### 기본 매핑
+- 화면/탭/UX/문구/플로우 요청:
+  - Stage: `#STAGE-B` 또는 `#STAGE-D`
+  - Task: `#TASK-TAB`
+  - Org: `#ORG-PM`, `#ORG-DESIGN`, 개발이면 `#ORG-FE`, 항상 `#ORG-QA`
+- 학습 정책/간격표/오답 규칙/난이도 요청:
+  - Stage: `#STAGE-B`
+  - Task: `#TASK-LEARNING`
+  - Org: `#ORG-PM`, `#ORG-EDU`, `#ORG-COG`, `#ORG-ARCH`
+- SQLite/상태 모델/앱 구조/세션 복원 요청:
+  - Stage: `#STAGE-C`
+  - Task: `#TASK-APP`, 필요시 `#TASK-DATA`
+  - Org: `#ORG-ARCH`, `#ORG-FE`, `#ORG-DATA`
+- 동기화/가져오기/결제/서버 연동 요청:
+  - Stage: `#STAGE-C` 또는 `#STAGE-E`
+  - Task: `#TASK-SYNC`, `#TASK-SERVERLESS`, `#TASK-COMMERCE`
+  - Org: `#ORG-DATA`, `#ORG-SEC`, `#ORG-SRE`, 필요시 `#ORG-BE`
+- 테스트/회귀/품질 점검 요청:
+  - Stage: `#STAGE-F`
+  - Task: `#TASK-QA`
+  - Org: `#ORG-QA`, 필요시 `#ORG-FE`, `#ORG-PM`
+- workflow/템플릿/자동화 요청:
+  - Stage: `#STAGE-C`
+  - Task: `#TASK-WORKFLOW`
+  - Org: `#ORG-WF-ARCH`, `#ORG-WF-LIB`, `#ORG-WF-AUTO`
+
+### 조건부 추가 규칙
+- 서버 API, 인증, 외부 저장소, 결제 검증이 나오면 `#ORG-BE` 추가
+- 개인정보, 권한, 데이터 외부 반출이 나오면 `#ORG-SEC` 추가
+- 학습 효과, 간격, 난이도, 회상 규칙이 나오면 `#ORG-EDU`, `#ORG-COG` 추가
+- 병렬 탭 작업이면 `#ORG-PM`을 오케스트레이터로 유지
+
 ## 5. 현재 활성 조직 배치
 
 ### 5.1 현재 기준 오너십

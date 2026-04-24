@@ -82,6 +82,6 @@
 - 인증 복구 후 바로 적용 가능
 
 ## 8. 인증 blocked 시 임시 규칙
-- `doc/context-log.md`에 `GitHub issue pending` 상태를 기록한다.
+- `doc/context/context-log.md`에 `GitHub issue pending` 상태를 기록한다.
 - 실제 구현 시작 전 또는 최소 PR 전에는 GitHub 이슈를 복구 생성한다.
 - 인증 전까지는 로컬 브랜치 생성과 문서 준비까지만 허용한다.

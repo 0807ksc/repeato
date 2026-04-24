@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repeato Product Reviewer"
+  short_description: "Repeato를 실행해 테스트하고 개선 요구를 도출"
+  default_prompt: "Use $review-repeato-product to launch the current Repeato app, exercise key user flows, and propose the next requirements."

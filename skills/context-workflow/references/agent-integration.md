@@ -1,23 +1,23 @@
-# Agent Integration
+# 에이전트 통합
 
-Use this block in `AGENTS.md` to make the workflow reusable at agent level.
+아래 블록을 `AGENTS.md`에 넣으면 워크플로우를 에이전트 레벨에서 재사용할 수 있다.
 
 ```md
-## Context Management Protocol (Always Apply)
-- Project workflow: `doc/<project>-workflow.md`
-- Standard workflow: `doc/context-workflow.md`
-- Temporary context: `doc/context-inbox.md`
-- Decision log: `doc/context-log.md`
-- Next-action queue: `doc/next-actions.md`
-- Pruning rules: `doc/context-prune-rules.md`
+## 컨텍스트 관리 프로토콜(항상 적용)
+- 프로젝트 워크플로우: `doc/reference/<project>-workflow.md`
+- 표준 워크플로우: `doc/reference/context-workflow.md`
+- 임시 컨텍스트: `doc/context/context-inbox.md`
+- 결정 로그: `doc/context/context-log.md`
+- 다음 작업 큐: `doc/context/next-actions.md`
+- 정리 규칙: `doc/context/context-prune-rules.md`
 
-Working rules:
-- At task start, summarize the request in `doc/context-inbox.md`.
-- Record meaningful decisions in `doc/context-log.md`.
-- Move unfinished work into `doc/next-actions.md` with priority.
-- Before ending task, prune inbox and keep only unresolved items.
+작업 규칙:
+- 작업 시작 시 요청을 `doc/context/context-inbox.md`에 요약한다.
+- 유의미한 결정을 `doc/context/context-log.md`에 기록한다.
+- 미완료 작업을 우선순위와 함께 `doc/context/next-actions.md`로 옮긴다.
+- 작업 종료 전 inbox를 정리하고 미해결 항목만 남긴다.
 ```
 
-Project-specific notes:
-- Keep product/domain rules in `doc/<project>-workflow.md`.
-- Keep `doc/context-workflow.md` product-agnostic so it can be copied to other repos.
+프로젝트 전용 메모:
+- 제품/도메인 규칙은 `doc/reference/<project>-workflow.md`에 둔다.
+- `doc/reference/context-workflow.md`는 제품 비종속적으로 유지해 다른 저장소로 복사 가능하게 한다.

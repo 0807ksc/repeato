@@ -15,8 +15,8 @@
 - 현재 스프린트와 무관한 아이디어
 
 ## 정리 루틴
-1. `doc/context-inbox.md`를 위에서 아래로 읽는다.
+1. `doc/context/context-inbox.md`를 위에서 아래로 읽는다.
 2. “유효/이관/삭제”로 라벨링한다.
-3. 유효하지만 결정된 항목은 `doc/context-log.md`로 이동한다.
-4. 다음 작업이 필요한 항목은 `doc/next-actions.md`에 옮긴다.
+3. 유효하지만 결정된 항목은 `doc/context/context-log.md`로 이동한다.
+4. 다음 작업이 필요한 항목은 `doc/context/next-actions.md`에 옮긴다.
 5. inbox에는 미해결 임시 항목만 남긴다.

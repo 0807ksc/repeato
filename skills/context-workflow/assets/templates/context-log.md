@@ -1,17 +1,17 @@
-# Context Log (Decisions)
+# 컨텍스트 로그(결정)
 
-## Template
-- Date:
-- Decision:
-- Rationale:
-- Impact Scope:
-- Follow-up:
+## 템플릿
+- 날짜:
+- 결정:
+- 근거:
+- 영향 범위:
+- 후속 작업:
 
 ---
 
-## Entries
-- Date:
-- Decision:
-- Rationale:
-- Impact Scope:
-- Follow-up:
+## 항목
+- 날짜:
+- 결정:
+- 근거:
+- 영향 범위:
+- 후속 작업:

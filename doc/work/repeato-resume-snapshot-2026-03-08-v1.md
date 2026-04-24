@@ -34,8 +34,8 @@
 
 ## 4. resume 시작 절차
 1. 저장소 루트에서 현재 문서 기준 확인
-   - `doc/next-actions.md`
-   - `doc/context-log.md`
+   - `doc/context/next-actions.md`
+   - `doc/context/context-log.md`
    - `doc/work/repeato-iteration-001-loop-v1.md`
    - `doc/work/repeato-delivery-organization-v1.md`
    - `doc/work/repeato-github-tracking-workflow-v1.md`
@@ -76,11 +76,11 @@
 
 ## 8. 권장 백업 방식
 - 문서 백업:
-  - 이 문서 + `doc/context-log.md` + `doc/next-actions.md`
+  - 이 문서 + `doc/context/context-log.md` + `doc/context/next-actions.md`
 - 코드 백업:
   - Git branch 또는 commit
 - 재개 기준:
-  - 이 문서와 `doc/next-actions.md`를 단일 시작점으로 사용
+  - 이 문서와 `doc/context/next-actions.md`를 단일 시작점으로 사용
 
 ## 9. 마지막 backup 실행 기록
 - 실행일: 2026-03-08

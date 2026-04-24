@@ -7,7 +7,7 @@
 - 범위: `Decks` 탭 상세 기획, UX, 앱/서버 연동 검토, 검증 질문
 - 통합 대상:
   - `doc/work/repeato-menu-and-screen-spec-v1.md`의 `3.2 Decks`
-  - `doc/plan-checklist.md`의 멀티 트랙 정책 관련 항목
+  - `doc/reference/plan-checklist.md`의 멀티 트랙 정책 관련 항목
 
 ## 1. 작업 프레임
 - 기본 Agent 세트: `PM + Product Designer + Technical Architect + Frontend Engineer + QA Engineer`
