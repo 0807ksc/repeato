@@ -1,6 +1,6 @@
 # Repeato 요구사항 체크리스트 (project-context 정렬본)
 
-> 기준 문서: `doc/project-context.md`
+> 기준 문서: `doc/reference/project-context.md`
 > 목적: 초기 컨텍스트를 기준으로 “이미 결정된 항목”과 “정의가 필요한 항목”을 분리해 실행 가능한 백로그를 유지한다.
 
 ---
@@ -132,7 +132,7 @@ MVP-3:
 ---
 
 ## 10. 컨텍스트 운영 연동
-- 작업 중 임시 메모: `doc/context-inbox.md`
-- 결정/진행 로그: `doc/context-log.md`
-- 다음 작업 큐: `doc/next-actions.md`
-- 정리 규칙: `doc/context-prune-rules.md`
+- 작업 중 임시 메모: `doc/context/context-inbox.md`
+- 결정/진행 로그: `doc/context/context-log.md`
+- 다음 작업 큐: `doc/context/next-actions.md`
+- 정리 규칙: `doc/context/context-prune-rules.md`

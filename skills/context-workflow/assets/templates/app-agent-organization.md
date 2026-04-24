@@ -1,49 +1,49 @@
-# App Agent Organization (Common)
+# 앱 에이전트 조직(공통)
 
-## Purpose
-- Define reusable app development agent roles and collaboration protocol independent of product domain.
+## 목적
+- 제품 도메인과 무관하게 재사용 가능한 앱 개발 에이전트 역할과 협업 프로토콜을 정의한다.
 
-## Core Agents
-1. Product Manager Agent
-- Scope: goals, priorities, delivery scope
-- Outputs: PRD, backlog, release criteria
+## 핵심 에이전트
+1. 프로덕트 매니저 에이전트(PM)
+- 범위: 목표, 우선순위, 전달 범위
+- 산출물: PRD, 백로그, 릴리즈 기준
 
-2. Product Designer Agent
-- Scope: user flows and UI/UX specs
-- Outputs: flow map, wireframes, UI spec
+2. 프로덕트 디자이너 에이전트
+- 범위: 사용자 흐름, UI/UX 명세
+- 산출물: 플로우 맵, 와이어프레임, UI 명세
 
-3. Technical Architect Agent
-- Scope: architecture, API/data contracts, non-functional requirements
-- Outputs: architecture decision records, API contracts
+3. 테크니컬 아키텍트 에이전트
+- 범위: 아키텍처, API/데이터 계약, 비기능 요구사항
+- 산출물: 아키텍처 결정 기록, API 계약
 
-4. Frontend Engineer Agent
-- Scope: client implementation
-- Outputs: UI code, client tests
+4. 프런트엔드 엔지니어 에이전트
+- 범위: 클라이언트 구현
+- 산출물: UI 코드, 클라이언트 테스트
 
-5. Backend Engineer Agent
-- Scope: server/domain implementation
-- Outputs: server code, schema changes, API behavior
+5. 백엔드 엔지니어 에이전트
+- 범위: 서버/도메인 구현
+- 산출물: 서버 코드, 스키마 변경, API 동작
 
-6. QA Engineer Agent
-- Scope: quality gates and regression coverage
-- Outputs: test plan, test report, release verdict
+6. QA 엔지니어 에이전트
+- 범위: 품질 게이트와 회귀 커버리지
+- 산출물: 테스트 계획, 테스트 리포트, 릴리즈 판정
 
-7. DevOps/SRE Agent
-- Scope: CI/CD and operational readiness
-- Outputs: pipeline config, monitoring and runbook
+7. DevOps/SRE 에이전트
+- 범위: CI/CD와 운영 준비도
+- 산출물: 파이프라인 설정, 모니터링, 런북
 
-8. Data Analyst Agent
-- Scope: event model and product insights
-- Outputs: event schema, dashboard, analysis notes
+8. 데이터 분석가 에이전트
+- 범위: 이벤트 모델과 제품 인사이트
+- 산출물: 이벤트 스키마, 대시보드, 분석 메모
 
-9. Security/Privacy Agent
-- Scope: security and compliance checks
-- Outputs: risk checklist, mitigation actions
+9. 보안/프라이버시 에이전트
+- 범위: 보안 및 준수 점검
+- 산출물: 리스크 체크리스트, 완화 조치
 
-## Task Collaboration Flow (Mandatory)
-1. Pre-review gate: PM + Architect check spec conflicts and service intent fit.
-2. Planning gate: Architect defines detailed execution plan.
-3. Execution: Engineer + Designer implement based on the plan.
-4. Post-review gate: PM + Architect verify output against planning and architecture guidance.
-5. QA gate: QA executes tests and approves before completion.
-6. PM sign-off: close task and record next actions.
+## 작업 협업 흐름(필수)
+1. 사전 검토 게이트: PM + Architect가 스펙 충돌과 서비스 취지 적합성을 확인한다.
+2. 계획 게이트: Architect가 상세 실행 계획을 정의한다.
+3. 실행: Engineer + Designer가 계획에 따라 구현한다.
+4. 사후 검토 게이트: PM + Architect가 결과물을 계획과 아키텍처 지침에 맞춰 검증한다.
+5. QA 게이트: QA가 테스트를 수행하고 완료 전에 승인한다.
+6. PM 승인: 작업을 닫고 다음 액션을 기록한다.

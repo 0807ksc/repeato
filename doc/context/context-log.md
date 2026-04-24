@@ -10,6 +10,78 @@
 ---
 
 ## Entries
+- 날짜: 2026-04-19
+- 결정: `doc` 폴더는 `doc/agents`, `doc/reference`, `doc/context`, `doc/work` 4축으로 분리하고, `agent/reference/context` 문서는 각 전용 폴더로 이동한다.
+- 근거: 개발 workflow, agent/skill 참고 문서, 세션 로그 문서가 루트에 섞여 있어 탐색 비용이 높았고, 기능 단위 spec은 GitHub issue/PR을 우선 저장소로 두려는 운영 방향과도 맞지 않았기 때문이다.
+- 영향 범위: `AGENTS.md`, `README.md`, `doc/*`, `skills/context-workflow/*`, `skills/repeato-workflow/SKILL.md`.
+- 후속 작업: `doc/work` 문서를 active/archive/issue-managed 기준으로 재분류하고, GitHub issue가 canonical source인 로컬 spec 후보를 정리한다.
+
+- 날짜: 2026-04-04
+- 결정: 현재 제품을 기동/사용해 추가 요구사항을 도출하는 프로젝트 전용 skill은 repo-local `skills/` 아래에 만든다.
+- 근거: 이 skill은 Repeato 제품 구조, 실행 가이드, 테스트 포인트, workflow와 강하게 결합돼 있어 글로벌 공용 skill보다 저장소 전용 skill이 적합하기 때문이다.
+- 영향 범위: `skills/*`, `doc/work/*`, `doc/work/index.md`, `doc/reference/project-context.md`.
+- 후속 작업: skill 골격 생성, 제품 기동/사용 가이드 경로 고정, 실제 테스트 결과를 skill reference에 반영.
+
+- 날짜: 2026-04-04
+- 결정: 현재 제품 테스트는 `flutter` 실행 타깃이 실제로 존재하는지 확인한 뒤, 가능하면 제품 기동을 수행하고, 항상 정적/위젯 테스트 결과도 함께 참고하는 구조로 설계한다.
+- 근거: 사용자 요청은 실제 제품 사용을 요구하지만, 실행 환경에 따라 GUI 기동이 어려울 수 있으므로 기동 가능 타깃 확인과 자동 테스트를 함께 두는 것이 가장 현실적이다. 현재 환경에서는 `macOS`와 `Chrome` 타깃이 확인됐다.
+- 영향 범위: 제품 기동/사용 가이드 포맷, skill 절차, 테스트 증거 수집 방식.
+- 후속 작업: 제품 기동/사용 가이드 문서에 필수 실행 절차와 대체 검증 절차를 함께 명시한다.
+
+- 날짜: 2026-04-04
+- 결정: Repeato workflow의 시작점은 문서 작성이 아니라 사용자와의 대화형 요구사항 수집으로 바꾼다.
+- 근거: 사용자는 `새 요청 한 줄 요약 추가`를 문서에 먼저 쓰는 방식이 아니라 대화로 요구사항을 받고 이후 프로세스가 진행되길 원했다. 따라서 목표, 범위, 비범위, 제약사항, 성공 조건을 먼저 대화로 정리한 뒤 내부 기록을 남기는 구조가 더 자연스럽다.
+- 영향 범위: `README.md`, `AGENTS.md`, `doc/reference/context-workflow.md`, `doc/reference/repeato-workflow.md`, `skills/context-workflow/SKILL.md`, `skills/repeato-workflow/SKILL.md`.
+- 후속 작업: 실제 요청 수집 시 어떤 질문 세트가 가장 빠르게 요구사항을 정리하는지 사례를 모아 보강 검토.
+
+- 날짜: 2026-04-04
+- 결정: 단계 태그, 작업 태그, 담당 조직은 요구사항 정리 후 에이전트가 자동 배정하는 구조로 바꾼다.
+- 근거: 사용자는 `기준으로 단계 태그, 작업 태그, 담당 조직을 정한다`는 수동 절차 대신, 요구사항이 정리되면 다음 단계에서 자동으로 담당 조직이 정해지고 프로세스가 진행되길 원했다. 이를 위해 `doc/work/repeato-delivery-organization-v1.md`에 자동 매핑 규칙을 추가했다.
+- 영향 범위: `README.md`, `AGENTS.md`, `doc/reference/context-workflow.md`, `doc/reference/repeato-workflow.md`, `doc/work/repeato-delivery-organization-v1.md`.
+- 후속 작업: 실제 기능 요청 사례를 기반으로 자동 배정 규칙의 예외 케이스를 누적한다.
+
+- 날짜: 2026-04-04
+- 결정: Repeato workflow 설명용 문서는 루트 `README.md`를 진입점으로 추가하되, 권위 있는 상세 절차와 버전 문서는 계속 `doc/reference/repeato-workflow.md`, `doc/work/*`에 유지한다.
+- 근거: 사용자는 흐름을 한눈에 이해할 수 있는 입구 문서를 원했고, 동시에 기존 `doc/work` 문서를 skill로 옮길지 판단해 달라고 요청했다. 루트 README는 탐색성과 이해도를 높이고, `doc/work`는 버전이 있는 정책/결정 기록을 유지하는 데 적합하다.
+- 영향 범위: `README.md`, `doc/reference/repeato-workflow.md`, `doc/work/repeato-workflow-extraction-v1.md`, `AGENTS.md`.
+- 후속 작업: README를 기준으로 새 사용자/에이전트가 진입하는지 실제 사용 중 피드백 확인.
+
+- 날짜: 2026-04-04
+- 결정: 이번 workflow 정리 작업은 `PM + Technical Architect + Workflow Enablement Group + QA` 관점으로 운영한다.
+- 근거: 요청이 Repeato 전용 절차 설명, 문서 구조 재배치 판단, skill 추출 여부, 대화형 시작 구조, 자동 조직 배정을 함께 요구하기 때문이다.
+- 영향 범위: `README.md`, `doc/reference/repeato-workflow.md`, `doc/work/*`, `skills/*`, `doc/reference/context-workflow.md`, `AGENTS.md`.
+- 후속 작업: README 작성, doc/work vs skill 경계 문서화, 대화형 intake 및 자동 배정 규칙 반영, 변경 후 검증.
+
+- 날짜: 2026-04-04
+- 결정: `skills/context-workflow/scripts/init_context_workflow.sh`는 한국어화 이후에도 `/tmp/repeato-context-workflow-check`에서 정상 실행되며 동일한 파일 세트를 생성한다.
+- 근거: 실제 실행 결과 `context-workflow.md`, `context-inbox.md`, `context-log.md`, `context-prune-rules.md`, `next-actions.md`, `app-agent-organization.md`, `repeato-check-workflow.md`가 모두 생성됐고, 콘솔 안내 문구만 한국어로 바뀌었기 때문이다.
+- 영향 범위: 스킬 초기화 품질 보증, 템플릿 복사 동작, 사용자 안내 출력.
+- 후속 작업: 추가 언어 정책이 생기면 식별자 비번역 원칙을 `skills` 패키지 작성 규칙으로 확장 검토한다.
+
+- 날짜: 2026-04-04
+- 결정: `AGENTS.md`, `SKILL.md`, skills 자산은 파일명/식별자는 유지하고, 사용자 노출 설명문과 역할명은 한국어 중심으로 전환한다.
+- 근거: `AGENTS.md`, `SKILL.md`, 스킬 디렉터리 경로, frontmatter `name`은 도구가 탐지하거나 참조할 가능성이 있어 번역 시 호환성 리스크가 있고, 반대로 본문 설명문은 한국어화해도 동작 로직에 영향을 주지 않기 때문이다.
+- 영향 범위: `AGENTS.md`, `doc/reference/context-workflow.md`, `doc/reference/repeato-workflow.md`, `doc/agents/app-agent-organization.md`, `doc/agents/repeato-agent-extension.md`, `skills/context-workflow/*`.
+- 후속 작업: 스킬 템플릿/초기화 스크립트 한국어화 후 임시 디렉터리에서 초기화 스크립트 실행으로 동작 동일성을 검증한다.
+
+- 날짜: 2026-04-04
+- 결정: 이번 작업 Agent 세트는 `PM + Technical Architect + Documentation Engineer + QA` 관점으로 운영한다.
+- 근거: 요청이 제품/워크플로우 문서 정합성, 스킬 패키지 구조 보존, 사용자 노출 문구 번역 품질, 실행 검증을 함께 요구하기 때문이다.
+- 영향 범위: 번역 범위 결정, 스크립트 검증 방식, 최종 품질 판단 기준.
+- 후속 작업: 대상 파일 일괄 수정 후 `init_context_workflow.sh` 실행 결과와 잔여 영어 표현을 점검한다.
+
+- 날짜: 2026-03-31
+- 결정: `Add` 2차 반복은 세션 메모리 기반 최근 입력 이력과 최근 사용 덱 제안을 도입하고, 저장 후 마지막 선택 덱을 유지하는 흐름으로 마무리한다.
+- 근거: SQLite 도입 전에도 반복 입력 마찰을 줄일 수 있고, 테스트에서 마지막 선택 덱이 오늘 학습 덱으로 강제 복귀하는 현재 동작이 사용자 기대와 충돌했기 때문이다.
+- 영향 범위: `app/lib/app_root.dart`, `app/lib/models/add_history_entry.dart`, `app/lib/screens/add_screen.dart`, `app/test/widget_test.dart`, GitHub 이슈 `#23`.
+- 후속 작업: PR 생성, QA 인수인계 정리, 이후 `Profile` 다중 덱 정합성 강화 또는 `Insights` 이벤트 스키마 정의로 다음 반복 착수.
+
+- 날짜: 2026-03-31
+- 결정: 이전 작업 루프 재개 시점의 1순위 구현 항목은 `Add` 2차 반복(입력 히스토리/최근 덱 제안/저장 후 재입력 흐름 고도화)으로 잡고, workflow는 다시 `이슈 -> 브랜치 -> 구현 -> PR -> QA -> 머지` 절차를 따른다.
+- 근거: 열린 개발 이슈 `#19`, `#21`은 마지막 반복 결과를 보존하고 있으나 PR 없이 멈춰 있고, `doc/context/next-actions.md` 기준 다음 사용자 가치가 가장 크면서 현재 메모리 상태 구조로 바로 구현 가능한 항목이 `Add` 2차 반복이기 때문이다.
+- 영향 범위: `doc/context/context-inbox.md`, `doc/context/next-actions.md`, 새 GitHub 이슈/브랜치, `app/lib/screens/add_screen.dart`, `app/lib/app_root.dart`, `app/test/widget_test.dart`.
+- 후속 작업: `Add` 2차 반복 이슈 생성, 3인 개발 검토 메모 기록, `feat/<issue>-add-second-iteration` 브랜치 생성, 구현 및 coverage 검증.
+
 - 날짜: 2026-03-15
 - 결정: 하루 학습은 단일 덱이 아니라 여러 덱을 함께 담는 `todayStudyDeckIds` 구조로 운영하고, 이를 `Today -> Insights -> Add`에 일관되게 반영한다.
 - 근거: 사용자가 하루 학습을 여러 덱으로 구성하는 실제 사용 맥락을 명시했고, Today만 다중 덱을 지원하면 다른 탭에서 현재 학습 맥락이 끊기기 때문이다.
@@ -95,7 +167,7 @@
 - 후속 작업: 실제 로컬에서 bootstrap 실행 후 `flutter doctor -v` 결과를 기반으로 v2 트러블슈팅 문서 보강.
 
 - 날짜: 2026-02-22
-- 결정: 산출물 가치 문서는 `doc/work` 하위에 보존하고 `doc/project-context.md`는 인덱스 허브로 운영한다.
+- 결정: 산출물 가치 문서는 `doc/work` 하위에 보존하고 `doc/reference/project-context.md`는 인덱스 허브로 운영한다.
 - 근거: project-context 비대화를 막고, 필요 시점에 상세 산출물을 선택적으로 로드하기 위함.
 - 영향 범위: 문서 저장 구조, Repeato 헌법 본문 위치, AGENTS/Workflow 문서 운영 규칙.
 - 후속 작업: 신규 산출물 작성 시 `doc/work/index.md`를 함께 갱신하는 체크리스트 추가 검토.
@@ -103,7 +175,7 @@
 - 날짜: 2026-02-22
 - 결정: Repeato 기획 1~6 항목은 전 Agent(공통 9 + 전문가 2) 회의체 3차 검토 후 `doc/work/repeato-constitution-v1.md`로 확정한다.
 - 근거: 제품 취지, 학습과학 근거, 구현 가능성, 품질/보안/운영성까지 동시에 충족하는 합의가 필요했기 때문.
-- 영향 범위: `doc/work/repeato-constitution-v1.md`, `doc/project-context.md` 인덱스, `AGENTS.md` 헌법 운영 규칙.
+- 영향 범위: `doc/work/repeato-constitution-v1.md`, `doc/reference/project-context.md` 인덱스, `AGENTS.md` 헌법 운영 규칙.
 - 후속 작업: 다음 Repeato 정책 변경 요청부터 3차 회의체 템플릿(라운드별 합의/반려 사유) 적용.
 
 - 날짜: 2026-02-22
@@ -131,7 +203,7 @@
 - 후속 작업: 다음 작업부터 요청 유형별 기본 Agent 세트 템플릿을 context-log에 재사용.
 
 - 날짜: 2026-02-22
-- 결정: 앱 개발 공통 Agent 조직은 `doc/app-agent-organization.md`로 고정하고, Repeato 전용 전문가는 `doc/repeato-agent-extension.md`로 분리한다.
+- 결정: 앱 개발 공통 Agent 조직은 `doc/agents/app-agent-organization.md`로 고정하고, Repeato 전용 전문가는 `doc/agents/repeato-agent-extension.md`로 분리한다.
 - 근거: 공통 협업 체계 재사용성과 Repeato 도메인 전문성(교육/인지과학)을 동시에 유지하기 위함.
 - 영향 범위: 작업별 Agent 호출 방식, 기획 검토 게이트, workflow 문서 연결 구조.
 - 후속 작업: 다음 기능 요청부터 선택 Agent 세트를 작업 로그에 명시 적용.
@@ -155,13 +227,13 @@
 - 후속 작업: 실제 다른 저장소 1곳에 적용해 템플릿 최소 항목 검증.
 
 - 날짜: 2026-02-22
-- 결정: `context-workflow`를 공통 재사용 표준으로 분리하고 Repeato 전용 흐름은 `doc/repeato-workflow.md`로 분리한다.
+- 결정: `context-workflow`를 공통 재사용 표준으로 분리하고 Repeato 전용 흐름은 `doc/reference/repeato-workflow.md`로 분리한다.
 - 근거: 제품별 의사결정 규칙과 컨텍스트 운영 절차를 분리해야 다른 프로젝트에도 동일한 workflow를 재사용할 수 있기 때문.
 - 영향 범위: AGENTS 참조 구조, 작업 시작/종료 절차, 문서 확장 방식.
 - 후속 작업: 다른 프로젝트 적용 시 `<project>-workflow.md` 템플릿으로 변환 검증.
 
 - 날짜: 2026-02-22
-- 결정: `doc/plan-checklist.md`를 `doc/project-context.md` 기준으로 재정렬한다.
+- 결정: `doc/reference/plan-checklist.md`를 `doc/reference/project-context.md` 기준으로 재정렬한다.
 - 근거: 초기 제품 방향과 상세 요구사항 문서의 불일치를 줄여 우선순위 판단을 빠르게 하기 위함.
 - 영향 범위: 요구사항 정의, MVP 범위 수립, 후속 기술 설계.
 - 후속 작업: 카드 템플릿/스케줄 간격표/KPI 정의를 우선 확정.
@@ -180,20 +252,20 @@
 
 - 날짜: 2026-02-24
 - 결정: 현재 상태는 `M2 초기 학습 루프 MVP 완료 + 정책/스펙 다수 미확정 + Add/Profile 기능 플레이스홀더`로 판단한다.
-- 근거: `app/lib/main.dart`에서 Today 루프만 실동작하고 Add/Profile가 다음 단계 안내 문구로 남아 있으며, `doc/plan-checklist.md` 핵심 체크 항목이 대부분 미완료 상태이기 때문.
+- 근거: `app/lib/main.dart`에서 Today 루프만 실동작하고 Add/Profile가 다음 단계 안내 문구로 남아 있으며, `doc/reference/plan-checklist.md` 핵심 체크 항목이 대부분 미완료 상태이기 때문.
 - 영향 범위: 다음 스프린트는 신규 기능 확장보다 정책 확정(카드/스케줄/KPI)과 스케줄러 구현을 우선해야 함.
-- 후속 작업: `doc/next-actions.md` 상위 3개 항목을 산출물 단위로 구체화.
+- 후속 작업: `doc/context/next-actions.md` 상위 3개 항목을 산출물 단위로 구체화.
 
 - 날짜: 2026-03-08
 - 결정: `Today` 탭 상세 기획은 `doc/work/repeato-today-tab-spec-v1.md`로 통합하고, 기존 메뉴 스펙 문서는 요약/참조 역할로 유지한다.
 - 근거: 기존 `Today` 정의가 메뉴 스펙과 인터뷰 결과에 분산돼 있었고, 3차 검토 및 2회 리드백 이력을 한 문서에서 추적할 필요가 있기 때문이다.
-- 영향 범위: `doc/work/repeato-menu-and-screen-spec-v1.md`, `doc/work/index.md`, `doc/project-context.md`.
+- 영향 범위: `doc/work/repeato-menu-and-screen-spec-v1.md`, `doc/work/index.md`, `doc/reference/project-context.md`.
 - 후속 작업: 구현 착수 시 새 문서를 기준으로 `Today` 상태 UI와 이벤트 스키마를 구체화한다.
 
 - 날짜: 2026-03-08
 - 결정: 전체 탭 상세화는 `PM Agent` 오케스트레이션 하에 병렬 시작하고, 선행작업이 필요한 탭은 `blocked` 상태로 대기시키는 방식으로 운영한다.
 - 근거: 사용자 요청이 각 탭에 동일한 상세화 프로세스를 반복하되, 서버/다른 탭 Agent와의 연동 질문과 작업 순서 조율까지 포함하고 있기 때문이다.
-- 영향 범위: `AGENTS.md`, `doc/app-agent-organization.md`, `doc/work/repeato-tab-orchestration-v1.md`, 각 탭 상세 문서.
+- 영향 범위: `AGENTS.md`, `doc/agents/app-agent-organization.md`, `doc/work/repeato-tab-orchestration-v1.md`, 각 탭 상세 문서.
 - 후속 작업: KPI/이벤트 스키마와 동기화/결제 범위가 정리되면 `Insights`, `Profile`의 blocked 상태를 해제한다.
 
 - 날짜: 2026-03-08
@@ -223,7 +295,7 @@
 - 날짜: 2026-03-08
 - 결정: 모든 후속 작업은 착수 전에 `doc/work/repeato-delivery-organization-v1.md` 기준으로 담당 조직과 `#STAGE-*`, `#TASK-*`, `#ORG-*` 태그를 먼저 지정한다.
 - 근거: 현재까지 역할 문서는 있었지만 실제 작업 단위별 책임 배치와 태깅 기준이 분리돼 있지 않아 조율 비용이 증가했기 때문이다.
-- 영향 범위: `AGENTS.md`, 향후 `doc/work` 산출물, `doc/next-actions.md` 작업 태깅 방식.
+- 영향 범위: `AGENTS.md`, 향후 `doc/work` 산출물, `doc/context/next-actions.md` 작업 태깅 방식.
 - 후속 작업: 다음 구현 작업부터 task 라인마다 조직 태그를 병기한다.
 
 - 날짜: 2026-03-08
@@ -235,14 +307,14 @@
 - 날짜: 2026-03-08
 - 결정: `resume workflow` 재개 결과, 다음 구현 대상은 유지하되 현재 세션 상태를 `GitHub issue pending`으로 복원하고 구현 착수는 보류한다.
 - 근거: `doc/work/repeato-resume-snapshot-2026-03-08-v1.md` 기준 1순위 작업은 `Add 직접 입력 MVP 구현`이지만, 2026-03-08 현재 `gh auth status`에서 기본 계정 토큰이 invalid이고 작업 브랜치도 `main`이어서 `이슈 -> 브랜치 -> 구현` 강제 절차를 충족하지 못하기 때문이다.
-- 영향 범위: `doc/context-inbox.md`, `doc/next-actions.md`, 다음 개발 착수 순서, GitHub tracking workflow 적용 방식.
+- 영향 범위: `doc/context/context-inbox.md`, `doc/context/next-actions.md`, 다음 개발 착수 순서, GitHub tracking workflow 적용 방식.
 - 후속 작업: GitHub 인증 복구 후 `Add 직접 입력 MVP` 이슈 생성, 3인 개발 검토 기록, `feat/<issue-number>-add-direct-input-mvp` 브랜치에서 구현을 시작한다.
 - 후속 작업: 다음 반복 착수 전에 사용자에게 1순위 구현 항목을 확인받는다.
 
 - 날짜: 2026-03-08
 - 결정: 개발 조직 workflow의 기본 품질 기준으로 테스트 라인 커버리지 70% 이상 유지를 추가하고, 이슈/PR/QA 게이트에 모두 연결한다.
 - 근거: 사용자가 개발 조직 차원에서 커버리지 70% 유지를 명시적으로 요구했고, 문서 규칙만 두면 누락되기 쉬우므로 GitHub tracking 템플릿과 QA 게이트까지 함께 강제해야 실제 운영이 가능하기 때문이다.
-- 영향 범위: `AGENTS.md`, `doc/context-workflow.md`, `doc/app-agent-organization.md`, `doc/work/repeato-github-tracking-workflow-v1.md`, `doc/work/repeato-delivery-organization-v1.md`, `.github/ISSUE_TEMPLATE/feature-task.yml`, `.github/PULL_REQUEST_TEMPLATE.md`.
+- 영향 범위: `AGENTS.md`, `doc/reference/context-workflow.md`, `doc/agents/app-agent-organization.md`, `doc/work/repeato-github-tracking-workflow-v1.md`, `doc/work/repeato-delivery-organization-v1.md`, `.github/ISSUE_TEMPLATE/feature-task.yml`, `.github/PULL_REQUEST_TEMPLATE.md`.
 - 후속 작업: 다음 개발 이슈부터 coverage plan을 이슈에 기록하고, PR에는 실제 line coverage 측정값을 남긴다.
 
 - 날짜: 2026-03-08
@@ -297,7 +369,7 @@
 - 결정: 현재 작업 컨텍스트 백업과 다음 세션 resume 기준은 `doc/work/repeato-resume-snapshot-2026-03-08-v1.md`를 단일 시작점으로 사용한다.
 - 근거: 내부 대화 상태는 직접 저장할 수 없으므로, 문서/작업 큐/코드 상태를 한 문서에 묶어 재개 기준을 명확히 해야 하기 때문이다.
 - 영향 범위: 이후 세션 재개 방식, context 복원 절차, 사용자 resume 프롬프트.
-- 후속 작업: 다음 세션 시작 시 snapshot 문서와 `doc/next-actions.md`를 먼저 읽고 작업을 재개한다.
+- 후속 작업: 다음 세션 시작 시 snapshot 문서와 `doc/context/next-actions.md`를 먼저 읽고 작업을 재개한다.
 
 - 날짜: 2026-03-08
 - 결정: backup/resume 절차는 특정 snapshot 문서에 종속하지 않고 Workflow Enablement Group이 관리하는 공통 workflow(`repeato-backup-resume-workflow-v1.md`)와 template(`repeato-resume-snapshot-template-v1.md`)로 재사용한다.
@@ -309,7 +381,7 @@
 - 결정: 현재 세션 상태에 대해 backup workflow를 실행하고, 최신 resume 기준은 `doc/work/repeato-resume-snapshot-2026-03-08-v1.md`로 재확정한다.
 - 근거: 다음 세션에서 동일한 문서 기준으로 바로 resume 할 수 있게 최신 산출물과 blocked 상태를 snapshot에 반영해야 하기 때문이다.
 - 영향 범위: `doc/work/repeato-resume-snapshot-2026-03-08-v1.md`, 이후 세션 재개 절차.
-- 후속 작업: resume 시 snapshot + `doc/next-actions.md` + `doc/context-log.md`를 함께 읽고 시작한다.
+- 후속 작업: resume 시 snapshot + `doc/context/next-actions.md` + `doc/context/context-log.md`를 함께 읽고 시작한다.
 
 - 날짜: 2026-03-13
 - 결정: `Insights` 1차 반복은 GitHub 이슈 `#5`와 브랜치 `feat/5-insights-dashboard-cta`에서 진행하고, 범위는 핵심 KPI 3개와 Today 재진입 CTA, 탭 상태 보존으로 제한한다.

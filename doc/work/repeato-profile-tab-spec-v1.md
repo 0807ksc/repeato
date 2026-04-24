@@ -7,7 +7,7 @@
 - 범위: `Profile` 탭 상세 기획, UX, 앱/서버 연동 검토, 검증 질문
 - 통합 대상:
   - `doc/work/repeato-menu-and-screen-spec-v1.md`의 `3.5 Profile`
-  - `doc/plan-checklist.md`의 동기화/결제/알림 관련 항목
+  - `doc/reference/plan-checklist.md`의 동기화/결제/알림 관련 항목
 
 ## 1. 작업 프레임
 - 기본 Agent 세트: `PM + Product Designer + Technical Architect + Frontend Engineer + QA Engineer + Security/Privacy`

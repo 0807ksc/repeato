@@ -1,26 +1,26 @@
-# Context Inbox (Temporary)
+# 컨텍스트 인박스(임시)
 
-## Rules
-- Keep only unverified notes.
-- Write short, factual bullets.
-- Promote confirmed items to `doc/context-log.md`.
+## 규칙
+- 검증 전 메모만 남긴다.
+- 짧고 사실 중심의 불릿으로 적는다.
+- 확정된 항목은 `doc/context/context-log.md`로 승격한다.
 
-## Template
-- Date:
-- Topic:
-- Temporary Context:
+## 템플릿
+- 날짜:
+- 주제:
+- 임시 컨텍스트:
   -
-- Needs Validation:
+- 검증 필요:
   -
-- Notes:
+- 메모:
   -
 
-## Active
-- Date:
-- Topic:
-- Temporary Context:
+## 활성 항목
+- 날짜:
+- 주제:
+- 임시 컨텍스트:
   -
-- Needs Validation:
+- 검증 필요:
   -
-- Notes:
+- 메모:
   -

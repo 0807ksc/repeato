@@ -2,7 +2,14 @@
 
 ## 목적
 - 산출물 가치가 있는 문서를 `doc/work` 하위에 보존/관리한다.
-- `doc/project-context.md`는 상세 본문이 아닌 인덱스/참조 허브 역할을 한다.
+- `doc/reference/project-context.md`는 상세 본문이 아닌 인덱스/참조 허브 역할을 한다.
+- 기능 단위 상세 spec/진행 메모는 GitHub issue/PR을 우선 저장소로 사용한다.
+- 여러 이슈에서 재사용되는 로컬 문서만 `doc/work`에 유지하고, 활성 사용이 끝나면 `doc/work/archive/`로 이동하거나 제거한다.
+
+## 상태 기준
+- `Active`: 현재도 로컬에서 직접 참조하는 문서
+- `Archived`: 이력 보존만 필요해 `doc/work/archive/`에 둔 문서
+- `Issue-managed`: canonical source가 GitHub issue/PR인 문서
 
 ## Documents
 1. `doc/work/repeato-constitution-v1.md`
@@ -159,3 +166,13 @@
 - 설명: 다중 덱 Today 상태를 `Insights`와 `Add`까지 일관되게 확장하기 위한 3차 협의 문서
 - 상태: Active
 - 사용 시점: 다중 덱 상태를 교차 탭으로 반영할 때
+
+32. `doc/work/repeato-product-run-guide-v1.md`
+- 설명: Repeato 제품 기동/사용 테스트의 canonical guide
+- 상태: Active
+- 사용 시점: 현재 제품을 실제로 부팅하고 핵심 사용자 흐름을 테스트할 때
+
+33. `doc/work/repeato-product-review-2026-04-04-v1.md`
+- 설명: 2026-04-04 기준 실제 제품 테스트 결과와 추가 요구사항 후보 정리 문서
+- 상태: Active
+- 사용 시점: 현재 제품의 부족한 점과 다음 요구사항 후보를 빠르게 파악할 때

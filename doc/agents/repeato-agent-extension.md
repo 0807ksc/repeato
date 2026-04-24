@@ -1,21 +1,21 @@
-# Repeato Agent Extension
+# Repeato 에이전트 확장
 
 ## 목적
-- 공통 앱 조직에 Repeato 도메인 전문가 Agent를 추가해 기획/검토 품질을 높인다.
+- 공통 앱 조직에 Repeato 도메인 전문가 에이전트를 추가해 기획/검토 품질을 높인다.
 
-## Repeato 전용 전문가 Agent
-1. Education Specialist Agent
+## Repeato 전용 전문가 에이전트
+1. 교육 전문가 에이전트
 - 책임: 학습 콘텐츠/커리큘럼 구조 검토
 - 필수 역량: 학습목표 설계, 난이도 조정, 학습자 수준별 구성
 - 핵심 산출물: 학습 시나리오, 콘텐츠 구조표, 난이도 가이드
 
-2. Cognitive Science Specialist Agent
+2. 인지과학 전문가 에이전트
 - 책임: 기억/복습 이론 기반 정책 검토
 - 필수 역량: 망각곡선, 반복학습 간격, 인출 연습(Recall) 설계
 - 핵심 산출물: 복습 간격 정책, 정답/오답 전이 규칙 제안, 학습효과 가설
 
 ## 기획 단계 협업 규칙
-1. PM이 기획 초안을 작성하면 Education Specialist와 Cognitive Science Specialist를 동시에 호출한다.
+1. PM이 기획 초안을 작성하면 교육 전문가와 인지과학 전문가를 동시에 호출한다.
 2. 두 전문가가 검토 의견을 남긴 뒤, Architect/Designer가 구현 가능성/UX 영향도를 반영한다.
 3. 전문가 검토가 완료되기 전에는 학습 정책(간격표, 난이도 정책)을 확정하지 않는다.
 

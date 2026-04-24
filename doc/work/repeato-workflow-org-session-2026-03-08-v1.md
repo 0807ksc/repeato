@@ -33,12 +33,12 @@
 
 ## 4. 활성 참조 문서
 - `AGENTS.md`
-- `doc/context-workflow.md`
-- `doc/app-agent-organization.md`
+- `doc/reference/context-workflow.md`
+- `doc/agents/app-agent-organization.md`
 - `doc/work/repeato-delivery-organization-v1.md`
 - `doc/work/repeato-github-tracking-workflow-v1.md`
 - `doc/work/repeato-resume-snapshot-2026-03-08-v1.md`
-- `doc/next-actions.md`
+- `doc/context/next-actions.md`
 
 ## 5. 오픈 안건
 1. Flutter에서 사용할 표준 coverage 측정 명령과 보고 형식을 고정할 것인가
@@ -55,5 +55,5 @@
 
 ## 7. 세션 종료/재개 규칙
 - 이 문서는 workflow 조직의 현재 활성 세션 기준점으로 유지한다.
-- 다음 세션에서 workflow 재개 시 이 문서와 `doc/context-log.md`, `doc/next-actions.md`를 함께 읽는다.
+- 다음 세션에서 workflow 재개 시 이 문서와 `doc/context/context-log.md`, `doc/context/next-actions.md`를 함께 읽는다.
 - 더 최신 workflow 조직 세션 문서가 생성되면 이 문서는 히스토리로 남기고 최신 문서를 `resume 기준`으로 사용한다.

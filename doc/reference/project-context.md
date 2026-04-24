@@ -46,11 +46,14 @@
 - 대안: `Repitto`
 
 ## 5. 문서 운영 기준
-- 상세 요구사항 정의는 `doc/plan-checklist.md`를 기준으로 확장한다.
+- 상세 요구사항 정의는 `doc/reference/plan-checklist.md`를 기준으로 확장한다.
+- `doc/reference/`는 오래 유지되는 기준 문서, `doc/agents/`는 agent 규칙, `doc/context/`는 세션 기록으로 구분한다.
+- 기능 단위 spec/진행 메모는 GitHub issue/PR을 우선 저장소로 사용한다.
 - 본 문서는 프로젝트의 시작점(문제 정의/방향/이름 컨텍스트)을 고정하는 목적이다.
 
 ## 6. Work 문서 인덱스
 - 산출물 가치가 있는 상세 기획/정책/결정 문서는 `doc/work`에 보존한다.
+- 활성 사용이 끝난 로컬 문서는 `doc/work/archive/`로 내릴 수 있다.
 - 본 문서는 요약 컨텍스트와 참조 인덱스 역할을 유지한다.
 
 ### Active Work Documents
@@ -181,3 +184,11 @@
 32. `doc/work/repeato-multi-deck-cross-tab-alignment-2026-03-15-v1.md`
 - 설명: 다중 덱 Today 상태를 `Insights`와 `Add`까지 일관되게 확장하기 위한 3차 협의 문서
 - 사용 시점: 다중 덱 상태를 교차 탭으로 반영할 때
+
+33. `doc/work/repeato-product-run-guide-v1.md`
+- 설명: Repeato 제품 기동/사용 테스트 기준 문서
+- 사용 시점: 현재 제품을 직접 실행하고 핵심 사용자 흐름을 검증할 때
+
+34. `doc/work/repeato-product-review-2026-04-04-v1.md`
+- 설명: 2026-04-04 기준 제품 테스트 결과와 추가 요구사항 후보 문서
+- 사용 시점: 현재 제품의 부족한 점과 다음 요구사항 후보를 검토할 때

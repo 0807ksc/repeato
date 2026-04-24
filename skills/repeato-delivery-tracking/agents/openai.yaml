@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repeato Delivery Tracking"
+  short_description: "Track issue, branch, PR, QA, and coverage"
+  default_prompt: "Use $repeato-delivery-tracking to prepare the issue, branch, review, PR, and coverage packet for this Repeato change."

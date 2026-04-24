@@ -8,7 +8,7 @@
 - 통합 대상:
   - `doc/work/repeato-menu-and-screen-spec-v1.md`의 `3.1 Today`
   - `doc/work/repeato-user-interview-001.md`의 세션 시작/시간 제약/성취 기준
-  - `doc/plan-checklist.md`의 카드 UX, 스케줄, 오늘 완료 기준 관련 항목
+  - `doc/reference/plan-checklist.md`의 카드 UX, 스케줄, 오늘 완료 기준 관련 항목
 
 ## 1. 작업 프레임
 
@@ -289,5 +289,5 @@
 
 ## 11. 후속 작업
 1. 사용자 인터뷰로 `10장 추천 배치`와 완료 화면 선호를 검증한다.
-2. `doc/plan-checklist.md`의 세션 규칙/오늘 완료 기준 항목을 확정 상태로 승격한다.
+2. `doc/reference/plan-checklist.md`의 세션 규칙/오늘 완료 기준 항목을 확정 상태로 승격한다.
 3. Flutter `Today` 화면 구현 시 상태별 스냅샷 테스트를 추가한다.
