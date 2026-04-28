@@ -107,7 +107,7 @@ class _TodayScreenState extends State<TodayScreen> {
         children: [
           Text('Today', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 8),
-          Text('${widget.deckName} · Iteration 1 리뷰 빌드'),
+          Text(widget.deckName),
           const SizedBox(height: 12),
           const Card(
             child: ListTile(
@@ -138,14 +138,12 @@ class _TodayScreenState extends State<TodayScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Today', style: Theme.of(context).textTheme.headlineMedium),
-                  const SizedBox(height: 4),
-                  Text('${widget.deckName} · Iteration 1 리뷰 빌드'),
-                  const SizedBox(height: 8),
                   Text(
-                    '리뷰 포인트: 3단계 평가와 짧은 세션 흐름',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    'Today',
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
+                  const SizedBox(height: 4),
+                  Text(widget.deckName),
                   const SizedBox(height: 12),
                   Card(
                     child: Padding(
@@ -153,14 +151,17 @@ class _TodayScreenState extends State<TodayScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('세션 제어', style: Theme.of(context).textTheme.titleMedium),
+                          Text(
+                            '세션 제어',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
                           const SizedBox(height: 8),
                           Text(
                             done
                                 ? '오늘 목표를 완료했습니다. 같은 목표로 다시 시작하거나 목표 수를 바꿀 수 있습니다.'
                                 : _index == 0
-                                    ? '아직 세션을 시작하지 않았습니다. 목표 카드 수를 고르고 바로 시작하세요.'
-                                    : '현재 세션이 진행 중입니다. 목표를 바꾸거나 같은 목표로 다시 시작할 수 있습니다.',
+                                ? '아직 세션을 시작하지 않았습니다. 목표 카드 수를 고르고 바로 시작하세요.'
+                                : '현재 세션이 진행 중입니다. 목표를 바꾸거나 같은 목표로 다시 시작할 수 있습니다.',
                           ),
                           const SizedBox(height: 12),
                           Wrap(
@@ -192,7 +193,9 @@ class _TodayScreenState extends State<TodayScreen> {
                   const SizedBox(height: 12),
                   LinearProgressIndicator(value: progress),
                   const SizedBox(height: 8),
-                  Text('진행: $_index / $_target · 알겠음 $_known · 헷갈림 $_unsure · 모르겠음 $_again'),
+                  Text(
+                    '진행: $_index / $_target · 알겠음 $_known · 헷갈림 $_unsure · 모르겠음 $_again',
+                  ),
                   const SizedBox(height: 20),
                   if (!done)
                     Expanded(
@@ -206,7 +209,8 @@ class _TodayScreenState extends State<TodayScreen> {
                         },
                         onHorizontalDragUpdate: (details) {
                           if (_swipeHandled || _dragStartX == null) return;
-                          final deltaX = details.globalPosition.dx - _dragStartX!;
+                          final deltaX =
+                              details.globalPosition.dx - _dragStartX!;
                           const swipeThreshold = 24.0;
                           if (deltaX < -swipeThreshold) {
                             _swipeHandled = true;
@@ -254,26 +258,39 @@ class _TodayScreenState extends State<TodayScreen> {
                               elevation: 2,
                               child: Padding(
                                 padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      _showMeaning ? word.meaningKo : word.word,
-                                      style: Theme.of(context).textTheme.headlineLarge,
-                                    ),
-                                    const SizedBox(height: 12),
-                                    Text(
-                                      _showMeaning ? word.exampleKo : word.exampleEn,
-                                      style: Theme.of(context).textTheme.bodyLarge,
-                                    ),
-                                    const Spacer(),
-                                    Text(
-                                      _showMeaning
-                                          ? '누르고 있으면 뜻이 보여요'
-                                          : '누르고 있으면 뜻이 보여요 · 왼쪽 스와이프: 알겠음 / 오른쪽 스와이프: 모르겠음',
-                                      style: Theme.of(context).textTheme.labelMedium,
-                                    ),
-                                  ],
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        _showMeaning
+                                            ? word.meaningKo
+                                            : word.word,
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.headlineLarge,
+                                      ),
+                                      const SizedBox(height: 12),
+                                      Text(
+                                        _showMeaning
+                                            ? word.exampleKo
+                                            : word.exampleEn,
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodyLarge,
+                                      ),
+                                      const SizedBox(height: 24),
+                                      Text(
+                                        _showMeaning
+                                            ? '누르고 있으면 뜻이 보여요'
+                                            : '누르고 있으면 뜻이 보여요 · 왼쪽 스와이프: 알겠음 / 오른쪽 스와이프: 모르겠음',
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.labelMedium,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -294,7 +311,9 @@ class _TodayScreenState extends State<TodayScreen> {
                                 children: [
                                   const Text('오늘 목표 달성'),
                                   const SizedBox(height: 8),
-                                  Text('알겠음 $_known · 헷갈림 $_unsure · 모르겠음 $_again'),
+                                  Text(
+                                    '알겠음 $_known · 헷갈림 $_unsure · 모르겠음 $_again',
+                                  ),
                                   const SizedBox(height: 12),
                                   FilledButton(
                                     onPressed: () => _setTarget(_target),

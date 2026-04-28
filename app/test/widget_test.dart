@@ -11,7 +11,7 @@ void main() {
     expect(find.text('Today'), findsWidgets);
     expect(find.text('Decks'), findsOneWidget);
     expect(find.text('Insights'), findsOneWidget);
-    expect(find.text('중2 초급 영어 · Iteration 1 리뷰 빌드'), findsOneWidget);
+    expect(find.text('중2 초급 영어'), findsOneWidget);
   });
 
   testWidgets('Advances card on Again button tap', (WidgetTester tester) async {
@@ -268,7 +268,7 @@ void main() {
     await tester.tap(find.text('중2 초급 영어'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Deck Detail'), findsOneWidget);
+    expect(find.text('덱 상세'), findsOneWidget);
     expect(find.text('120개'), findsOneWidget);
     expect(find.text('0개'), findsOneWidget);
 
@@ -295,7 +295,7 @@ void main() {
     await tester.tap(find.text('지금 바로 학습'));
     await tester.pumpAndSettle();
 
-    expect(find.text('천자문 입문 · Iteration 1 리뷰 빌드'), findsOneWidget);
+    expect(find.text('천자문 입문'), findsOneWidget);
     expect(find.text('天'), findsOneWidget);
   });
 
@@ -315,7 +315,7 @@ void main() {
     await tester.tap(find.text('Today').last);
     await tester.pumpAndSettle();
 
-    expect(find.text('중2 초급 영어 + 천자문 입문 · Iteration 1 리뷰 빌드'), findsOneWidget);
+    expect(find.text('중2 초급 영어 + 천자문 입문'), findsOneWidget);
   });
 
   testWidgets('Insights action can move back to Today with KPI cards visible', (

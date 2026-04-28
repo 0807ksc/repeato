@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../models/add_history_entry.dart';
-import '../widgets/review_note_card.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({
@@ -111,11 +110,6 @@ class _AddScreenState extends State<AddScreen> {
       padding: const EdgeInsets.all(16),
       children: [
         Text('Add', style: Theme.of(context).textTheme.headlineMedium),
-        const SizedBox(height: 12),
-        const ReviewNoteCard(
-          title: '리뷰 설명',
-          body: '사용자 그룹에는 "오늘 학습 중인 덱 맥락이 Add에서도 자연스럽게 이어지는지"를 확인해 달라고 안내합니다.',
-        ),
         const SizedBox(height: 12),
         Card(
           child: Padding(
