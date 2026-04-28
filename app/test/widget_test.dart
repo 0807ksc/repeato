@@ -371,6 +371,8 @@ void main() {
 
     expect(find.text('오늘 학습 요약'), findsOneWidget);
     expect(find.textContaining('1/30 진행'), findsOneWidget);
+    expect(find.text('오늘 학습 덱 1개'), findsOneWidget);
+    expect(find.text('중2 초급 영어'), findsWidgets);
     expect(find.text('로컬 저장 상태'), findsOneWidget);
     expect(find.text('로컬 전용'), findsOneWidget);
     expect(find.text('Today 이어서 학습'), findsOneWidget);
@@ -382,6 +384,24 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.textContaining('진행: 1 /'), findsOneWidget);
+  });
+
+  testWidgets('Profile reflects multiple today study decks', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const RepeatoApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Decks').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(Switch).last);
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Profile').last);
+    await tester.pumpAndSettle();
+
+    expect(find.text('오늘 학습 덱 2개'), findsOneWidget);
+    expect(find.text('중2 초급 영어 + 천자문 입문'), findsOneWidget);
   });
 
   testWidgets('Add shows recent decks and recent entries after save', (

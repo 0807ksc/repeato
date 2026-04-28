@@ -7,11 +7,13 @@ class ProfileScreen extends StatelessWidget {
     super.key,
     required this.stats,
     required this.totalCards,
+    required this.todayStudyDeckNames,
     required this.onResumeToday,
   });
 
   final SessionStats stats;
   final int totalCards;
+  final List<String> todayStudyDeckNames;
   final VoidCallback onResumeToday;
 
   @override
@@ -23,6 +25,11 @@ class ProfileScreen extends StatelessWidget {
         : stats.done
         ? '오늘 목표 달성'
         : '오늘 학습 진행 중';
+    final todayDeckSummary = todayStudyDeckNames.isEmpty
+        ? '선택된 덱 없음'
+        : todayStudyDeckNames.length <= 2
+        ? todayStudyDeckNames.join(' + ')
+        : '${todayStudyDeckNames.take(2).join(', ')} 외 ${todayStudyDeckNames.length - 2}개';
 
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -37,6 +44,14 @@ class ProfileScreen extends StatelessWidget {
               '$statusText · ${stats.completed}/${stats.target} 진행 · 정답률 $accuracy%',
             ),
             trailing: Text('$totalCards장'),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            leading: const Icon(Icons.collections_bookmark_outlined),
+            title: Text('오늘 학습 덱 ${todayStudyDeckNames.length}개'),
+            subtitle: Text(todayDeckSummary),
+            trailing: const Chip(label: Text('Today')),
           ),
         ),
         Card(
