@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../models/session_stats.dart';
-import '../widgets/review_note_card.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({
@@ -22,18 +21,13 @@ class ProfileScreen extends StatelessWidget {
     final statusText = solved == 0
         ? '아직 시작 전'
         : stats.done
-            ? '오늘 목표 달성'
-            : '오늘 학습 진행 중';
+        ? '오늘 목표 달성'
+        : '오늘 학습 진행 중';
 
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         Text('Profile', style: Theme.of(context).textTheme.headlineMedium),
-        const SizedBox(height: 12),
-        const ReviewNoteCard(
-          title: '리뷰 설명',
-          body: '동기화/결제는 이번 버전에서 구현하지 않습니다. 사용자 그룹에는 "로컬 설정과 상태 설명이 충분한지"만 확인합니다.',
-        ),
         const SizedBox(height: 12),
         Card(
           child: ListTile(
@@ -49,10 +43,14 @@ class ProfileScreen extends StatelessWidget {
           child: ListTile(
             leading: const Icon(Icons.cloud_off_outlined),
             title: const Text('로컬 저장 상태'),
-            subtitle: const Text('이 기기에서만 학습 상태를 보관합니다. 동기화/결제는 아직 연결하지 않았습니다.'),
+            subtitle: const Text(
+              '이 기기에서만 학습 상태를 보관합니다. 동기화/결제는 아직 연결하지 않았습니다.',
+            ),
             trailing: Chip(
               label: const Text('로컬 전용'),
-              backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
             ),
           ),
         ),

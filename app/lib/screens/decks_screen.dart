@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../models/deck_summary.dart';
-import '../widgets/review_note_card.dart';
 
 class DecksScreen extends StatelessWidget {
   const DecksScreen({
@@ -23,12 +22,6 @@ class DecksScreen extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: [
         Text('Decks', style: Theme.of(context).textTheme.headlineMedium),
-        const SizedBox(height: 12),
-        const ReviewNoteCard(
-          title: '리뷰 설명',
-          body: '이번 단계에서는 덱 정렬 기준과 Today 연결 흐름을 검토합니다. '
-              '실제 편집/중지는 다음 개발 반복에서 들어갑니다.',
-        ),
         const SizedBox(height: 12),
         for (final deck in decks)
           Card(
@@ -79,7 +72,7 @@ class DeckDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Deck Detail')),
+      appBar: AppBar(title: const Text('덱 상세')),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -103,20 +96,13 @@ class DeckDetailScreen extends StatelessWidget {
             ),
           ),
           const Card(
-            child: ListTile(
-              title: Text('다음 복습'),
-              subtitle: Text('오늘'),
-            ),
+            child: ListTile(title: Text('다음 복습'), subtitle: Text('오늘')),
           ),
           const Card(
-            child: ListTile(
-              title: Text('일일 목표'),
-              subtitle: Text('빠른 30카드'),
-            ),
+            child: ListTile(title: Text('일일 목표'), subtitle: Text('빠른 30카드')),
           ),
           const SizedBox(height: 16),
-          if (isSelected)
-            const Chip(label: Text('오늘 학습 포함')),
+          if (isSelected) const Chip(label: Text('오늘 학습 포함')),
           const SizedBox(height: 8),
           Wrap(
             spacing: 12,

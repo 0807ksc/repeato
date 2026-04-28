@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../models/session_stats.dart';
-import '../widgets/review_note_card.dart';
 
 class InsightsScreen extends StatelessWidget {
   const InsightsScreen({
@@ -25,26 +24,36 @@ class InsightsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final solved = stats.known + stats.unsure + stats.again;
     final accuracy = solved == 0 ? 0 : ((stats.known / solved) * 100).round();
-    final completionRate = stats.target == 0 ? 0 : ((stats.completed / stats.target) * 100).round();
-    final deckProgressCount = stats.completed > totalCards ? totalCards : stats.completed;
-    final deckProgressRate = totalCards == 0 ? 0 : ((deckProgressCount / totalCards) * 100).round();
-    final todayRemaining = stats.target - stats.completed < 0 ? 0 : stats.target - stats.completed;
+    final completionRate = stats.target == 0
+        ? 0
+        : ((stats.completed / stats.target) * 100).round();
+    final deckProgressCount = stats.completed > totalCards
+        ? totalCards
+        : stats.completed;
+    final deckProgressRate = totalCards == 0
+        ? 0
+        : ((deckProgressCount / totalCards) * 100).round();
+    final todayRemaining = stats.target - stats.completed < 0
+        ? 0
+        : stats.target - stats.completed;
     final recentChangeLabel = stats.completed == 0
         ? '아직 변화 데이터가 적습니다'
         : accuracy >= 70
-            ? '정답률이 안정적으로 유지되고 있습니다'
-            : '재복습 비중이 높아 다시 확인이 필요합니다';
-    final nextReviewLabel = todayRemaining == 0 ? '오늘 세션 마감 후 다음 묶음 계산' : '오늘 안에 다음 복습 묶음이 이어집니다';
+        ? '정답률이 안정적으로 유지되고 있습니다'
+        : '재복습 비중이 높아 다시 확인이 필요합니다';
+    final nextReviewLabel = todayRemaining == 0
+        ? '오늘 세션 마감 후 다음 묶음 계산'
+        : '오늘 안에 다음 복습 묶음이 이어집니다';
     final weakFocus = stats.again > stats.unsure
         ? '기억이 거의 나지 않는 카드가 더 많습니다.'
         : stats.unsure > 0
-            ? '헷갈리는 카드가 더 많아 빠른 재확인이 필요합니다.'
-            : '뚜렷한 약점 응답은 아직 많지 않습니다.';
+        ? '헷갈리는 카드가 더 많아 빠른 재확인이 필요합니다.'
+        : '뚜렷한 약점 응답은 아직 많지 않습니다.';
     final todayStatus = stats.done
         ? '오늘 목표 달성'
         : solved == 0
-            ? '아직 시작 전'
-            : '진행 중';
+        ? '아직 시작 전'
+        : '진행 중';
     final todayDeckSummary = todayStudyDeckNames.length <= 2
         ? todayStudyDeckNames.join(' + ')
         : '${todayStudyDeckNames.take(2).join(', ')} 외 ${todayStudyDeckNames.length - 2}개';
@@ -53,12 +62,6 @@ class InsightsScreen extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: [
         Text('Insights', style: Theme.of(context).textTheme.headlineMedium),
-        const SizedBox(height: 12),
-        const ReviewNoteCard(
-          title: '리뷰 설명',
-          body: '이번 반복에서는 현재 학습 중인 덱의 전체 진행 감각과 오늘 남은 양을 먼저 보이게 합니다. '
-              '주간/월간 추이와 장기 지표는 이벤트 스키마 확정 후 확장합니다.',
-        ),
         const SizedBox(height: 12),
         Card(
           child: Padding(
@@ -73,7 +76,10 @@ class InsightsScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 6),
-                Text(todayDeckSummary, style: Theme.of(context).textTheme.bodyMedium),
+                Text(
+                  todayDeckSummary,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
                 const SizedBox(height: 12),
                 Text(
                   '아래 진행률과 남은 카드는 선택된 오늘 학습 덱 전체를 합산한 기준입니다.',
@@ -90,7 +96,10 @@ class InsightsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('현재 학습 중인 덱', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  '현재 학습 중인 덱',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 8),
                 Text(deckName, style: Theme.of(context).textTheme.titleLarge),
                 const SizedBox(height: 12),
@@ -120,9 +129,21 @@ class InsightsScreen extends StatelessWidget {
         const SizedBox(height: 12),
         Text('핵심 KPI', style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 8),
-        _MetricCard(title: '오늘 완료율', value: '$completionRate%', subtitle: '${stats.completed}/${stats.target} 완료'),
-        _MetricCard(title: '정답률', value: '$accuracy%', subtitle: '알겠음 ${stats.known} / 전체 $solved'),
-        _MetricCard(title: '오늘 상태', value: todayStatus, subtitle: '헷갈림 ${stats.unsure}건 · 모르겠음 ${stats.again}건'),
+        _MetricCard(
+          title: '오늘 완료율',
+          value: '$completionRate%',
+          subtitle: '${stats.completed}/${stats.target} 완료',
+        ),
+        _MetricCard(
+          title: '정답률',
+          value: '$accuracy%',
+          subtitle: '알겠음 ${stats.known} / 전체 $solved',
+        ),
+        _MetricCard(
+          title: '오늘 상태',
+          value: todayStatus,
+          subtitle: '헷갈림 ${stats.unsure}건 · 모르겠음 ${stats.again}건',
+        ),
         const SizedBox(height: 8),
         Card(
           child: Padding(
@@ -149,7 +170,10 @@ class InsightsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('다음 복습 시점', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  '다음 복습 시점',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 8),
                 Text(nextReviewLabel),
                 const SizedBox(height: 6),
@@ -170,7 +194,10 @@ class InsightsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('약점 영역 요약', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  '약점 영역 요약',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 8),
                 Text(weakFocus),
                 const SizedBox(height: 12),
@@ -244,10 +271,7 @@ class _MetricCard extends StatelessWidget {
       child: ListTile(
         title: Text(title),
         subtitle: Text(subtitle),
-        trailing: Text(
-          value,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
+        trailing: Text(value, style: Theme.of(context).textTheme.titleMedium),
       ),
     );
   }
