@@ -258,6 +258,7 @@ class _AppRootState extends State<AppRoot> {
       ProfileScreen(
         stats: _stats,
         totalCards: todayCards.length,
+        todayStudyDeckNames: todayDeckNames,
         onResumeToday: () => setState(() => _currentIndex = 0),
       ),
     ];
